@@ -17,6 +17,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Table(name = "NURSE")
 public class Nurse {
+
     @Id
     @SequenceGenerator(name =  "Nurse_seq", sequenceName="Nurse_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Nurse_seq")
@@ -27,4 +28,5 @@ public class Nurse {
     private @NonNull String telephone;
     private @NonNull String email;
     private @NonNull Date birthday;
+//
 }
