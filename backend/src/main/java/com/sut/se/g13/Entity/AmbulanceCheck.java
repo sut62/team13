@@ -34,42 +34,42 @@ public class AmbulanceCheck  {
   private @NonNull Date checkDate;
 
   @Column(name="CHECK_BATTERY")
-  private @NonNull String battery;
+  private @NonNull Boolean battery;
 
   @Column(name="CHECK_LIGHT")
-  private @NonNull String light;
+  private @NonNull Boolean light;
 
   @Column(name="CHECK_WHEEL")
-  private @NonNull String wheel;
+  private @NonNull Boolean wheel;
 
   @Column(name="CHECK_SUSPENSION")
-  private @NonNull String suspension;
+  private @NonNull Boolean suspension;
 
   @Column(name="CHECK_BRAKE_FLUID")
-  private @NonNull String brakeFluid;
+  private @NonNull Boolean brakeFluid;
 
   @Column(name="CHECK_ENGINE_OIL")
-  private @NonNull String engineOil;
+  private @NonNull Boolean engineOil;
 
   @Column(name="CHECK_RADIATOR")
-  private @NonNull String radiator;
+  private @NonNull Boolean radiator;
 
   @Column(name="CHECK_TOOL_SET")
-  private @NonNull String toolSet;
+  private @NonNull Boolean toolSet;
 
-  /*@ManyToOne(fetch = FetchType.EAGER, targetEntity = Ambulance.class)
+  @ManyToOne(fetch = FetchType.EAGER, targetEntity = Ambulance.class)
   @JoinColumn(name = "ID_AMBULANCE", insertable = true)
-  private Ambulance ambulance;*/
+  private Ambulance ambulance;
 
-  /*@ManyToOne(fetch = FetchType.EAGER, targetEntity = Mile.class)
+  @ManyToOne(fetch = FetchType.EAGER, targetEntity = Mile.class)
   @JoinColumn(name = "ID_MILE", insertable = true)
-  private Mile mile;*/
+  private Mile mile;
 
-  /*@ManyToOne(fetch = FetchType.EAGER, targetEntity = Driver.class)
-  @JoinColumn(name = "ID_DRIVER", insertable = true)
-  private Driver driver;*/
+  @ManyToOne(fetch = FetchType.EAGER, targetEntity = DriverRegis.class)
+  @JoinColumn(name = "ID_DRIVERREGIS", insertable = true)
+  private DriverRegis driverRegis;
 
-  /*@ManyToOne(fetch = FetchType.EAGER, targetEntity = Status.class)
+  @ManyToOne(fetch = FetchType.EAGER, targetEntity = Status.class)
   @JoinColumn(name = "ID_STATUS", insertable = true)
-  private Status status;*/
+  private Status status;
 }

@@ -2,6 +2,7 @@ package com.sut.se.g13;
 
 import com.sut.se.g13.Entity.*;
 import com.sut.se.g13.Repository.*;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.ApplicationRunner;
@@ -17,8 +18,8 @@ public class SpringBootVueApplication {
 	}
 
 	@Bean
-	ApplicationRunner init(ProvinceRepository provinceRepository, AmbulanceBrandRepository ambulanceBrandRepository,
-			AmbulanceTypeRepository ambulanceTypeRepository) {
+	ApplicationRunner init(AmbulanceRepository ambulanceRepository, StatusRepository statusRepository, DriverRegisRepository driverRegisRepository,MileRepository mileRepository,ProvinceRepository provinceRepository, AmbulanceBrandRepository ambulanceBrandRepository,
+						   AmbulanceTypeRepository ambulanceTypeRepository) {
 		return args -> {
 
 			Stream.of("กรุงเทพมหานคร", "กระบี่", "กาญจนบุรี", "กาฬสินธุ์", "กำแพงเพชร", "ขอนแก่น", "จันทบุรี",
@@ -47,6 +48,24 @@ public class SpringBootVueApplication {
 				AmbulanceType ambulancetype = new AmbulanceType();
 				ambulancetype.setAmtype(Type);
 				ambulanceTypeRepository.save(ambulancetype);
+			});
+
+			Stream.of("พร้อมใช้งาน", "ไม่พร้อมใช้งาน").forEach(name -> {
+				Status status = new Status(); // สร้าง Object Status
+				status.setName(name); // set ชื่อ (name) ให้ Object ชื่อ Status
+				statusRepository.save(status); // บันทึก Objcet ชื่อ Status
+			});
+
+			Stream.of("นายA", "นายB", "นายC","นายD").forEach(name -> {
+				DriverRegis driverRegis = new DriverRegis(); // สร้าง Object DriverRegis
+				driverRegis.setName(name); // set ชื่อ (name) ให้ Object ชื่อ DriverRegis
+				driverRegisRepository.save(driverRegis); // บันทึก Objcet ชื่อ DriverRegis
+			});
+
+			Stream.of("0 - 2000", "2001 - 5000", "5001 - 10000","10001 -20000","20001 ขึ้นไป").forEach(name -> {
+				Mile mile = new Mile(); // สร้าง Object Mile
+				mile.setName(name); // set ชื่อ (name) ให้ Object ชื่อ Mile
+				mileRepository.save(mile); // บันทึก Objcet ชื่อ Mile
 			});
 		};
 	}
