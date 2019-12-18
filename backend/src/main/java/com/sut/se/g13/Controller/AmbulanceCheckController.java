@@ -74,7 +74,7 @@ public class AmbulanceCheckController {
 
         Ambulance ambulance = ambulanceRepository.findByAmbulanceid(id_ambulance);
         Status status = statusRepository.findById(id_status);
-        DriverRegis driverRegis = driverRegisRepository.findById(id_driverRegis);
+        DriverRegis driverRegis = driverRegisRepository.findByDriverregisid(id_driverRegis);
         Mile mile = mileRepository.findById(id_mile);
 
         newAmbulanceCheck.setCheckDate(new Date());
