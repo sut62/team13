@@ -70,7 +70,7 @@ export default {
         });
     },
     back() {
-      this.$router.push("/");
+      this.$router.push("/ambulance");
     }
     /* eslint-disable no-console */
   },
