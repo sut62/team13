@@ -1,21 +1,14 @@
 package com.sut.se.g13.Entity;
 
 import lombok.*;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.*;
+import java.util.*;
 
 @Data
 @Entity
 @NoArgsConstructor
+@ToString
+@EqualsAndHashCode
 @Table(name = "EMERGENCY")
 public class Emergency {
 	@Id
@@ -23,16 +16,37 @@ public class Emergency {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "EMERGENCY_SEQ")
 	@Column(name = "ID_EMERGENCY", unique = true, nullable = true)
 	private @NonNull Long emergencyId;
+
+	@Column(name = "EM_DATE")
+	@Temporal(TemporalType.DATE)
+	private @NonNull Date emDate;
+
+	@Column(name = "EM_PNam")
 	private @NonNull String patientName;
+
+	@Column(name = "EM_PAddress")
 	private @NonNull String patientAddress;
-	private @NonNull Number patientTel;
+
+	@Column(name = "EM_PTel")
+	private @NonNull String patientTel;
+
+	@Column(name = "EM_PNote")
 	private @NonNull String note;
 
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Symptom.class)
-	@JoinColumn(name = "ID_EMPOLYEE", insertable = true)
+	@JoinColumn(name = "SYMPTOME_ID", insertable = true)
 	private Symptom symptom;
 
-	@Column(name = "EM_DATE")
-	private @NonNull Date emDate;
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Ambulance.class)
+	@JoinColumn(name = "AMBULANCE_ID", insertable = true)
+	private Ambulance ambulance;
+
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Nurse.class)
+	@JoinColumn(name = "NURSE_ID", insertable = true)
+	private Nurse nurse;
+
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = DriverRegis.class)
+	@JoinColumn(name = "DRIVERREGIS_ID", insertable = true)
+	private DriverRegis driverRegis;
 
 }
