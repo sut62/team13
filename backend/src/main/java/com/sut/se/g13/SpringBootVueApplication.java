@@ -18,8 +18,10 @@ public class SpringBootVueApplication {
 	}
 
 	@Bean
-	ApplicationRunner init(AmbulanceRepository ambulanceRepository, StatusRepository statusRepository, DriverRegisRepository driverRegisRepository,MileRepository mileRepository,ProvinceRepository provinceRepository, AmbulanceBrandRepository ambulanceBrandRepository,
-						   AmbulanceTypeRepository ambulanceTypeRepository) {
+	ApplicationRunner init(AmbulanceRepository ambulanceRepository, StatusRepository statusRepository, DriverRegisRepository driverRegisRepository,
+	MileRepository mileRepository,ProvinceRepository provinceRepository, AmbulanceBrandRepository ambulanceBrandRepository,
+	GenderRepository genderRepository,PositionDriverRepository positiondriverRepository,SymptomRepository symptomRepository,
+	EducationalRepository educationalRepository,AmbulanceTypeRepository ambulanceTypeRepository) {
 		return args -> {
 
 			Stream.of("กรุงเทพมหานคร", "กระบี่", "กาญจนบุรี", "กาฬสินธุ์", "กำแพงเพชร", "ขอนแก่น", "จันทบุรี",
@@ -62,6 +64,37 @@ public class SpringBootVueApplication {
 				mile.setName(name); // set ชื่อ (name) ให้ Object ชื่อ Mile
 				mileRepository.save(mile); // บันทึก Objcet ชื่อ Mile
 			});
+
+			Stream.of("นายแบงค์", "นายเบ้น", "นายเฉลิมชัย","นางตั๊กกี้").forEach(drivername -> {
+				DriverRegis driverRegis = new DriverRegis(); // สร้าง Object DriverRegis
+				driverRegis.setDrivername(drivername); // set ชื่อ (name) ให้ Object ชื่อ DriverRegis
+				driverRegisRepository.save(driverRegis); // บันทึก Objcet ชื่อ DriverRegis
+			});
+			
+			Stream.of("Male", "Female", "Another").forEach(sex -> {
+				Gender genders = new Gender(); 
+				genders.setSex(sex); 
+				genderRepository.save(genders); 
+			});
+
+			Stream.of("พนักงานขับฝึกหัด", "พนักงานขับทั่วไป", "พนักงานขับเชี่ยวชาญ").forEach(positionlevel -> {
+				PositionDriver positiondrivers = new PositionDriver(); 
+				positiondrivers.setPositionlevel(positionlevel); 
+				positiondriverRepository.save(positiondrivers); 
+			});
+
+			Stream.of("มัธยมศึกษาตอนปลาย", "อนุปริญญา", "ปริญญาตรี").forEach(educationallevel -> {
+				Educational educationals = new Educational(); 
+				educationals.setEducationallevel(educationallevel); 
+				educationalRepository.save(educationals); 
+			});
+
+			Stream.of("หัวใจหยุดเต้น", "อวัยวะฉีกขาด ", "สติเปลี่ยนไป", "ไม่สามารถหายใจได้ปกติ",
+					"ระบบไหลเวียนเลือดวิกฤต", "อาการอื่นๆ ").forEach(type -> {
+						Symptom symptom = new Symptom(); // สร้าง Object Symptom
+						symptom.setType(type); // set ชื่อ (type) ให้ Object ชื่อ Symptom
+						symptomRepository.save(symptom); // บันทึก Objcet ชื่อ Symptom
+					});
 		};
 	}
 
