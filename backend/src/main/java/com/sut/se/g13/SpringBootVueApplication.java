@@ -56,11 +56,6 @@ public class SpringBootVueApplication {
 				statusRepository.save(status); // บันทึก Objcet ชื่อ Status
 			});
 
-			Stream.of("นายA", "นายB", "นายC","นายD").forEach(name -> {
-				DriverRegis driverRegis = new DriverRegis(); // สร้าง Object DriverRegis
-				driverRegis.setName(name); // set ชื่อ (name) ให้ Object ชื่อ DriverRegis
-				driverRegisRepository.save(driverRegis); // บันทึก Objcet ชื่อ DriverRegis
-			});
 
 			Stream.of("0 - 2000", "2001 - 5000", "5001 - 10000","10001 -20000","20001 ขึ้นไป").forEach(name -> {
 				Mile mile = new Mile(); // สร้าง Object Mile
