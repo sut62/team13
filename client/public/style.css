@@ -1,0 +1,9 @@
+.bg {
+  background-image: url("https://cdn3.vectorstock.com/i/1000x1000/65/12/ambulance-opposite-the-of-the-hospital-vector-20196512.jpg");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
