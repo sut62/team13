@@ -219,7 +219,7 @@ export default {
         )
         .then(response => {
           console.log(response);
-          this.$router.push("/viewAmbulance");
+          this.$router.push("/viewambulance");
           alert('บันทึกข้อมูลสำเร็จ');
           this.$refs.form.reset();
         })
@@ -234,7 +234,7 @@ export default {
           }
     },
       viewinfo() {
-          this.$router.push("/viewAmbulance");
+          this.$router.push("/viewambulance");
       },
     clear() {
       this.$refs.form.reset();

@@ -34,7 +34,7 @@ export default {
       this.$router.push("/ambulance");
     },
     pushCheckAm() {
-      this.$router.push("/checkambulance");
+      this.$router.push("/ambulancecheck");
     },
     pushNurse() {
       this.$router.push("/nurse");
