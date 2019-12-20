@@ -21,13 +21,15 @@ public class SpringBootVueApplication {
 	ApplicationRunner init(AmbulanceRepository ambulanceRepository, StatusRepository statusRepository, DriverRegisRepository driverRegisRepository,
 	MileRepository mileRepository,ProvinceRepository provinceRepository, AmbulanceBrandRepository ambulanceBrandRepository,
 	GenderRepository genderRepository,PositionDriverRepository positiondriverRepository,SymptomRepository symptomRepository,
-	EducationalRepository educationalRepository,AmbulanceTypeRepository ambulanceTypeRepository) {
+	EducationalRepository educationalRepository,AmbulanceTypeRepository ambulanceTypeRepository,EmployeeRepository employeeRepository) {
 		return args -> {
 
 			Stream.of("กรุงเทพมหานคร", "กระบี่", "กาญจนบุรี", "กาฬสินธุ์", "กำแพงเพชร", "ขอนแก่น", "จันทบุรี",
 					"ฉะเชิงเทรา", "ชลบุรี", "ชัยนาท", "ชัยภูมิ", "ชุมพร", "เชียงราย", "เชียงใหม่", "ตรัง", "ตราด",
 					"ตาก", "นครนายก", "นครปฐม", "นครพนม", "นครราชสีมา", "นครศรีธรรมราช", "นครสวรรค์", "นนทบุรี",
-					"นราธิวาส", "น่าน", "บึงกาฬ", "บุรีรัมย์", "ปทุมธานี", "ประจวบคีรีขันธ์", "ปราจีนบุรี", "ปัตตานี",
+		
+
+			"นราธิวาส", "น่าน", "บึงกาฬ", "บุรีรัมย์", "ปทุมธานี", "ประจวบคีรีขันธ์", "ปราจีนบุรี", "ปัตตานี",
 					"พระนครศรีอยุธยา", "พังงา", "พัทลุง", "พิจิตร", "พิษณุโลก", "เพชรบุรี", "เพชรบูรณ์", "แพร่",
 					"พะเยา", "ภูเก็ต", "มหาสารคาม", "มุกดาหาร", "แม่ฮ่องสอน", "ยะลา", "ยโสธร", "ร้อยเอ็ด", "ระนอง",
 					"ระยอง", "ราชบุรี", "ลพบุรี", "ลำปาง", "ลำพูน", "เลย", "ศรีสะเกษ", "สกลนคร", "สงขลา", "สตูล",
@@ -94,6 +96,11 @@ public class SpringBootVueApplication {
 						Symptom symptom = new Symptom(); // สร้าง Object Symptom
 						symptom.setType(type); // set ชื่อ (type) ให้ Object ชื่อ Symptom
 						symptomRepository.save(symptom); // บันทึก Objcet ชื่อ Symptom
+					});
+			Stream.of("se2562", "se2019", "sut2562").forEach(password -> {
+						Employee employee = new Employee();
+						employee.setPassword(password);
+						employeeRepository.save(employee);
 					});
 		};
 	}
