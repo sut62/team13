@@ -1,0 +1,117 @@
+package com.sut.se.g13.Controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.RestController;
+import java.util.Collection;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.stream.Collectors;
+import java.util.Optional;
+import com.sut.se.g13.Entity.*;
+import com.sut.se.g13.Repository.*;
+import java.text.ParseException;
+
+@CrossOrigin(origins = "http://localhost:8080")
+@RestController
+public class NurseController {
+
+    @Autowired
+    private  NurseRepository nurseRepository;
+    @Autowired
+    private  TierRepository tierRepository;
+    @Autowired
+    private  GenderRepository genderRepository;
+    @Autowired
+    private  EducationalRepository educationalRepository;
+    @Autowired
+    private  ProvinceRepository provinceRepository;
+
+
+    public NurseController(NurseRepository nurseRepository,TierRepository tierRepository,
+    GenderRepository genderRepository,EducationalRepository educationalRepository,
+    ProvinceRepository provinceRepository) {
+        
+        this.tierRepository = tierRepository;
+        this.genderRepository = genderRepository;
+        this.educationalRepository = educationalRepository;
+        this.provinceRepository = provinceRepository;
+    }
+
+    @GetMapping("/nurse")
+    public Collection<Nurse> Nurses() {
+        return nurseRepository.findAll().stream().collect(Collectors.toList());
+    }
+    @GetMapping("/nurse/{id}")
+    public Optional<Nurse> Nurses(@PathVariable Long id) {
+        Optional<Nurse> nurse = nurseRepository.findById(id);
+        return nurse;
+    }
+
+    @GetMapping("/tier")
+    public Collection<Tier> Tiers() {
+        return tierRepository.findAll().stream().collect(Collectors.toList());
+    }
+
+    @GetMapping("/gender")
+    public Collection<Gender> genders() {
+        return genderRepository.findAll().stream().collect(Collectors.toList());
+    }
+
+    @GetMapping("/educational")
+    public Collection<Educational> Educationals() {
+        return educationalRepository.findAll().stream().collect(Collectors.toList());
+    }
+
+    @GetMapping("/province")
+    public Collection<Province> provinces() {
+        return provinceRepository.findAll().stream().collect(Collectors.toList());
+    }
+
+    @PostMapping("/nurse/{nursename}/{genderid}/{birthday}/{address}/{provinceid}/{educationalid}/{tierid}/{telephone}/{email}")
+    public Nurse newNurse(Nurse newNurse,
+        @PathVariable String nursename,
+        @PathVariable Long genderid,
+        @PathVariable String birthday,
+        @PathVariable String address,
+        @PathVariable Long provinceid,
+        @PathVariable Long educationalid,
+        @PathVariable Long tierid,
+        @PathVariable String telephone,
+        @PathVariable String email,
+        @PathVariable Date nowdate) 
+        throws ParseException {
+
+        Gender gender = genderRepository.findByGenderid(genderid);
+        Province province = provinceRepository.findByProvinceid(provinceid);
+        Educational educational = educationalRepository.findByEducationalid(educationalid);
+        Tier tier = tierRepository.findBytierid(tierid);
+       
+        DateFormat newDate = new SimpleDateFormat("yyyy-MM-dd");
+        Date d = newDate.parse(birthday); 
+       
+        newNurse.setNursename(nursename);
+        newNurse.setGenderid(gender);
+        newNurse.setBirthday(d);
+        newNurse.setAddress(address);
+        newNurse.setProvinceid(province);
+        newNurse.setEducationalid(educational);
+        newNurse.setTierid(tier);
+        newNurse.setTelephone(telephone);
+        newNurse.setEmail(email);
+        newNurse.setNowdate(nowdate);
+
+        return nurseRepository.save(newNurse);
+    }
+
+    
+    
+
+}
