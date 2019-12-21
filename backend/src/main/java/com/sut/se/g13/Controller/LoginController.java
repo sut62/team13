@@ -32,18 +32,16 @@ public class LoginController {
         return employeeRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @GetMapping("/check/{employeeid}/{passoword}")
-    public Collection<Employee> getCheck(@PathVariable("employeeid") Long employeeid,
+    @GetMapping("/check/{username}/{passoword}")
+    public Collection<Employee> getCheck(@PathVariable("username") String username,
             @PathVariable("passoword") String password) {
-        return employeeRepository.findCheck(employeeid, password);
+        return employeeRepository.findCheck(username, password);
     }
 
-    @PostMapping("/login/{emid}")
-    public Login newLogin(Login newLogin, @PathVariable final Long emid) throws ParseException {
+    @PostMapping("/login/{username}")
+    public Login newLogin(Login newLogin, @PathVariable final String username) throws ParseException {
 
-        final Employee employee = employeeRepository.findByEmployeeid(emid);
-
-        newLogin.setEmployeeid(employee);
+        newLogin.setEmployee(username);
         newLogin.setLogintime(new Date());
 
         return loginRepository.save(newLogin);

@@ -20,5 +20,6 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_seq")
     @Column(name = "EMPLOYEE_ID", unique = true, nullable = true)
     private @NonNull Long employeeid;
+    private @NonNull String username;
     private @NonNull String password;
 }
