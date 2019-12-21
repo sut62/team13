@@ -14,6 +14,6 @@ import java.util.Collection;
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     Employee findByEmployeeid(Long employeeid);
 
-    @Query(value = "SELECT * FROM Employee z Where z.employeeid = :employeeid and z.password = :password", nativeQuery = true)
-    Collection<Employee> findCheck(@Param("employeeid") Long employeeid, @Param("password") String password);
+    @Query(value = "SELECT * FROM Employee z Where z.username = :username and z.password = :password", nativeQuery = true)
+    Collection<Employee> findCheck(@Param("username") String username, @Param("password") String password);
 }
