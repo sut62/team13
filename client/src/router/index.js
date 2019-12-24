@@ -5,6 +5,8 @@ import ViewAmbulance from "../components/ViewAmbulance";
 import Welcome from "../components/Welcome";
 import ViewAmCheck from "../components/ViewAmCheck";
 import AmbulanceCheck from "../components/AmbulanceCheck";
+import Emergency from '../components/Emergency';
+import ViewEmergency from '../components/ViewEmergency';
 
 Vue.use(Router);
 
@@ -31,6 +33,14 @@ export default new Router({
     {
       path: "/ambulance",
       component: Ambulance
+    },
+    {
+      path: '/emergency',
+      component: Emergency
+    },
+    {
+      path: '/viewEmergency',
+      component: ViewEmergency
     }
   ]
 });
