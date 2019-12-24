@@ -66,7 +66,7 @@ public class CheckEquipmentController {
 
         newCheckEquipment.setCheckDate(new Date());
         newCheckEquipment.setAmbulance(ambulance);
-        newCheckEquipment.setNursename(nurse);
+        newCheckEquipment.setNurse(nurse);
         newCheckEquipment.setStatus(status);
         newCheckEquipment.setDefibrillator(defibrillator);
         newCheckEquipment.setSphygmomanometer(sphygmomanometer);
