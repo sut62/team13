@@ -67,12 +67,6 @@ public class SpringBootVueApplication {
 				mileRepository.save(mile); // บันทึก Objcet ชื่อ Mile
 			});
 
-			Stream.of("นายแบงค์", "นายเบ้น", "นายเฉลิมชัย", "นางตั๊กกี้").forEach(drivername -> {
-				DriverRegis driverRegis = new DriverRegis(); // สร้าง Object DriverRegis
-				driverRegis.setDrivername(drivername); // set ชื่อ (name) ให้ Object ชื่อ DriverRegis
-				driverRegisRepository.save(driverRegis); // บันทึก Objcet ชื่อ DriverRegis
-			});
-
 			Stream.of("Male", "Female", "Another").forEach(sex -> {
 				Gender genders = new Gender();
 				genders.setSex(sex);

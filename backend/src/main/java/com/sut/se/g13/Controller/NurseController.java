@@ -60,20 +60,7 @@ public class NurseController {
         return tierRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @GetMapping("/gender")
-    public Collection<Gender> genders() {
-        return genderRepository.findAll().stream().collect(Collectors.toList());
-    }
 
-    @GetMapping("/educational")
-    public Collection<Educational> Educationals() {
-        return educationalRepository.findAll().stream().collect(Collectors.toList());
-    }
-
-    @GetMapping("/province")
-    public Collection<Province> provinces() {
-        return provinceRepository.findAll().stream().collect(Collectors.toList());
-    }
 
     @PostMapping("/nurse/{nursename}/{genderid}/{birthday}/{address}/{provinceid}/{educationalid}/{tierid}/{telephone}/{email}")
     public Nurse newNurse(Nurse newNurse,

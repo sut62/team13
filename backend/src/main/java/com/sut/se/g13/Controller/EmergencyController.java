@@ -56,20 +56,7 @@ public class EmergencyController {
         return emergency;
     }
 
-    @GetMapping("/ambulance")
-    public Collection<Ambulance> Ambulances() {
-        return ambulanceRepository.findAll().stream().collect(Collectors.toList());
-    }
-    
-    @GetMapping("/driverRegis")
-    public Collection<DriverRegis> DriverRegiss() {
-        return driverRegisRepository.findAll().stream().collect(Collectors.toList());
-    }
-    
-    @GetMapping("/nurse")
-    public Collection<Nurse> Nurses() {
-        return nurseRepository.findAll().stream().collect(Collectors.toList());
-    }
+
 
     @GetMapping("/symptom")
     public Collection<Symptom> Symptoms() {
