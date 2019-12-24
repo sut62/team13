@@ -45,21 +45,6 @@ public class CheckEquipmentController {
         return checkEquipmentRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @GetMapping("/ambulance")
-    public Collection<Ambulance> Ambulances() {
-        return ambulanceRepository.findAll().stream().collect(Collectors.toList());
-    }
-
-    @GetMapping("/status")
-    public Collection<Status> Statuses() {
-        return statusRepository.findAll().stream().collect(Collectors.toList());
-    }
-
-    @GetMapping("/Nurse")
-    public Collection<Nurse> Nurses() {
-        return nurseRepository.findAll().stream().collect(Collectors.toList());
-    }
-
     @PostMapping("/checkEquipment/{id_ambulance}/{id_nurse}/{id_status}/{defibrillator}/{sphygmomanometer}/{respirator}/{oxygenmachine}/{suction}/{motionDevice}/{medicalSprayer}")
     public CheckEquipment newCheckEquipment (CheckEquipment  newCheckEquipment ,
                                @PathVariable long id_ambulance,
@@ -75,9 +60,9 @@ public class CheckEquipmentController {
     ) {
         //CheckEquipment newCheckEquipment = new CheckEquipment();
 
-        Ambulance ambulance = ambulanceRepository.findById(id_ambulance);
+        Ambulance ambulance = ambulanceRepository.findByAmbulanceid(id_ambulance);
         Status status = statusRepository.findById(id_status);
-        Nurse nurse = nurseRepository.findById(id_nurse);
+        Nurse nurse = nurseRepository.findByNurseid(id_nurse);
 
         newCheckEquipment.setCheckDate(new Date());
         newCheckEquipment.setAmbulance(ambulance);
