@@ -24,7 +24,7 @@ import java.text.ParseException;
 public class DriverRegisController {
 
     @Autowired
-    private  DriverRegisRepository driverregisRepository;
+    private  DriverRegisRepository driverRegisRepository;
     @Autowired
     private  EducationalRepository educationalRepository;
     @Autowired
@@ -35,19 +35,19 @@ public class DriverRegisController {
     private  ProvinceRepository provinceRepository;
 
 
-    public DriverRegisController(DriverRegisRepository driverregisRepository,EducationalRepository educationalRepository, 
+    public DriverRegisController(DriverRegisRepository driverRegisRepository,EducationalRepository educationalRepository,
     GenderRepository genderRepository,PositionDriverRepository positiondriverRepository,ProvinceRepository provinceRepository) {
         
-        this.driverregisRepository = driverregisRepository;
+        this.driverRegisRepository = driverRegisRepository;
         this.educationalRepository = educationalRepository;
         this.genderRepository = genderRepository;
         this.positiondriverRepository = positiondriverRepository;
         this.provinceRepository = provinceRepository;
     }
 
-    @GetMapping("/driverregis")
+    @GetMapping("/driverRegis")
     public Collection<DriverRegis> DriverRegists() {
-        return driverregisRepository.findAll().stream().collect(Collectors.toList());
+        return driverRegisRepository.findAll().stream().collect(Collectors.toList());
     }
 
     // @GetMapping("/driverregis/{id}")
@@ -61,22 +61,14 @@ public class DriverRegisController {
         return educationalRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @GetMapping("/gender")
-    public Collection<Gender> genders() {
-        return genderRepository.findAll().stream().collect(Collectors.toList());
-    }
 
     @GetMapping("/positiondriver")
     public Collection<PositionDriver> positiondrivers() {
         return positiondriverRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @GetMapping("/province")
-    public Collection<Province> province() {
-        return provinceRepository.findAll().stream().collect(Collectors.toList());
-    }
 
-    @PostMapping("/driverregis/{drivername}/{idcard}/{address}/{telephone}/{genderid}/{positionid}/{provinceid}/{educationalid}")
+    @PostMapping("/driverRegis/{drivername}/{idcard}/{address}/{telephone}/{genderid}/{positionid}/{provinceid}/{educationalid}")
     public DriverRegis newDriverRegis(DriverRegis newDriverRegis, 
             @PathVariable String birthday,
             @PathVariable String drivername, 
@@ -108,7 +100,7 @@ public class DriverRegisController {
         newDriverRegis.setProvinceid(province);
         newDriverRegis.setEducationalid(educational);
        
-        return driverregisRepository.save(newDriverRegis);
+        return driverRegisRepository.save(newDriverRegis);
     }
 
     
