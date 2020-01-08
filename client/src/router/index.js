@@ -11,6 +11,8 @@ import Emergency from '../components/Emergency';
 import ViewEmergency from '../components/ViewEmergency';
 import CheckEquipment from "../components/CheckEquipment";
 import ViewCheckEquipment from "../components/ViewCheckEquipment";
+import Nurse from "../components/Nurse";
+import ViewNurse from "../components/ViewNurse";
 Vue.use(Router);
 
 export default new Router({
@@ -60,6 +62,14 @@ export default new Router({
     {
       path: '/ViewCheckEquipment',
       component: ViewCheckEquipment
+    },
+	{
+      path: '/nurse',
+      component: Nurse
+    },
+    {
+      path: '/viewnurse',
+      component: ViewNurse
     }
   ]
 });
