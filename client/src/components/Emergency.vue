@@ -11,23 +11,23 @@
             >
                 <v-flex xs12>
                     <v-img
-                            :src="require('../assets/ambulance.png')"
+                            :src="require('../assets/Emergency.png')"
                             class="my-3"
                             contain
-                            height="100"
+                            height="150"
                     ></v-img>
                 </v-flex>
 
                 <v-container>
                     <div>
-                        <p class="font-weight-black display-1">ADD EMERGENCY</p>
+                        <p class="font-weight-black display-1">EMERGENCY NOTIFICATION</p>
                     </div>
                 </v-container>
 
                 <v-container>
                     <v-row justify="center">
                         <v-col cols="12" sm="4">
-                            <p>PatientName</p>
+                            <p>Patient's name</p>
                             <v-text-field
                                         v-model="emergency.emergencyPatientName"
                                         :rules="[(v) => !!v || 'Item is required']"
@@ -36,7 +36,7 @@
                             ></v-text-field>
                         </v-col>
                         <v-col cols="12" sm="4">
-                            <p>PatientTel</p>
+                            <p>Patient's phone number</p>
                             <v-text-field
                                         v-model="emergency.emergencyPatientTel"
                                         :rules="[(v) => !!v || 'Item is required']"
@@ -50,11 +50,11 @@
                 <v-container>
                         <v-row justify="center">
                             <v-col cols="12" sm="8">
-                                 <p>Location</p>
+                                 <p>Patient's location / address</p>
                                     <v-text-field
                                         v-model="emergency.emergencyPatientAddress"
                                         :rules="[(v) => !!v || 'Item is required']"
-                                        label="-- ตำแหน่งผู้ป่วย --"
+                                        label="-- ที่อยู่/ตำแหน่งผู้ป่วย --"
                                         required
                                     ></v-text-field>
                               </v-col>
@@ -64,23 +64,23 @@
                 <v-container>
                   <v-row justify="center">
                         <v-col cols="8" sm="4">
-                            <p>Symptom Type</p>
+                            <p>Sickness</p>
                             <v-select
                                     v-model="emergency.symptomId"
                                     :items="symptoms"
                                     item-text="type"
                                     item-value="symptomid"
                                     :rules="[v => !!v || 'Item is required']"
-                                    label="-- ประเภทอาการผู้ป่วย --"
+                                    label="-- ประเภทอาการผู้ป่วย  -- "
                                     required
                             ></v-select>
                         </v-col>
                         <v-col cols="12" sm="4">
-                            <p>Note</p>
+                            <p>Additional notes</p>
                             <v-text-field
                                         v-model="emergency.emergencyNote"
                                         :rules="[(v) => !!v || 'Item is required']"
-                                        label="-- หมายเหหตุ --"
+                                        label="-- อาการอย่างjนโปรดระบุ (ถ้าไม่มีกรอก - ) -- "
                                         required
                              ></v-text-field>
                         </v-col>
@@ -89,28 +89,28 @@
 
                 <v-container>
                     <v-row justify="center">                       
-                        <v-col cols="12" sm="4">
-                            <p>Ambulance</p>
+                        <v-col cols="8" sm="4">
+                            <p>Emergency Ambulance</p>
                             <v-select
                                     v-model="emergency.ambulanceId"
                                     :items="ambulances"
                                     item-text="licenseplate"
                                     item-value="ambulanceid"
                                     :rules="[v => !!v || 'Item is required']"
-                                    label="-- รถฉุกเฉิน --"
+                                    label="-- ทะเบียนรถพยาบาล --"
                                     required
                             ></v-select>
                         </v-col>
 
-                        <v-col cols="12" sm="4">
-                            <p>Driver</p>
+                        <v-col cols="8" sm="4">
+                            <p>Ambulance Driver</p>
                             <v-select
                                     v-model="emergency.driverregisId"
                                     :items="driverRegiss"
                                     item-text="drivername"
                                     item-value="driverregisid"
                                     :rules="[v => !!v || 'Item is required']"
-                                    label="-- คนขับรถ --"
+                                    label="-- ชื่อคนขับรถ --"
                                     required
                             ></v-select>
                         </v-col>
@@ -119,7 +119,7 @@
 
                  <v-container>
                     <v-row justify="center">
-                        <v-col cols="10" sm="5">
+                        <v-col cols="8" sm="4">
                             <p>Nurse</p>
                             <v-select
                                     v-model="emergency.nurseId"
@@ -127,13 +127,13 @@
                                     item-text="nursename"
                                     item-value="nurseid"
                                     :rules="[v => !!v || 'Item is required']"
-                                    label="-- พยาบาลรับเรื่องฉุกเฉิน --"
+                                    label="-- ชื่อพยาบาลรับเรื่องฉุกเฉิน --"
                                     required
                             ></v-select>
                         </v-col>
                     </v-row>
                 </v-container>
-
+                
                 <v-row justify="center">
                     <v-col cols="12">
                         <v-btn :disabled="!valid" color="success" @click="saveEmergencys">Submit</v-btn>
@@ -141,8 +141,6 @@
                         <v-btn style="margin-left: 15px;" @click="clear">Reset</v-btn>
                     </v-col>
                 </v-row>
-
-
             </v-layout>
         </v-form>
         </v-card>
