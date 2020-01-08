@@ -40,7 +40,7 @@ export default {
       this.$router.push("/nurse");
     },
     pushEquipment() {
-      this.$router.push("/equipment");
+      this.$router.push("/checkEquipment");
     },
     pushDriver() {
       this.$router.push("/driverRegis");
@@ -48,10 +48,6 @@ export default {
     pushEmergency() {
       this.$router.push("/emergency");
     },
-   
-    pushEquipment() {
-      this.$router.push("/checkEquipment");
-    }
 
   }
 };
