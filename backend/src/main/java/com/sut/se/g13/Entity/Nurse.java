@@ -12,6 +12,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import java.util.Date;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Data
 @Entity
@@ -25,6 +27,7 @@ public class Nurse {
   @Column(name = "NURSE_ID", unique = true, nullable = true)
   private @NonNull Long nurseid; // ไอดีพยาบาล  
   private @NonNull String nursename; // ชื่อ-นามสกุล
+  @Temporal(TemporalType.DATE)
   private @NonNull Date birthday; // วันเกิด
   private @NonNull String address; // ที่อยู่
   private @NonNull String telephone; // เบอร์โทร
