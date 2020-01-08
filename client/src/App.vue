@@ -47,7 +47,12 @@ export default {
     },
     pushEmergency() {
       this.$router.push("/emergency");
+    },
+   
+    pushEquipment() {
+      this.$router.push("/checkEquipment");
     }
+
   }
 };
 </script>

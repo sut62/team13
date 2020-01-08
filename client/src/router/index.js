@@ -9,7 +9,8 @@ import ViewAmCheck from "../components/ViewAmCheck";
 import AmbulanceCheck from "../components/AmbulanceCheck";
 import Emergency from '../components/Emergency';
 import ViewEmergency from '../components/ViewEmergency';
-
+import CheckEquipment from "../components/CheckEquipment";
+import ViewCheckEquipment from "../components/ViewCheckEquipment";
 Vue.use(Router);
 
 export default new Router({
@@ -51,6 +52,14 @@ export default new Router({
     {
       path: '/viewEmergency',
       component: ViewEmergency
+    },
+    {
+      path: '/checkEquipment',
+      component: CheckEquipment
+    },
+    {
+      path: '/ViewCheckEquipment',
+      component: ViewCheckEquipment
     }
   ]
 });
