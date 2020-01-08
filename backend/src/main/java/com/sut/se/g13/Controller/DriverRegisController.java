@@ -14,7 +14,7 @@ import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.stream.Collectors;
-//import java.util.Optional;
+import java.util.Optional;
 import com.sut.se.g13.Entity.*;
 import com.sut.se.g13.Repository.*;
 import java.text.ParseException;
@@ -50,11 +50,11 @@ public class DriverRegisController {
         return driverRegisRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    // @GetMapping("/driverregis/{id}")
-    // public Optional<DriverRegis> DriverRegists(@PathVariable Long id) {
-    //     Optional<DriverRegis> driverregis = driverregisRepository.findById(id);
-    //     return driverregis;
-    // }
+    @GetMapping("/driverregis/{id}")
+     public Optional<DriverRegis> DriverRegists(@PathVariable Long id) {
+         Optional<DriverRegis> driverregis = driverRegisRepository.findById(id);
+         return driverregis;
+     }
 
     @GetMapping("/educational")
     public Collection<Educational> educationals() {
@@ -67,10 +67,15 @@ public class DriverRegisController {
         return positiondriverRepository.findAll().stream().collect(Collectors.toList());
     }
 
+    @GetMapping("/gender")
+    public Collection<Gender> Genders() {
+        return genderRepository.findAll().stream().collect(Collectors.toList());
+    }
 
-    @PostMapping("/driverRegis/{drivername}/{idcard}/{address}/{telephone}/{genderid}/{positionid}/{provinceid}/{educationalid}")
+
+    @PostMapping("/driverRegis/{date}/{drivername}/{idcard}/{address}/{telephone}/{genderid}/{positionid}/{provinceid}/{educationalid}")
     public DriverRegis newDriverRegis(DriverRegis newDriverRegis, 
-            @PathVariable String birthday,
+            @PathVariable String date,
             @PathVariable String drivername, 
             @PathVariable String idcard, 
             @PathVariable String address,
@@ -87,7 +92,7 @@ public class DriverRegisController {
         Educational educational = educationalRepository.findByEducationalid(educationalid);
        
         DateFormat newDate = new SimpleDateFormat("yyyy-MM-dd");
-        Date d = newDate.parse(birthday); 
+        Date d = newDate.parse(date); 
 
 
         newDriverRegis.setBirthday(d);
