@@ -62,27 +62,26 @@ public class NurseController {
 
 
 
-    @PostMapping("/nurse/{nursename}/{genderid}/{birthday}/{address}/{provinceid}/{educationalid}/{tierid}/{telephone}/{email}")
+    @PostMapping("/nurse/{nursename}/{genderid}/{date}/{address}/{provinceid}/{educationalid}/{tierid}/{telephone}/{email}")
     public Nurse newNurse(Nurse newNurse,
         @PathVariable String nursename,
         @PathVariable Long genderid,
-        @PathVariable String birthday,
+        @PathVariable String date,
         @PathVariable String address,
         @PathVariable Long provinceid,
         @PathVariable Long educationalid,
         @PathVariable Long tierid,
         @PathVariable String telephone,
-        @PathVariable String email,
-        @PathVariable Date nowdate) 
+        @PathVariable String email) 
         throws ParseException {
 
         Gender gender = genderRepository.findByGenderid(genderid);
         Province province = provinceRepository.findByProvinceid(provinceid);
         Educational educational = educationalRepository.findByEducationalid(educationalid);
-        Tier tier = tierRepository.findBytierid(tierid);
+        Tier tier = tierRepository.findByTierid(tierid);
        
         DateFormat newDate = new SimpleDateFormat("yyyy-MM-dd");
-        Date d = newDate.parse(birthday); 
+        Date d = newDate.parse(date); 
        
         newNurse.setNursename(nursename);
         newNurse.setGenderid(gender);
@@ -93,7 +92,7 @@ public class NurseController {
         newNurse.setTierid(tier);
         newNurse.setTelephone(telephone);
         newNurse.setEmail(email);
-        newNurse.setNowdate(nowdate);
+        newNurse.setNowdate(new Date());
 
         return nurseRepository.save(newNurse);
     }

@@ -7,5 +7,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
 public interface TierRepository extends JpaRepository<Tier, Long> {
-    Tier findBytierid(long tierid);
+    Tier findByTierid(long tierid);
 }
