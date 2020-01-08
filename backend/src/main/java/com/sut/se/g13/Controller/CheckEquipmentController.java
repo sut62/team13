@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.net.URLDecoder;
+import java.text.ParseException;
 
 import com.sut.se.g13.Entity.*;
 import com.sut.se.g13.Repository.*;
@@ -57,7 +58,7 @@ public class CheckEquipmentController {
                                @PathVariable Boolean suction,
                                @PathVariable Boolean motionDevice,
                                @PathVariable Boolean medicalSprayer
-    ) {
+    ) throws ParseException {
         //CheckEquipment newCheckEquipment = new CheckEquipment();
 
         Ambulance ambulance = ambulanceRepository.findByAmbulanceid(id_ambulance);
