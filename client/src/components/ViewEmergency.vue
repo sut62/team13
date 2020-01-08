@@ -52,8 +52,7 @@ export default {
         { text: "อาการผู้ป่วย", value: "symptom.type" },
         { text: "หมายเหตุ", value: "note" },
         { text: "รถฉุกเฉิน", value: "ambulance.licenseplate" },
-        { text: "จังหวัด", value: "ambulance.provinceid.provincename" },
-        { text: "คนขับ", value: "driverRegis.drivername" },
+        { text: "คนขับรถ", value: "driverRegis.drivername" },
         { text: "พยาบาลรับเรื่อง", value: "nurse.nursename" }
       ],
       items: []
@@ -73,7 +72,7 @@ export default {
         });
     },
     back() {
-      this.$router.push("/");
+      this.$router.push("/emergency");
     }
     /* eslint-disable no-console */
   },
