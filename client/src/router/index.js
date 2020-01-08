@@ -2,6 +2,8 @@ import Vue from "vue";
 import Router from "vue-router";
 import Ambulance from "../components/Ambulance";
 import ViewAmbulance from "../components/ViewAmbulance";
+import DriverRegis from "../components/DriverRegis";
+import ViewDriver from "../components/ViewDriver";
 import Welcome from "../components/Welcome";
 import ViewAmCheck from "../components/ViewAmCheck";
 import AmbulanceCheck from "../components/AmbulanceCheck";
@@ -33,6 +35,14 @@ export default new Router({
     {
       path: "/ambulance",
       component: Ambulance
+    },
+    {
+      path: "/driverRegis",
+      component: DriverRegis
+    },
+    {
+      path: '/viewdriver',
+      component: ViewDriver
     },
     {
       path: '/emergency',

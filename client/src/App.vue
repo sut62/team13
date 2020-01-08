@@ -43,7 +43,7 @@ export default {
       this.$router.push("/equipment");
     },
     pushDriver() {
-      this.$router.push("/driver");
+      this.$router.push("/driverRegis");
     },
     pushEmergency() {
       this.$router.push("/emergency");
