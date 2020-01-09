@@ -1,10 +1,14 @@
 <template>
+    <v-app id="landing-page">
     <v-container>
-        <v-layout text-center wrap>
-                <br />
-                <h1 class="display-1 font-weight-bold mb-3">Check Ambulance Condition Information</h1>
-        </v-layout>
-        <v-row justify="center" class="amber">
+        <v-card style="width:90%; margin:auto; background-color:#FFFFFF">
+            <v-layout text-center wrap>
+                <v-flex mb-4>
+                    <br />
+                    <h1 class="display-1 font-weight-bold mb-3">CHECK AMBULANCE CONDITION INFORMATION.</h1>
+                </v-flex>
+            </v-layout>
+        <v-row justify="center">
             <v-col cols="30">
                 <v-card-title>
                     <v-text-field
@@ -32,7 +36,9 @@
                 </v-col>
             </v-col>
         </v-row>
+        </v-card>
     </v-container>
+    </v-app>
 </template>
 
 
@@ -44,7 +50,8 @@
             return {
                 search: '',
                 headers: [
-                    { text: "ID ใบเช็ครถ", value: "ambulance.ambulanceid"},
+                    { text: "ID ใบเช็ครถ", value: "id"},
+                    { text: "ID รถพยาบาล", value: "ambulance.ambulanceid"},
                     { text: "เลขทะเบียนรถ", value: "ambulance.licenseplate"},
                     { text: "จังหวัด", value: "ambulance.provinceid.provincename"},
                     { text: "สภาพรถ", value: "status.name"  },
@@ -56,7 +63,7 @@
         methods: {
             /* eslint-disable no-console */
 
-            // ดึงข้อมูล Advertisement ใส่ combobox
+            // ดึงข้อมูล AmbulanceCheck ใส่ combobox
             getAmbulanceChecks() {
                 http
                     .get("/ambulanceCheck")

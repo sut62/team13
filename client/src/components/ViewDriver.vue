@@ -1,4 +1,5 @@
 <template>
+  <v-app id="landing-page">
   <v-container>
     <v-card style="width:100%; margin:auto; background-color:#FFFFFF">
 
@@ -34,6 +35,7 @@
     </v-row>
     </v-card>
   </v-container>
+  </v-app>
 </template>
 
 <script>
@@ -72,7 +74,7 @@ export default {
         });
     },
     back() {
-      this.$router.push("/driverRegis");
+      this.$router.push("/driver");
     }
     /* eslint-disable no-console */
   },

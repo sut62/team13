@@ -1,4 +1,5 @@
 <template>
+    <v-app id="landing-page">
     <v-container>
         <v-layout text-center wrap>
                 <br />
@@ -33,6 +34,7 @@
             </v-col>
         </v-row>
     </v-container>
+    </v-app>
 </template>
 
 

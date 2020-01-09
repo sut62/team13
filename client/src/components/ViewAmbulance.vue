@@ -1,4 +1,5 @@
 <template>
+  <v-app id="landing-page">
   <v-container>
     <v-card style="width:90%; margin:auto; background-color:#FFFFFF">
 
@@ -34,6 +35,7 @@
     </v-row>
     </v-card>
   </v-container>
+  </v-app>
 </template>
 
 <script>

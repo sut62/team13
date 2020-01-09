@@ -13,6 +13,7 @@ import CheckEquipment from "../components/CheckEquipment";
 import ViewCheckEquipment from "../components/ViewCheckEquipment";
 import Nurse from "../components/Nurse";
 import ViewNurse from "../components/ViewNurse";
+import Login from "../components/Login";
 Vue.use(Router);
 
 export default new Router({
@@ -21,6 +22,10 @@ export default new Router({
   routes: [
     {
       path: "/",
+      component: Login
+    },
+    {
+      path: "/welcome",
       component: Welcome
     },
     {
@@ -40,7 +45,7 @@ export default new Router({
       component: Ambulance
     },
     {
-      path: "/driverRegis",
+      path: "/driver",
       component: DriverRegis
     },
     {
