@@ -1,140 +1,163 @@
 <template>
-    <v-container>
-      <v-card style="width:90%; margin:auto; background-color:#FFFFFF">
-        <v-form
-                ref="form"
-                v-model="valid"
-        >
-            <v-layout
-                    text-center
-                    wrap
+    <v-app id="landing-page">
+        <v-app-bar app class="orange darken-2">
+            <v-toolbar-title class="headline text-uppercase">
+
+                <v-row align="center">
+                    <v-col cols="12" sm="8" md="4">
+                        <span>AMBULANCE&nbsp;</span>
+                        <v-btn @click="pushAmbulance" color="#FFFFFF" style="color:#000000">รถพยาบาล</v-btn>
+                        <v-btn @click="pushNurse" color="#FFFFFF" style="color:#000000">ข้อมูลพยาบาล</v-btn>
+                        <v-btn @click="pushCheckAm" color="#FFFFFF" style="color:#000000">เช็คสภาพรถ</v-btn>
+                        <v-btn @click="pushEquipment" color="#FFFFFF" style="color:#000000">เช็คอุปกรณ์ในรถ</v-btn>
+                        <v-btn @click="pushDriver" color="#FFFFFF" style="color:#000000">ข้อมูลคนขับรถ</v-btn>
+                        <v-btn @click="pushEmergency" color="#FFFFFF" style="color:#000000">แจ้งเหตุฉุกเฉิน</v-btn>
+                    </v-col>
+                </v-row>
+            </v-toolbar-title>
+            <v-row align="center" justify="end">
+                <v-btn @click="logout">
+                    Log out
+                </v-btn>
+            </v-row>
+        </v-app-bar>
+        <v-container>
+        <v-card style="width:90%; margin:auto; background-color:#FFFFFF">
+            <v-form
+                    ref="form"
+                    v-model="valid"
             >
-                <v-flex xs12>
-                    <v-img
-                            :src="require('../assets/ambulance.png')"
-                            class="my-3"
-                            contain
-                            height="100"
-                    ></v-img>
-                </v-flex>
+                <v-layout
+                        text-center
+                        wrap
+                >
+                    <v-flex xs12>
+                        <v-img
+                                :src="require('../assets/ambulance.png')"
+                                class="my-3"
+                                contain
+                                height="100"
+                        ></v-img>
+                    </v-flex>
 
-                <v-container>
-                    <div>
-                        <p class="font-weight-black display-1">ADD AMBULANCE</p>
-                    </div>
+                    <v-container>
+                        <div>
+                            <p class="font-weight-black display-1">ADD AMBULANCE</p>
+                        </div>
 
-                </v-container>
+                    </v-container>
 
 
-                <v-container>
-                    <v-row justify="center">
-                        <v-col cols="12" sm="4">
-                            <p>Brands</p>
-                            <v-select
-                                    v-model="ambulance.ambulanceBrandId"
-                                    :items="ambulanceBrands"
-                                    item-text="ambrand"
-                                    item-value="brandid"
-                                    :rules="[v => !!v || 'Item is required']"
-                                    label="-- ยี่ห่อรถ --"
-                                    required
-                            ></v-select>
-                        </v-col>
+                    <v-container>
+                        <v-row justify="center">
+                            <v-col cols="12" sm="4">
+                                <p>Brands</p>
+                                <v-select
+                                        v-model="ambulance.ambulanceBrandId"
+                                        :items="ambulanceBrands"
+                                        item-text="ambrand"
+                                        item-value="brandid"
+                                        :rules="[v => !!v || 'Item is required']"
+                                        label="-- ยี่ห้อรถ --"
+                                        required
+                                ></v-select>
+                            </v-col>
 
-                        <v-col cols="12" sm="4">
-                            <p>Model</p>
-                            <v-text-field
+                            <v-col cols="12" sm="4">
+                                <p>Model</p>
+                                <v-text-field
                                         v-model="ambulance.ambulanceModel"
                                         :rules="[(v) => !!v || 'Item is required']"
                                         label="-- รุ่นรถ --"
                                         required
-                            ></v-text-field>
-                        </v-col>
-                    </v-row>
-                </v-container>
+                                ></v-text-field>
+                            </v-col>
+                        </v-row>
+                    </v-container>
 
-                <v-container>
-                    <v-row justify="center">
-                        <v-col cols="12" sm="8">
-                            <p>Ambulance Type</p>
-                            <v-select
-                                    v-model="ambulance.ambulanceTypeId"
-                                    :items="ambulanceTypes"
-                                    item-text="amtype"
-                                    item-value="typeid"
-                                    :rules="[v => !!v || 'Item is required']"
-                                    label="-- ประเภทรถพยาบาล --"
-                                    required
-                            ></v-select>
-                        </v-col>
-                    </v-row>
-                </v-container>
+                    <v-container>
+                        <v-row justify="center">
+                            <v-col cols="12" sm="8">
+                                <p>Ambulance Type</p>
+                                <v-select
+                                        v-model="ambulance.ambulanceTypeId"
+                                        :items="ambulanceTypes"
+                                        item-text="amtype"
+                                        item-value="typeid"
+                                        :rules="[v => !!v || 'Item is required']"
+                                        label="-- ประเภทรถพยาบาล --"
+                                        required
+                                ></v-select>
+                            </v-col>
+                        </v-row>
+                    </v-container>
 
-                 <v-container>
-                    <v-row justify="center">
-                        <v-col cols="12" sm="4">
-                            <p>Identification Number</p>
-                            <v-text-field
+                    <v-container>
+                        <v-row justify="center">
+                            <v-col cols="12" sm="4">
+                                <p>Identification Number</p>
+                                <v-text-field
                                         v-model="ambulance.ambulanceNum"
                                         :rules="[(v) => !!v || 'Item is required']"
                                         label="-- เลขตัวรถ(ตามใบคู่มือจดทะเบียน) --"
                                         required
-                            ></v-text-field>
-                        </v-col>
-                        
-                        <v-col cols="12" sm="4">
-                            <p>Engine Number</p>
-                            <v-text-field
+                                ></v-text-field>
+                            </v-col>
+
+                            <v-col cols="12" sm="4">
+                                <p>Engine Number</p>
+                                <v-text-field
                                         v-model="ambulance.engineNum"
                                         :rules="[(v) => !!v || 'Item is required']"
                                         label="-- เลขเครื่องยนตร์(ตามใบคู่มือจดทะเบียน) --"
                                         required
-                            ></v-text-field>
-                        </v-col>
-                    </v-row>
-                </v-container>
+                                ></v-text-field>
+                            </v-col>
+                        </v-row>
+                    </v-container>
 
-                <v-container>
-                  <p>License plate</p>
-                    <v-row justify="center">
-                        <v-col cols="12" sm="4">
+                    <v-container>
+                        <p>License plate</p>
+                        <v-row justify="center">
+                            <v-col cols="12" sm="4">
 
-                            <v-text-field
+                                <v-text-field
                                         v-model="ambulance.licensePlate"
                                         :rules="[(v) => !!v || 'Item is required']"
                                         label="-- เลขทะเบียนรถ --"
                                         required
-                            ></v-text-field>
-                        </v-col>
+                                ></v-text-field>
+                            </v-col>
 
-                        <v-col cols="12" sm="4">
+                            <v-col cols="12" sm="4">
 
-                            <v-select
-                                    v-model="ambulance.provinceId"
-                                    :items="provinces"
-                                    item-text="provincename"
-                                    item-value="provinceid"
-                                    :rules="[v => !!v || 'Item is required']"
-                                    label="-- จังหวัด --"
-                                    required
-                            ></v-select>
+                                <v-select
+                                        v-model="ambulance.provinceId"
+                                        :items="provinces"
+                                        item-text="provincename"
+                                        item-value="provinceid"
+                                        :rules="[v => !!v || 'Item is required']"
+                                        label="-- จังหวัด --"
+                                        required
+                                ></v-select>
+                            </v-col>
+                        </v-row>
+                    </v-container>
+
+                    <v-row justify="center">
+                        <v-col cols="12">
+                            <v-btn :disabled="!valid" color="success" @click="saveAmbulances">Submit</v-btn>
+                            <v-btn style="margin-left: 15px;" color="yellow darken-1" @click="viewinfo">Info.</v-btn>
+                            <v-btn style="margin-left: 15px;" @click="clear">Reset</v-btn>
                         </v-col>
                     </v-row>
-                </v-container>
-
-                <v-row justify="center">
-                    <v-col cols="12">
-                        <v-btn :disabled="!valid" color="success" @click="saveAmbulances">Submit</v-btn>
-                        <v-btn style="margin-left: 15px;" color="yellow darken-1" @click="viewinfo">Info.</v-btn>
-                        <v-btn style="margin-left: 15px;" @click="clear">Reset</v-btn>
-                    </v-col>
-                </v-row>
 
 
-            </v-layout>
-        </v-form>
+                </v-layout>
+            </v-form>
         </v-card>
     </v-container>
+    </v-app>
 </template>
 
 
@@ -238,7 +261,29 @@ export default {
       },
     clear() {
       this.$refs.form.reset();
-    }
+    },
+      pushAmbulance() {
+          this.$router.push("/ambulance");
+      },
+      pushCheckAm() {
+          this.$router.push("/ambulancecheck");
+      },
+      pushNurse() {
+          this.$router.push("/nurse");
+      },
+      pushEquipment() {
+          this.$router.push("/checkEquipment");
+      },
+      pushDriver() {
+          this.$router.push("/driver");
+      },
+      pushEmergency() {
+          this.$router.push("/emergency");
+      },
+      logout() {
+          this.$router.push("/");
+      },
+      refreshList() {}
   },
 
   mounted() {
@@ -248,3 +293,4 @@ export default {
   }
 };
 </script>
+
