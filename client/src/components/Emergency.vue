@@ -102,7 +102,7 @@
                             <v-text-field
                                         v-model="emergency.emergencyNote"
                                         :rules="[(v) => !!v || 'Item is required']"
-                                        label="-- อาการอย่างjนโปรดระบุ (ถ้าไม่มีกรอก - ) -- "
+                                        label="-- อาการอย่างอื่นๆโปรดระบุ (ถ้าไม่มีกรอก - ) -- "
                                         required
                              ></v-text-field>
                         </v-col>
