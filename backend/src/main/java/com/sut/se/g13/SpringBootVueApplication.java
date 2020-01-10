@@ -23,7 +23,8 @@ public class SpringBootVueApplication {
 			ProvinceRepository provinceRepository, AmbulanceBrandRepository ambulanceBrandRepository,
 			GenderRepository genderRepository, PositionDriverRepository positiondriverRepository,
 			SymptomRepository symptomRepository, EducationalRepository educationalRepository,
-			AmbulanceTypeRepository ambulanceTypeRepository, EmployeeRepository employeeRepository) {
+			AmbulanceTypeRepository ambulanceTypeRepository, EmployeeRepository employeeRepository,
+			TierRepository tierRepository) {
 		return args -> {
 
 			Stream.of("กรุงเทพมหานคร", "กระบี่", "กาญจนบุรี", "กาฬสินธุ์", "กำแพงเพชร", "ขอนแก่น", "จันทบุรี",
@@ -90,7 +91,21 @@ public class SpringBootVueApplication {
 						Symptom symptom = new Symptom(); // สร้าง Object Symptom
 						symptom.setType(type); // set ชื่อ (type) ให้ Object ชื่อ Symptom
 						symptomRepository.save(symptom); // บันทึก Objcet ชื่อ Symptom
-					});
+			});
+			
+			Stream.of("หัวใจหยุดเต้น", "อวัยวะฉีกขาด ", "สติเปลี่ยนไป", "ไม่สามารถหายใจได้ปกติ",
+					"ระบบไหลเวียนเลือดวิกฤต", "อาการอื่นๆ ").forEach(type -> {
+						Symptom symptom = new Symptom(); // สร้าง Object Symptom
+						symptom.setType(type); // set ชื่อ (type) ให้ Object ชื่อ Symptom
+						symptomRepository.save(symptom); // บันทึก Objcet ชื่อ Symptom
+			});
+
+			Stream.of("C1", "C2 ", "D3", "C4", "C5").forEach(tiername -> {
+						Tier tier = new Tier();
+						tier.setTiername(tiername);
+						tierRepository.save(tier);
+			});
+
 			Employee infoemp1 = new Employee();
 			infoemp1.setUsername("G13");
 			infoemp1.setPassword("SE2562");
