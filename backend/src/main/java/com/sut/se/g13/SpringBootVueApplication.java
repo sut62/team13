@@ -100,7 +100,7 @@ public class SpringBootVueApplication {
 						symptomRepository.save(symptom); // บันทึก Objcet ชื่อ Symptom
 			});
 
-			Stream.of("C1", "C2 ", "D3", "C4", "C5").forEach(tiername -> {
+			Stream.of("C1", "C2 ", "C3", "C4", "C5").forEach(tiername -> {
 						Tier tier = new Tier();
 						tier.setTiername(tiername);
 						tierRepository.save(tier);
