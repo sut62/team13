@@ -4,16 +4,16 @@
                 <v-toolbar-title class="headline text-uppercase">
 
                     <v-row align="center">
-                        <v-col cols="12" sm="8" md="4">
-                            <span>AMBULANCE&nbsp;</span>
-                            <v-btn @click="pushAmbulance" color="#FFFFFF" style="color:#000000">รถพยาบาล</v-btn>
-                            <v-btn @click="pushNurse" color="#FFFFFF" style="color:#000000">ข้อมูลพยาบาล</v-btn>
-                            <v-btn @click="pushCheckAm" color="#FFFFFF" style="color:#000000">เช็คสภาพรถ</v-btn>
-                            <v-btn @click="pushEquipment" color="#FFFFFF" style="color:#000000">เช็คอุปกรณ์ในรถ</v-btn>
-                            <v-btn @click="pushDriver" color="#FFFFFF" style="color:#000000">ข้อมูลคนขับรถ</v-btn>
-                            <v-btn @click="pushEmergency" color="#FFFFFF" style="color:#000000">แจ้งเหตุฉุกเฉิน</v-btn>
-                        </v-col>
-                    </v-row>
+            <v-col cols="12" sm="8" md="4">
+                <span>AMBULANCE&nbsp;&nbsp;</span>
+                    <v-btn @click="pushAmbulance" color="#FFFFFF" style="color:#000000">รถพยาบาล&nbsp;&nbsp;</v-btn>
+                    <v-btn @click="pushNurse" color="#FFFFFF" style="color:#000000">ข้อมูลพยาบาล&nbsp;&nbsp;</v-btn>
+                    <v-btn @click="pushCheckAm" color="#FFFFFF" style="color:#000000">เช็คสภาพรถ&nbsp;&nbsp;</v-btn>
+                    <v-btn @click="pushEquipment" color="#FFFFFF" style="color:#000000">เช็คอุปกรณ์ในรถ&nbsp;&nbsp;</v-btn>
+                    <v-btn @click="pushDriver" color="#FFFFFF" style="color:#000000">ข้อมูลคนขับรถ&nbsp;&nbsp;</v-btn>
+                    <v-btn @click="pushEmergency" color="#FFFFFF" style="color:#000000">แจ้งเหตุฉุกเฉิน&nbsp;&nbsp;</v-btn>
+            </v-col>
+        </v-row>
                 </v-toolbar-title>
                 <v-row align="center" justify="end">
                     <v-btn @click="logout">
