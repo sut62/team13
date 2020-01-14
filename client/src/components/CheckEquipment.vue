@@ -1,36 +1,15 @@
 <template>
         <v-app id="landing-page">
-            <v-card style="width:100% ; background-color:#FFFFFF" class="orange darken-2">
-        <v-row >
-            <v-col >
-           <h1>&nbsp;&nbsp;AMBULANCE&nbsp;&nbsp;</h1>
-           </v-col>
-            <v-col >
-                    <v-btn @click="pushAmbulance" color="#FFFFFF" style="color:#000000">&nbsp;&nbsp;รถพยาบาล&nbsp;&nbsp;</v-btn>
-            </v-col>
-             <v-col >
-                    <v-btn @click="pushNurse" color="#FFFFFF" style="color:#000000">&nbsp;&nbsp;ข้อมูลพยาบาล&nbsp;&nbsp;</v-btn>
-            </v-col>
-             <v-col >
-                    <v-btn @click="pushCheckAm" color="#FFFFFF" style="color:#000000">&nbsp;&nbsp;เช็คสภาพรถ&nbsp;&nbsp;</v-btn>
-            </v-col>
-             <v-col  >
-                    <v-btn @click="pushEquipment" color="#FFFFFF" style="color:#000000">&nbsp;&nbsp;เช็คอุปกรณ์ในรถ&nbsp;&nbsp;</v-btn>
-            </v-col>
-             <v-col  >
-                    <v-btn @click="pushDriver" color="#FFFFFF" style="color:#000000">&nbsp;&nbsp;ข้อมูลคนขับรถ&nbsp;&nbsp;</v-btn>
-            </v-col>
-             <v-col  >
-                    <v-btn @click="pushEmergency" color="#FFFFFF" style="color:#000000">&nbsp;&nbsp;แจ้งเหตุฉุกเฉิน&nbsp;&nbsp;</v-btn>
-            </v-col>
-            <v-col  >
-             <v-btn @click="logout" color="#FFFFFF" style="color:#000000">
-            Log out
-            </v-btn>
-            </v-col  >
-            
-        </v-row>
-        </v-card >
+            <v-tabs background-color="orange darken-2">
+                <h1 style="color: black">&nbsp;&nbsp;AMBULANCE&nbsp;&nbsp;</h1>
+                <v-tab @click="pushAmbulance" style="color: black">รถพยาบาล</v-tab>
+                <v-tab @click="pushNurse" style="color: black">ข้อมูลพยาบาล</v-tab>
+                <v-tab @click="pushCheckAm" style="color: black">เช็คสภาพรถ</v-tab>
+                <v-tab @click="pushEquipment" style="color: black">เช็คอุปกรณ์ในรถ</v-tab>
+                <v-tab @click="pushDriver" style="color: black">ข้อมูลคนขับรถ</v-tab>
+                <v-tab @click="pushEmergency" style="color: black">แจ้งเหตุฉุกเฉิน</v-tab>
+                <v-tab @click="logout" style="color: black">LOG OUT</v-tab>
+            </v-tabs>
     <v-container>
         <v-card style="width:90%; margin:auto; background-color:#FFFFFF">
         <v-form
