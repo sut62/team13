@@ -11,6 +11,9 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.validation.constraints.NotNull;
+// import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Data
 @Entity
@@ -22,11 +25,21 @@ public class Ambulance {
   @SequenceGenerator(name = "AMBULANCE_SEQ", sequenceName = "AMBULANCE_SEQ")
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "AMBULANCE_SEQ")
   @Column(name = "ID_AMBULANCE", unique = true, nullable = true)
-  private @NonNull Long ambulanceid; // ไอดีรถ  
-  private @NonNull String ambulancemodel; // รุ่นรถ
-  private @NonNull String ambulancenum; // เลขตัวรถ
-  private @NonNull String licenseplate; // เลขทะเบียน (ไม่มีจังหวัด)
-  private @NonNull String enginenum; // เลขเครื่องยนตร์
+  private @NonNull Long ambulanceid; // ไอดีรถ
+
+  @NotNull
+  private String ambulancemodel; // รุ่นรถ
+
+  @Size(min = 17, max = 17)
+  @NotNull
+  private String ambulancenum; // เลขตัวรถ
+
+  @NotNull
+  private String licenseplate; // เลขทะเบียน (ไม่มีจังหวัด)
+
+  @Size(min = 12, max = 12)
+  @NotNull
+  private String enginenum; // เลขเครื่องยนตร์
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = AmbulanceBrand.class)
   @JoinColumn(name = "AMBULANCEBRAND_ID", insertable = true)
