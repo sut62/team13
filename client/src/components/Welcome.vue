@@ -1,7 +1,7 @@
 <template>
     <v-app id="landing-page">
-        <v-tabs background-color="orange darken-2">
-            <h1 style="color: black">&nbsp;&nbsp;AMBULANCE&nbsp;&nbsp;</h1>
+        <v-tabs background-color="orange darken-2" style="margin-buttom:-100px">
+            <v-tab @click="pushWelcome" style="color: black; width:13%;">&nbsp;&nbsp;AMBULANCE&nbsp;&nbsp;</v-tab>
             <v-tab @click="pushAmbulance" style="color: black">รถพยาบาล</v-tab>
             <v-tab @click="pushNurse" style="color: black">ข้อมูลพยาบาล</v-tab>
             <v-tab @click="pushCheckAm" style="color: black">เช็คสภาพรถ</v-tab>
@@ -9,19 +9,27 @@
             <v-tab @click="pushDriver" style="color: black">ข้อมูลคนขับรถ</v-tab>
             <v-tab @click="pushEmergency" style="color: black">แจ้งเหตุฉุกเฉิน</v-tab>
             <v-tab @click="logout" style="color: black">LOG OUT</v-tab>
+            
         </v-tabs>
+        <v-card style="width:90%; margin:auto; background-color:#FFFFFF">
+  <h1 class="font-weight">SUT HOSPITAL:</h1>
+  <iframe style="border: 3px solid #000;" frameborder="0" width="100%;" height="800px" src="http://smc.sut.ac.th"></iframe>
+  </v-card>
+        <v-container>
+        
+        </v-container>
     </v-app>
 </template>
 
 <script>
 
     export default {
-        name: "login",
+        name: "welcome",
         data() {
             return {
                 user: "",
                 pass: "",
-                uername:"Pink"
+                uername:""
             };
         },
         methods: {
@@ -47,18 +55,14 @@
             logout() {
                 this.$router.push("/");
             },
+            pushWelcome() {
+          this.$router.push("/welcome");
+            },
             refreshList() {}
             /* eslint-enable no-console */
         },
         mounted() {}
     };
 </script>
-<style>
-    #landing-page {
-        background-image: url("../assets/d370e515ecba80b8cc994e849fd0c44d.gif");
-        background-position: center;
-        background-repeat: round;
-    }
-</style>
 
 

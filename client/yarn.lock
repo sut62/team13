@@ -8026,6 +8026,11 @@ uuid@^3.0.1, uuid@^3.3.2:
   resolved "https://registry.npm.taobao.org/uuid/download/uuid-3.3.3.tgz#4568f0216e78760ee1dbf3a4d2cf53e224112866"
   integrity sha1-RWjwIW54dg7h2/Ok0s9T4iQRKGY=
 
+v-slim-dialog@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/v-slim-dialog/-/v-slim-dialog-0.0.9.tgz#ac7b8251047d5c47ae8f92f3ac017a47222802c3"
+  integrity sha512-NH1yFQ7W3UZNe2kIFWxABW1GTOVGN+pJrRepwfc3eKY9g/OgMY3vdmLzmvtQ6Mq8KpW4OyygP+ErLN6a8Fwn2Q==
+
 validate-npm-package-license@^3.0.1:
   version "3.0.4"
   resolved "https://registry.npm.taobao.org/validate-npm-package-license/download/validate-npm-package-license-3.0.4.tgz#fc91f6b9c7ba15c857f4cb2c5defeec39d4f410a"
