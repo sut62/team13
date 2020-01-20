@@ -10,6 +10,7 @@ import com.sut.se.g13.Repository.*;
 import java.text.ParseException;
 import java.util.Date;
 
+
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
 public class AmbulanceDeletedController {
@@ -21,7 +22,7 @@ public class AmbulanceDeletedController {
     public AmbulanceDeletedController(final AmbulanceDeletedRepository ambulanceDeletedRepository) {
         this.ambulanceDeletedRepository = ambulanceDeletedRepository;
     }
-
+    
     @PostMapping("/ambulancedeleted/{employee}/{amubulance}")
     public AmbulanceDeleted newLogin(AmbulanceDeleted newAmbulanceDeleted, @PathVariable final String employee, @PathVariable String amubulance) throws ParseException {
         
