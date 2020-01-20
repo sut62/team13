@@ -35,8 +35,10 @@
                   v-model="user"
                   :rules="[(v) => !!v || 'This field is required']"
                   required
+                  counter
                   clearable
                   prepend-icon="mdi-account"
+                  v-on:keyup.enter="Login"
                 />
 
                 <v-text-field
@@ -47,6 +49,7 @@
                   required
                   counter
                   clearable
+                  v-on:keyup.enter="Login"
                 />
               </v-form>
               <v-container />
@@ -86,9 +89,14 @@ export default {
           if (response.data[0] != null) {
             this.$router.push("/welcome");
             http.post("/login/" + this.user);
-            alert("เข้าสู่ระบบสำเร็จ");
-          } else {
-            alert("Username หรือ Password อาจจะผิดกรุณาเข้าสู่ระบบใหม่อีกครั้ง");
+            // eslint-disable-next-line no-unused-vars
+            const options1 = {title: 'Alert', size: 'sm'}
+            this.$dialogs.alert("เข้าสู่ระบบสำเร็จ", options1);
+          }
+           else {
+            // eslint-disable-next-line no-unused-vars
+            const options2 = {title: 'Alert', size: 'sm'}
+            this.$dialogs.alert("Username หรือ Password อาจจะผิดกรุณาเข้าสู่ระบบใหม่อีกครั้ง", options2);
           }
         })
         .catch(e => {
@@ -107,7 +115,8 @@ export default {
 #landing-page {
   background-image: url("../assets/d370e515ecba80b8cc994e849fd0c44d.gif");
   background-position: center;
-  background-repeat: round;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 </style>
 

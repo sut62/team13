@@ -1,7 +1,7 @@
 <template>
     <v-app id="landing-page">
         <v-tabs background-color="orange darken-2">
-            <h1 style="color: black">&nbsp;&nbsp;AMBULANCE&nbsp;&nbsp;</h1>
+            <v-tab @click="pushWelcome" style="color: black; width:13%;">&nbsp;&nbsp;AMBULANCE&nbsp;&nbsp;</v-tab>
             <v-tab @click="pushAmbulance" style="color: black">รถพยาบาล</v-tab>
             <v-tab @click="pushNurse" style="color: black">ข้อมูลพยาบาล</v-tab>
             <v-tab @click="pushCheckAm" style="color: black">เช็คสภาพรถ</v-tab>
@@ -12,7 +12,7 @@
         </v-tabs>
         <v-container>
             
-        <v-card style="width:90%; margin:auto; background-color:#FFFFFF">
+        <v-card style="width:75%; margin:auto; background-color:#FFFFFF">
             <v-form
                     ref="form"
                     v-model="valid"
@@ -50,6 +50,7 @@
                                         :rules="[v => !!v || 'Item is required']"
                                         label="-- ยี่ห้อรถ --"
                                         required
+                                        v-on:keyup.enter="saveAmbulances"
                                 ></v-select>
                             </v-col>
 
@@ -60,6 +61,7 @@
                                         :rules="[(v) => !!v || 'Item is required']"
                                         label="-- รุ่นรถ --"
                                         required
+                                        v-on:keyup.enter="saveAmbulances"
                                 ></v-text-field>
                             </v-col>
                         </v-row>
@@ -77,6 +79,7 @@
                                         :rules="[v => !!v || 'Item is required']"
                                         label="-- ประเภทรถพยาบาล --"
                                         required
+                                        v-on:keyup.enter="saveAmbulances"
                                 ></v-select>
                             </v-col>
                         </v-row>
@@ -89,8 +92,10 @@
                                 <v-text-field
                                         v-model="ambulance.ambulanceNum"
                                         :rules="[(v) => !!v || 'Item is required']"
-                                        label="-- เลขตัวรถ(ตามใบคู่มือจดทะเบียน) --"
+                                        label="-- เลขตัวรถ 17 หลัก(ตามใบคู่มือจดทะเบียน) --"
+                                        counter
                                         required
+                                        v-on:keyup.enter="saveAmbulances"
                                 ></v-text-field>
                             </v-col>
 
@@ -99,8 +104,10 @@
                                 <v-text-field
                                         v-model="ambulance.engineNum"
                                         :rules="[(v) => !!v || 'Item is required']"
-                                        label="-- เลขเครื่องยนตร์(ตามใบคู่มือจดทะเบียน) --"
+                                        label="-- เลขเครื่องยนตร์ 12 หลัก(ตามใบคู่มือจดทะเบียน) --"
+                                        counter
                                         required
+                                        v-on:keyup.enter="saveAmbulances"
                                 ></v-text-field>
                             </v-col>
                         </v-row>
@@ -116,6 +123,7 @@
                                         :rules="[(v) => !!v || 'Item is required']"
                                         label="-- เลขทะเบียนรถ --"
                                         required
+                                        v-on:keyup.enter="saveAmbulances"
                                 ></v-text-field>
                             </v-col>
 
@@ -129,6 +137,7 @@
                                         :rules="[v => !!v || 'Item is required']"
                                         label="-- จังหวัด --"
                                         required
+                                        v-on:keyup.enter="saveAmbulances"
                                 ></v-select>
                             </v-col>
                         </v-row>
@@ -233,12 +242,14 @@ export default {
         .then(response => {
           console.log(response);
           this.$router.push("/viewambulance");
-          alert('บันทึกข้อมูลสำเร็จ');
+          const options1 = {title: 'Alert', size: 'sm'}
+          this.$dialogs.alert('บันทึกข้อมูลสำเร็จ',options1);
           this.$refs.form.reset();
         })
         .catch(e => {
           console.log(e);
-          alert('บันทึกข้อมูลไม่สำเร็จ');
+          const options2 = {title: 'Alert', size: 'sm'}
+          this.$dialogs.alert('บันทึกข้อมูลไม่สำเร็จ',options2);
         });
       this.submitted = true;
 
@@ -272,6 +283,9 @@ export default {
       },
       logout() {
           this.$router.push("/");
+      },
+      pushWelcome() {
+          this.$router.push("/welcome");
       },
       refreshList() {}
   },
