@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
+import java.util.Date;
 import java.util.stream.Collectors;
 import java.util.Optional;
 import com.sut.se.g13.Entity.*;
@@ -87,6 +88,7 @@ public class AmbulanceController {
         newAmbulance.setAmbulancenum(ambulancenum);
         newAmbulance.setEnginenum(enginenum);
         newAmbulance.setLicenseplate(licenseplate);
+        newAmbulance.setAdddate(new Date());
 
         return ambulanceRepository.save(newAmbulance);
     }

@@ -6,6 +6,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.dao.DataIntegrityViolationException;
+
 // import org.springframework.dao.DataIntegrityViolationException;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -16,6 +18,7 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 // import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DataJpaTest
 public class AmbulanceTest {
@@ -130,7 +133,7 @@ public class AmbulanceTest {
 
         // error message ตรงชนิด และถูก field
         ConstraintViolation<Ambulance> v = result.iterator().next();
-        assertEquals("size must be between 12 and 12", v.getMessage());
+        assertEquals("must match \"\\w{12}\"", v.getMessage());
         assertEquals("enginenum", v.getPropertyPath().toString());
     }
 
@@ -149,12 +152,12 @@ public class AmbulanceTest {
 
         // error message ตรงชนิด และถูก field
         ConstraintViolation<Ambulance> v = result.iterator().next();
-        assertEquals("size must be between 12 and 12", v.getMessage());
+        assertEquals("must match \"\\w{12}\"", v.getMessage());
         assertEquals("enginenum", v.getPropertyPath().toString());
     }
 
     @Test
-    void B5814664_testEngineMustNotBe16String() {
+    void B5814664_testAmNumMustNotBe16String() {
         Ambulance ambulance = new Ambulance();
         ambulance.setEnginenum("JS150MM03731");
         ambulance.setAmbulancemodel("Dmax");
@@ -168,12 +171,12 @@ public class AmbulanceTest {
 
         // error message ตรงชนิด และถูก field
         ConstraintViolation<Ambulance> v = result.iterator().next();
-        assertEquals("size must be between 17 and 17", v.getMessage());
+        assertEquals("must match \"\\w{17}\"", v.getMessage());
         assertEquals("ambulancenum", v.getPropertyPath().toString());
     }
 
     @Test
-    void B5814664_testEngineMustNotBe18String() {
+    void B5814664_testAmNumMustNotBe18String() {
         Ambulance ambulance = new Ambulance();
         ambulance.setEnginenum("JS150MM03731");
         ambulance.setAmbulancemodel("Dmax");
@@ -187,31 +190,92 @@ public class AmbulanceTest {
 
         // error message ตรงชนิด และถูก field
         ConstraintViolation<Ambulance> v = result.iterator().next();
-        assertEquals("size must be between 17 and 17", v.getMessage());
+        assertEquals("must match \"\\w{17}\"", v.getMessage());
         assertEquals("ambulancenum", v.getPropertyPath().toString());
     }
-    
-    // @Test //test ไม่ซ้ำกัน
-    // void B5814664_testEngineMustBeUnique() {
-    //     // สร้าง ambulance object
-    //     Ambulance ambulance1 = new Ambulance();
-    //     ambulance1.setEnginenum("JS150MM03731");
-    //     ambulance1.setAmbulancemodel("Dmax");
-    //     ambulance1.setAmbulancenum("ML2S150CMHTP03731");
-    //     ambulance1.setLicenseplate("1กว 4451");
+    @Test
+    void B5814664_testLicenseMustLessThan4String() {
+        Ambulance ambulance = new Ambulance();
+        ambulance.setEnginenum("JS150MM03731");
+        ambulance.setAmbulancemodel("Dmax");
+        ambulance.setAmbulancenum("ML2S150CMHTP03731");
+        ambulance.setLicenseplate("1กว");
 
-    //     ambulanceRepository.saveAndFlush(ambulance1);
+        Set<ConstraintViolation<Ambulance>> result = validator.validate(ambulance);
 
-    //     // คาดหวังว่า DataIntegrityViolationException จะถูก throw
-    //     assertThrows(DataIntegrityViolationException.class, () -> {
-    //         // สร้าง ambulance object ตัวที่ 2
-    //     Ambulance ambulance2 = new Ambulance();
-    //     ambulance2.setEnginenum("JS150MM03731");
-    //     ambulance2.setAmbulancemodel("Pajero");
-    //     ambulance2.setAmbulancenum("HJ2S150CMHTP03731");
-    //     ambulance2.setLicenseplate("1กว 6621");
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
 
-    //     ambulanceRepository.saveAndFlush(ambulance2);
-    //     });
-    // }
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<Ambulance> v = result.iterator().next();
+        assertEquals("size must be between 4 and 8", v.getMessage());
+        assertEquals("licenseplate", v.getPropertyPath().toString());
+    }
+
+    @Test
+    void B5814664_testLicenseMustMoreThan8String() {
+        Ambulance ambulance = new Ambulance();
+        ambulance.setEnginenum("JS150MM03731");
+        ambulance.setAmbulancemodel("Dmax");
+        ambulance.setAmbulancenum("ML2S150CMHTP03731");
+        ambulance.setLicenseplate("1กว 45684");
+
+        Set<ConstraintViolation<Ambulance>> result = validator.validate(ambulance);
+
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
+
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<Ambulance> v = result.iterator().next();
+        assertEquals("size must be between 4 and 8", v.getMessage());
+        assertEquals("licenseplate", v.getPropertyPath().toString());
+    }
+
+    @Test //test EngineNumไม่ซ้ำกัน
+    void B5814664_testEngineMustBeUnique() {
+    // สร้าง ambulance object
+    Ambulance ambulance1 = new Ambulance();
+    ambulance1.setEnginenum("JS150MM03731");
+    ambulance1.setAmbulancemodel("Dmax");
+    ambulance1.setAmbulancenum("ML2S150CMHTP03731");
+    ambulance1.setLicenseplate("1กว 4451");
+
+    ambulanceRepository.saveAndFlush(ambulance1);
+
+    // คาดหวังว่า DataIntegrityViolationException จะถูก throw
+    assertThrows(DataIntegrityViolationException.class, () -> {
+    // สร้าง ambulance object ตัวที่ 2
+    Ambulance ambulance2 = new Ambulance();
+    ambulance2.setEnginenum("JS150MM03731");
+    ambulance2.setAmbulancemodel("Pajero");
+    ambulance2.setAmbulancenum("HJ2S150CMHTP03731");
+    ambulance2.setLicenseplate("1กว 6621");
+
+    ambulanceRepository.saveAndFlush(ambulance2);
+    });
+    }
+
+    @Test //test AmbulanceNumไม่ซ้ำกัน
+    void B5814664_testAmbulanceMustBeUnique() {
+    // สร้าง ambulance object
+    Ambulance ambulance1 = new Ambulance();
+    ambulance1.setEnginenum("JS150MM03731");
+    ambulance1.setAmbulancemodel("Dmax");
+    ambulance1.setAmbulancenum("ML2S150CMHTP03731");
+    ambulance1.setLicenseplate("1กว 4451");
+
+    ambulanceRepository.saveAndFlush(ambulance1);
+
+    // คาดหวังว่า DataIntegrityViolationException จะถูก throw
+    assertThrows(DataIntegrityViolationException.class, () -> {
+    // สร้าง ambulance object ตัวที่ 2
+    Ambulance ambulance2 = new Ambulance();
+    ambulance2.setEnginenum("JS150MM03745");
+    ambulance2.setAmbulancemodel("Pajero");
+    ambulance2.setAmbulancenum("ML2S150CMHTP03731");
+    ambulance2.setLicenseplate("1กว 6621");
+
+    ambulanceRepository.saveAndFlush(ambulance2);
+    });
+    }
 }
