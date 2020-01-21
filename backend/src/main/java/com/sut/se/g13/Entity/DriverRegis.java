@@ -8,12 +8,16 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import java.util.Date;
+
 
 @Data
 @Entity
@@ -24,14 +28,28 @@ public class DriverRegis {
     @SequenceGenerator(name="DriverRegis_seq",sequenceName="DriverRegis_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator="DriverRegis_seq")
     @Column(name = "DRIVERREGIS_ID", unique = true, nullable = true)
+    private Long driverregisid;
     
-    private @NonNull Long driverregisid;
     @Temporal(TemporalType.DATE)
-    private @NonNull Date birthday;     //วันเดือนปีเกิด
-    private @NonNull String drivername; //ชื่อ-สุกล คนชับ
-    private @NonNull String idcard;     //เลขที่บัตรประชาชน
-    private @NonNull String address;    //ที่อยู่
-    private @NonNull String telephone;  //หมายเลขโทรศัพท์
+    private Date birthday;     //วันเดือนปีเกิด
+    
+    @NotNull
+    @Size (min=1, max=20)
+    private String drivername; //ชื่อ-สุกล คนขับ
+    
+    @NotNull
+    @Pattern(regexp = "\\d{13}")
+    private  String idcard;     //เลขที่บัตรประชาชน
+   
+    @NotNull
+    @Size (min=1, max=50)
+    private String address;    //ที่อยู่
+    
+    @NotNull
+    @Pattern(regexp="\\d{10}")
+    private String telephone;  //หมายเลขโทรศัพท์
+
+
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Gender.class)
     @JoinColumn(name = "GENDER")
