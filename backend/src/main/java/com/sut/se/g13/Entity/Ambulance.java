@@ -6,14 +6,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.validation.constraints.NotNull;
-// import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Data
 @Entity
@@ -26,19 +29,25 @@ public class Ambulance {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "AMBULANCE_SEQ")
   @Column(name = "ID_AMBULANCE", unique = true, nullable = true)
   private @NonNull Long ambulanceid; // ไอดีรถ
+  
+  @Temporal(TemporalType.DATE)
+  private Date adddate;
 
   @NotNull
   private String ambulancemodel; // รุ่นรถ
 
-  @Size(min = 17, max = 17)
+  @Pattern(regexp = "\\w{17}")
   @NotNull
+  @Column(name = "AMBULANCENUM", unique = true)
   private String ambulancenum; // เลขตัวรถ
 
   @NotNull
+  @Size(min = 4, max = 8)
   private String licenseplate; // เลขทะเบียน (ไม่มีจังหวัด)
 
-  @Size(min = 12, max = 12)
+  @Pattern(regexp = "\\w{12}")
   @NotNull
+  @Column(name = "ENGINENUM", unique = true)
   private String enginenum; // เลขเครื่องยนตร์
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = AmbulanceBrand.class)
