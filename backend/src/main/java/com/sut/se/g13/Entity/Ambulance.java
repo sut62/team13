@@ -31,6 +31,7 @@ public class Ambulance {
   private @NonNull Long ambulanceid; // ไอดีรถ
   
   @Temporal(TemporalType.DATE)
+  @NotNull
   private Date adddate;
 
   @NotNull
@@ -52,14 +53,17 @@ public class Ambulance {
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = AmbulanceBrand.class)
   @JoinColumn(name = "AMBULANCEBRAND_ID", insertable = true)
+  @NotNull
   private AmbulanceBrand brandid; // ยี่ห่อรถ (ambulancebrand)
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = AmbulanceType.class)
   @JoinColumn(name = "AMBULANCETYPE_ID", insertable = true)
+  @NotNull
   private AmbulanceType typeid; // ประเภทรถการใช้งาน (ambulancetype)
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Province.class)
   @JoinColumn(name = "PROVINCE_ID", insertable = true)
+  @NotNull
   private Province provinceid; // จังหวัดในป้ายทะเบียน (province)
 
 }

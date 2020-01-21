@@ -7,5 +7,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
 public interface ProvinceRepository extends JpaRepository<Province, Long> {
-    Province findByProvinceid(Long provinceid);
+    Province findByProvinceid(long provinceid);
 }
