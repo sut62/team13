@@ -7,18 +7,17 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.dao.DataIntegrityViolationException;
-
-// import org.springframework.dao.DataIntegrityViolationException;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.text.ParseException;
 import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-// import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 @DataJpaTest
 public class AmbulanceTest {
@@ -27,19 +26,36 @@ public class AmbulanceTest {
     @Autowired
     private AmbulanceRepository ambulanceRepository;
 
+    @Autowired
+    private AmbulanceBrandRepository ambulanceBrandRepository;
+
+    @Autowired
+    private AmbulanceTypeRepository ambulanceTypeRepository;
+
+    @Autowired
+    private ProvinceRepository provinceRepository;
+
     @BeforeEach
     public void setup() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
     }
-
     @Test
-    void B5814664_testAmbulancewithCorrect() {
+    void B5814664_testAmbulancewithCorrect() throws ParseException {
         Ambulance ambulance = new Ambulance();
+        java.util.Date date = new java.util.Date(2020-01-21);
+        AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
+        AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
+        Province province = provinceRepository.findByProvinceid(1);
+    
         ambulance.setEnginenum("JS150MM03731");
         ambulance.setAmbulancemodel("Dmax");
         ambulance.setAmbulancenum("ML2S150CMHTP03731");
         ambulance.setLicenseplate("1กว 4451");
+        ambulance.setAdddate(date);
+        ambulance.setBrandid(brand);
+        ambulance.setTypeid(type);
+        ambulance.setProvinceid(province);
 
         ambulanceRepository.saveAndFlush(ambulance);
         Optional<Ambulance> check = ambulanceRepository.findById(ambulance.getAmbulanceid());
@@ -47,17 +63,28 @@ public class AmbulanceTest {
         assertEquals("Dmax", check.get().getAmbulancemodel());
         assertEquals("ML2S150CMHTP03731", check.get().getAmbulancenum());
         assertEquals("1กว 4451", check.get().getLicenseplate());
-
+        assertEquals(ambulance.getAdddate(), check.get().getAdddate());
+        assertEquals(brand, check.get().getBrandid());
+        assertEquals(type, check.get().getTypeid());
+        assertEquals(province, check.get().getProvinceid());
     }
 
     @Test
-    void B5814664_testAmbulancewithEngineNotNull() {
+    void B5814664_testAmbulancewithEngineNotNull() throws ParseException{
         Ambulance ambulance = new Ambulance();
+        java.util.Date date = new java.util.Date(2020-01-21);
+        AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
+        AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
+        Province province = provinceRepository.findByProvinceid(1);
         ambulance.setEnginenum(null);
         ambulance.setAmbulancemodel("Dmax");
         ambulance.setAmbulancenum("ML2S150CMHTP03731");
         ambulance.setLicenseplate("1กว 4451");
-
+        ambulance.setAdddate(date);
+        ambulance.setBrandid(brand);
+        ambulance.setTypeid(type);
+        ambulance.setProvinceid(province);
+        
         Set<ConstraintViolation<Ambulance>> result = validator.validate(ambulance);
 
         assertEquals(1, result.size());
@@ -68,12 +95,20 @@ public class AmbulanceTest {
     }
 
     @Test
-    void B5814664_testAmbulancewithModelNotNull() {
+    void B5814664_testAmbulancewithModelNotNull() throws ParseException{
         Ambulance ambulance = new Ambulance();
+        java.util.Date date = new java.util.Date(2020-01-21);
+        AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
+        AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
+        Province province = provinceRepository.findByProvinceid(1);
         ambulance.setEnginenum("JS150MM03731");
         ambulance.setAmbulancemodel(null);
         ambulance.setAmbulancenum("ML2S150CMHTP03731");
         ambulance.setLicenseplate("1กว 4451");
+        ambulance.setAdddate(date);
+        ambulance.setBrandid(brand);
+        ambulance.setTypeid(type);
+        ambulance.setProvinceid(province);
 
         Set<ConstraintViolation<Ambulance>> result = validator.validate(ambulance);
 
@@ -85,12 +120,20 @@ public class AmbulanceTest {
     }
 
     @Test
-    void B5814664_testAmbulancewithAmbulancenumNotNull() {
+    void B5814664_testAmbulancewithAmbulancenumNotNull() throws ParseException{
         Ambulance ambulance = new Ambulance();
+        java.util.Date date = new java.util.Date(2020-01-21);
+        AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
+        AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
+        Province province = provinceRepository.findByProvinceid(1);
         ambulance.setEnginenum("JS150MM03731");
         ambulance.setAmbulancemodel("Dmax");
         ambulance.setAmbulancenum(null);
         ambulance.setLicenseplate("1กว 4451");
+        ambulance.setAdddate(date);
+        ambulance.setBrandid(brand);
+        ambulance.setTypeid(type);
+        ambulance.setProvinceid(province);
 
         Set<ConstraintViolation<Ambulance>> result = validator.validate(ambulance);
 
@@ -102,12 +145,20 @@ public class AmbulanceTest {
     }
 
     @Test
-    void B5814664_testAmbulancewithLicenseplateNotNull() {
+    void B5814664_testAmbulancewithLicenseplateNotNull() throws ParseException {
         Ambulance ambulance = new Ambulance();
+        java.util.Date date = new java.util.Date(2020-01-21);
+        AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
+        AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
+        Province province = provinceRepository.findByProvinceid(1);
         ambulance.setEnginenum("JS150MM03731");
         ambulance.setAmbulancemodel("Dmax");
         ambulance.setAmbulancenum("ML2S150CMHTP03731");
         ambulance.setLicenseplate(null);
+        ambulance.setAdddate(date);
+        ambulance.setBrandid(brand);
+        ambulance.setTypeid(type);
+        ambulance.setProvinceid(province);
 
         Set<ConstraintViolation<Ambulance>> result = validator.validate(ambulance);
 
@@ -119,12 +170,114 @@ public class AmbulanceTest {
     }
 
     @Test
-    void B5814664_testEngineMustNotBe11String() {
+    void B5814664_testAmbulancewithAddDateNotNull() throws ParseException {
         Ambulance ambulance = new Ambulance();
+        AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
+        AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
+        Province province = provinceRepository.findByProvinceid(1);
+        ambulance.setEnginenum("JS150MM03731");
+        ambulance.setAmbulancemodel("Dmax");
+        ambulance.setAmbulancenum("ML2S150CMHTP03731");
+        ambulance.setLicenseplate("1กว 4451");
+        ambulance.setAdddate(null);
+        ambulance.setBrandid(brand);
+        ambulance.setTypeid(type);
+        ambulance.setProvinceid(province);
+
+        Set<ConstraintViolation<Ambulance>> result = validator.validate(ambulance);
+
+        assertEquals(1, result.size());
+
+        ConstraintViolation<Ambulance> message = result.iterator().next();
+        assertEquals("must not be null", message.getMessage());
+        assertEquals("adddate", message.getPropertyPath().toString());
+    }
+    @Test
+    void B5814664_testAmbulancewithBrandNotNull() throws ParseException{
+        Ambulance ambulance = new Ambulance();
+        java.util.Date date = new java.util.Date(2020-01-21);
+        AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
+        Province province = provinceRepository.findByProvinceid(1);
+        ambulance.setEnginenum("JS150MM03731");
+        ambulance.setAmbulancemodel("Dmax");
+        ambulance.setAmbulancenum("ML2S150CMHTP03731");
+        ambulance.setLicenseplate("1กว 4451");
+        ambulance.setAdddate(date);
+        ambulance.setBrandid(null);
+        ambulance.setTypeid(type);
+        ambulance.setProvinceid(province);
+        
+        Set<ConstraintViolation<Ambulance>> result = validator.validate(ambulance);
+
+        assertEquals(1, result.size());
+
+        ConstraintViolation<Ambulance> message = result.iterator().next();
+        assertEquals("must not be null", message.getMessage());
+        assertEquals("brandid", message.getPropertyPath().toString());
+    }
+    @Test
+    void B5814664_testAmbulancewithTypeNull() throws ParseException{
+        Ambulance ambulance = new Ambulance();
+        java.util.Date date = new java.util.Date(2020-01-21);
+        AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
+        Province province = provinceRepository.findByProvinceid(1);
+        ambulance.setEnginenum("JS150MM03731");
+        ambulance.setAmbulancemodel("Dmax");
+        ambulance.setAmbulancenum("ML2S150CMHTP03731");
+        ambulance.setLicenseplate("1กว 4451");
+        ambulance.setAdddate(date);
+        ambulance.setBrandid(brand);
+        ambulance.setTypeid(null);
+        ambulance.setProvinceid(province);
+        
+        Set<ConstraintViolation<Ambulance>> result = validator.validate(ambulance);
+
+        assertEquals(1, result.size());
+
+        ConstraintViolation<Ambulance> message = result.iterator().next();
+        assertEquals("must not be null", message.getMessage());
+        assertEquals("typeid", message.getPropertyPath().toString());
+    }
+
+    @Test
+    void B5814664_testAmbulancewithProvinceNotNull() throws ParseException{
+        Ambulance ambulance = new Ambulance();
+        java.util.Date date = new java.util.Date(2020-01-21);
+        AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
+        AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
+        ambulance.setEnginenum("JS150MM03731");
+        ambulance.setAmbulancemodel("Dmax");
+        ambulance.setAmbulancenum("ML2S150CMHTP03731");
+        ambulance.setLicenseplate("1กว 4451");
+        ambulance.setAdddate(date);
+        ambulance.setBrandid(brand);
+        ambulance.setTypeid(type);
+        ambulance.setProvinceid(null);
+        
+        Set<ConstraintViolation<Ambulance>> result = validator.validate(ambulance);
+
+        assertEquals(1, result.size());
+
+        ConstraintViolation<Ambulance> message = result.iterator().next();
+        assertEquals("must not be null", message.getMessage());
+        assertEquals("provinceid", message.getPropertyPath().toString());
+    }
+
+    @Test
+    void B5814664_testEngineMustNotBe11String() throws ParseException{
+        Ambulance ambulance = new Ambulance();
+        java.util.Date date = new java.util.Date(2020-01-21);
+        AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
+        AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
+        Province province = provinceRepository.findByProvinceid(1);
         ambulance.setEnginenum("JS150MM0373");
         ambulance.setAmbulancemodel("Dmax");
         ambulance.setAmbulancenum("ML2S150CMHTP03731");
         ambulance.setLicenseplate("1กว 4451");
+        ambulance.setAdddate(date);
+        ambulance.setBrandid(brand);
+        ambulance.setTypeid(type);
+        ambulance.setProvinceid(province);
 
         Set<ConstraintViolation<Ambulance>> result = validator.validate(ambulance);
 
@@ -138,12 +291,20 @@ public class AmbulanceTest {
     }
 
     @Test
-    void B5814664_testEngineMustNotBe14String() {
+    void B5814664_testEngineMustNotBe14String() throws ParseException {
         Ambulance ambulance = new Ambulance();
+        java.util.Date date = new java.util.Date(2020-01-21);
+        AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
+        AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
+        Province province = provinceRepository.findByProvinceid(1);
         ambulance.setEnginenum("JS150MM037311");
         ambulance.setAmbulancemodel("Dmax");
         ambulance.setAmbulancenum("ML2S150CMHTP03731");
         ambulance.setLicenseplate("1กว 4451");
+        ambulance.setAdddate(date);
+        ambulance.setBrandid(brand);
+        ambulance.setTypeid(type);
+        ambulance.setProvinceid(province);
 
         Set<ConstraintViolation<Ambulance>> result = validator.validate(ambulance);
 
@@ -157,12 +318,20 @@ public class AmbulanceTest {
     }
 
     @Test
-    void B5814664_testAmNumMustNotBe16String() {
+    void B5814664_testAmNumMustNotBe16String() throws ParseException{
         Ambulance ambulance = new Ambulance();
+        java.util.Date date = new java.util.Date(2020-01-21);
+        AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
+        AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
+        Province province = provinceRepository.findByProvinceid(1);
         ambulance.setEnginenum("JS150MM03731");
         ambulance.setAmbulancemodel("Dmax");
         ambulance.setAmbulancenum("ML2S150CMHTP0373");
         ambulance.setLicenseplate("1กว 4451");
+        ambulance.setAdddate(date);
+        ambulance.setBrandid(brand);
+        ambulance.setTypeid(type);
+        ambulance.setProvinceid(province);
 
         Set<ConstraintViolation<Ambulance>> result = validator.validate(ambulance);
 
@@ -176,12 +345,20 @@ public class AmbulanceTest {
     }
 
     @Test
-    void B5814664_testAmNumMustNotBe18String() {
+    void B5814664_testAmNumMustNotBe18String() throws ParseException{
         Ambulance ambulance = new Ambulance();
+        java.util.Date date = new java.util.Date(2020-01-21);
+        AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
+        AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
+        Province province = provinceRepository.findByProvinceid(1);
         ambulance.setEnginenum("JS150MM03731");
         ambulance.setAmbulancemodel("Dmax");
         ambulance.setAmbulancenum("ML2S150CMHTP037311");
         ambulance.setLicenseplate("1กว 4451");
+        ambulance.setAdddate(date);
+        ambulance.setBrandid(brand);
+        ambulance.setTypeid(type);
+        ambulance.setProvinceid(province);
 
         Set<ConstraintViolation<Ambulance>> result = validator.validate(ambulance);
 
@@ -194,12 +371,20 @@ public class AmbulanceTest {
         assertEquals("ambulancenum", v.getPropertyPath().toString());
     }
     @Test
-    void B5814664_testLicenseMustLessThan4String() {
+    void B5814664_testLicenseMustLessThan4String() throws ParseException{
         Ambulance ambulance = new Ambulance();
+        java.util.Date date = new java.util.Date(2020-01-21);
+        AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
+        AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
+        Province province = provinceRepository.findByProvinceid(1);
         ambulance.setEnginenum("JS150MM03731");
         ambulance.setAmbulancemodel("Dmax");
         ambulance.setAmbulancenum("ML2S150CMHTP03731");
         ambulance.setLicenseplate("1กว");
+        ambulance.setAdddate(date);
+        ambulance.setBrandid(brand);
+        ambulance.setTypeid(type);
+        ambulance.setProvinceid(province);
 
         Set<ConstraintViolation<Ambulance>> result = validator.validate(ambulance);
 
@@ -213,12 +398,20 @@ public class AmbulanceTest {
     }
 
     @Test
-    void B5814664_testLicenseMustMoreThan8String() {
+    void B5814664_testLicenseMustMoreThan8String() throws ParseException{
         Ambulance ambulance = new Ambulance();
+        java.util.Date date = new java.util.Date(2020-01-21);
+        AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
+        AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
+        Province province = provinceRepository.findByProvinceid(1);
         ambulance.setEnginenum("JS150MM03731");
         ambulance.setAmbulancemodel("Dmax");
         ambulance.setAmbulancenum("ML2S150CMHTP03731");
         ambulance.setLicenseplate("1กว 45684");
+        ambulance.setAdddate(date);
+        ambulance.setBrandid(brand);
+        ambulance.setTypeid(type);
+        ambulance.setProvinceid(province);
 
         Set<ConstraintViolation<Ambulance>> result = validator.validate(ambulance);
 
@@ -232,13 +425,21 @@ public class AmbulanceTest {
     }
 
     @Test //test EngineNumไม่ซ้ำกัน
-    void B5814664_testEngineMustBeUnique() {
+    void B5814664_testEngineMustBeUnique() throws ParseException{
     // สร้าง ambulance object
     Ambulance ambulance1 = new Ambulance();
+    java.util.Date date1 = new java.util.Date(2020-01-21);
+    AmbulanceBrand brand1 = ambulanceBrandRepository.findByBrandid(1);
+    AmbulanceType type1 = ambulanceTypeRepository.findByTypeid(1);
+    Province province1 = provinceRepository.findByProvinceid(1);
     ambulance1.setEnginenum("JS150MM03731");
     ambulance1.setAmbulancemodel("Dmax");
     ambulance1.setAmbulancenum("ML2S150CMHTP03731");
     ambulance1.setLicenseplate("1กว 4451");
+    ambulance1.setAdddate(date1);
+    ambulance1.setBrandid(brand1);
+    ambulance1.setTypeid(type1);
+    ambulance1.setProvinceid(province1);
 
     ambulanceRepository.saveAndFlush(ambulance1);
 
@@ -246,23 +447,39 @@ public class AmbulanceTest {
     assertThrows(DataIntegrityViolationException.class, () -> {
     // สร้าง ambulance object ตัวที่ 2
     Ambulance ambulance2 = new Ambulance();
+    java.util.Date date2 = new java.util.Date(2020-01-21);
+    AmbulanceBrand brand2 = ambulanceBrandRepository.findByBrandid(1);
+    AmbulanceType type2 = ambulanceTypeRepository.findByTypeid(1);
+    Province province2 = provinceRepository.findByProvinceid(1);
     ambulance2.setEnginenum("JS150MM03731");
     ambulance2.setAmbulancemodel("Pajero");
     ambulance2.setAmbulancenum("HJ2S150CMHTP03731");
     ambulance2.setLicenseplate("1กว 6621");
+    ambulance2.setAdddate(date2);
+    ambulance2.setBrandid(brand2);
+    ambulance2.setTypeid(type2);
+    ambulance2.setProvinceid(province2);
 
     ambulanceRepository.saveAndFlush(ambulance2);
     });
     }
 
     @Test //test AmbulanceNumไม่ซ้ำกัน
-    void B5814664_testAmbulanceMustBeUnique() {
+    void B5814664_testAmbulanceMustBeUnique() throws ParseException{
     // สร้าง ambulance object
     Ambulance ambulance1 = new Ambulance();
+    java.util.Date date1= new java.util.Date(2020-01-21);
+    AmbulanceBrand brand1 = ambulanceBrandRepository.findByBrandid(1);
+    AmbulanceType type1 = ambulanceTypeRepository.findByTypeid(1);
+    Province province1 = provinceRepository.findByProvinceid(1);
     ambulance1.setEnginenum("JS150MM03731");
     ambulance1.setAmbulancemodel("Dmax");
     ambulance1.setAmbulancenum("ML2S150CMHTP03731");
     ambulance1.setLicenseplate("1กว 4451");
+    ambulance1.setAdddate(date1);
+    ambulance1.setBrandid(brand1);
+    ambulance1.setTypeid(type1);
+    ambulance1.setProvinceid(province1);
 
     ambulanceRepository.saveAndFlush(ambulance1);
 
@@ -270,10 +487,18 @@ public class AmbulanceTest {
     assertThrows(DataIntegrityViolationException.class, () -> {
     // สร้าง ambulance object ตัวที่ 2
     Ambulance ambulance2 = new Ambulance();
+    java.util.Date date2 = new java.util.Date(2020-01-21);
+    AmbulanceBrand brand2 = ambulanceBrandRepository.findByBrandid(1);
+    AmbulanceType type2 = ambulanceTypeRepository.findByTypeid(1);
+    Province province2 = provinceRepository.findByProvinceid(1);
     ambulance2.setEnginenum("JS150MM03745");
     ambulance2.setAmbulancemodel("Pajero");
     ambulance2.setAmbulancenum("ML2S150CMHTP03731");
     ambulance2.setLicenseplate("1กว 6621");
+    ambulance2.setAdddate(date2);
+    ambulance2.setBrandid(brand2);
+    ambulance2.setTypeid(type2);
+    ambulance2.setProvinceid(province2);
 
     ambulanceRepository.saveAndFlush(ambulance2);
     });
