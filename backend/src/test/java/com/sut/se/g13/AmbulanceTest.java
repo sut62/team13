@@ -311,7 +311,7 @@ public class AmbulanceTest {
     }
 
     @Test
-    void B5814664_testEngineMustNotBe14String() throws ParseException {
+    void B5814664_testEngineMustNotBe13String() throws ParseException {
         Ambulance ambulance = new Ambulance();
         String pattern ="yyyy-MM-dd";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
