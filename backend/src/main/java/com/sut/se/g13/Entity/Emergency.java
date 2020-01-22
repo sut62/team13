@@ -3,6 +3,8 @@ package com.sut.se.g13.Entity;
 import lombok.*;
 import javax.persistence.*;
 import java.util.*;
+import javax.validation.constraints.*;
+
 
 @Data
 @Entity
@@ -22,16 +24,24 @@ public class Emergency {
 	private @NonNull Date emDate;
 
 	@Column(name = "EM_PNam")
-	private @NonNull String patientName;
+	@Size(max = 30)
+	@NotNull
+	private String patientName;
 
 	@Column(name = "EM_PAddress")
-	private @NonNull String patientAddress;
+	@Size(max = 50)
+	@NotNull
+	private String patientAddress;
 
 	@Column(name = "EM_PTel")
-	private @NonNull String patientTel;
+	@Pattern(regexp="\\d{10}")
+	@NotNull
+	private String patientTel;
 
 	@Column(name = "EM_PNote")
-	private @NonNull String note;
+	@Size(max = 30)
+	@NotNull
+	private String note;
 
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Symptom.class)
 	@JoinColumn(name = "SYMPTOME_ID", insertable = true)
