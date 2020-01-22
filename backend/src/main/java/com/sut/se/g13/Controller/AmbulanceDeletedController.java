@@ -19,12 +19,12 @@ public class AmbulanceDeletedController {
     private final AmbulanceDeletedRepository ambulanceDeletedRepository;
   
 
-    public AmbulanceDeletedController(final AmbulanceDeletedRepository ambulanceDeletedRepository) {
+    public AmbulanceDeletedController( AmbulanceDeletedRepository ambulanceDeletedRepository) {
         this.ambulanceDeletedRepository = ambulanceDeletedRepository;
     }
     
     @PostMapping("/ambulancedeleted/{employee}/{amubulance}")
-    public AmbulanceDeleted newLogin(AmbulanceDeleted newAmbulanceDeleted, @PathVariable final String employee, @PathVariable String amubulance) throws ParseException {
+    public AmbulanceDeleted newLogin(AmbulanceDeleted newAmbulanceDeleted, @PathVariable final String employee, @PathVariable Long amubulance) throws ParseException {
         
         newAmbulanceDeleted.setEmployee(employee);
         newAmbulanceDeleted.setAmbulance(amubulance);
