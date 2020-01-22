@@ -12,6 +12,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Optional;
 import java.util.Set;
 
@@ -43,7 +44,9 @@ public class AmbulanceTest {
     @Test
     void B5814664_testAmbulancewithCorrect() throws ParseException {
         Ambulance ambulance = new Ambulance();
-        java.util.Date date = new java.util.Date(2020-01-21);
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
         AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
         Province province = provinceRepository.findByProvinceid(1);
@@ -72,7 +75,9 @@ public class AmbulanceTest {
     @Test
     void B5814664_testAmbulancewithEngineNotNull() throws ParseException{
         Ambulance ambulance = new Ambulance();
-        java.util.Date date = new java.util.Date(2020-01-21);
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
         AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
         Province province = provinceRepository.findByProvinceid(1);
@@ -97,7 +102,9 @@ public class AmbulanceTest {
     @Test
     void B5814664_testAmbulancewithModelNotNull() throws ParseException{
         Ambulance ambulance = new Ambulance();
-        java.util.Date date = new java.util.Date(2020-01-21);
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
         AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
         Province province = provinceRepository.findByProvinceid(1);
@@ -122,7 +129,9 @@ public class AmbulanceTest {
     @Test
     void B5814664_testAmbulancewithAmbulancenumNotNull() throws ParseException{
         Ambulance ambulance = new Ambulance();
-        java.util.Date date = new java.util.Date(2020-01-21);
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
         AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
         Province province = provinceRepository.findByProvinceid(1);
@@ -147,7 +156,9 @@ public class AmbulanceTest {
     @Test
     void B5814664_testAmbulancewithLicenseplateNotNull() throws ParseException {
         Ambulance ambulance = new Ambulance();
-        java.util.Date date = new java.util.Date(2020-01-21);
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
         AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
         Province province = provinceRepository.findByProvinceid(1);
@@ -195,7 +206,9 @@ public class AmbulanceTest {
     @Test
     void B5814664_testAmbulancewithBrandNotNull() throws ParseException{
         Ambulance ambulance = new Ambulance();
-        java.util.Date date = new java.util.Date(2020-01-21);
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
         Province province = provinceRepository.findByProvinceid(1);
         ambulance.setEnginenum("JS150MM03731");
@@ -215,10 +228,13 @@ public class AmbulanceTest {
         assertEquals("must not be null", message.getMessage());
         assertEquals("brandid", message.getPropertyPath().toString());
     }
+
     @Test
     void B5814664_testAmbulancewithTypeNull() throws ParseException{
         Ambulance ambulance = new Ambulance();
-        java.util.Date date = new java.util.Date(2020-01-21);
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
         Province province = provinceRepository.findByProvinceid(1);
         ambulance.setEnginenum("JS150MM03731");
@@ -242,7 +258,9 @@ public class AmbulanceTest {
     @Test
     void B5814664_testAmbulancewithProvinceNotNull() throws ParseException{
         Ambulance ambulance = new Ambulance();
-        java.util.Date date = new java.util.Date(2020-01-21);
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
         AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
         ambulance.setEnginenum("JS150MM03731");
@@ -266,7 +284,9 @@ public class AmbulanceTest {
     @Test
     void B5814664_testEngineMustNotBe11String() throws ParseException{
         Ambulance ambulance = new Ambulance();
-        java.util.Date date = new java.util.Date(2020-01-21);
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
         AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
         Province province = provinceRepository.findByProvinceid(1);
@@ -293,7 +313,9 @@ public class AmbulanceTest {
     @Test
     void B5814664_testEngineMustNotBe14String() throws ParseException {
         Ambulance ambulance = new Ambulance();
-        java.util.Date date = new java.util.Date(2020-01-21);
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
         AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
         Province province = provinceRepository.findByProvinceid(1);
@@ -320,7 +342,9 @@ public class AmbulanceTest {
     @Test
     void B5814664_testAmNumMustNotBe16String() throws ParseException{
         Ambulance ambulance = new Ambulance();
-        java.util.Date date = new java.util.Date(2020-01-21);
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
         AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
         Province province = provinceRepository.findByProvinceid(1);
@@ -347,7 +371,9 @@ public class AmbulanceTest {
     @Test
     void B5814664_testAmNumMustNotBe18String() throws ParseException{
         Ambulance ambulance = new Ambulance();
-        java.util.Date date = new java.util.Date(2020-01-21);
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
         AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
         Province province = provinceRepository.findByProvinceid(1);
@@ -373,7 +399,9 @@ public class AmbulanceTest {
     @Test
     void B5814664_testLicenseMustLessThan4String() throws ParseException{
         Ambulance ambulance = new Ambulance();
-        java.util.Date date = new java.util.Date(2020-01-21);
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
         AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
         Province province = provinceRepository.findByProvinceid(1);
@@ -400,7 +428,9 @@ public class AmbulanceTest {
     @Test
     void B5814664_testLicenseMustMoreThan8String() throws ParseException{
         Ambulance ambulance = new Ambulance();
-        java.util.Date date = new java.util.Date(2020-01-21);
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
         AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
         Province province = provinceRepository.findByProvinceid(1);
@@ -428,7 +458,9 @@ public class AmbulanceTest {
     void B5814664_testEngineMustBeUnique() throws ParseException{
     // สร้าง ambulance object
     Ambulance ambulance1 = new Ambulance();
-    java.util.Date date1 = new java.util.Date(2020-01-21);
+    String pattern1 ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(pattern1);
+        java.util.Date date1 = simpleDateFormat1.parse("2020-01-23");
     AmbulanceBrand brand1 = ambulanceBrandRepository.findByBrandid(1);
     AmbulanceType type1 = ambulanceTypeRepository.findByTypeid(1);
     Province province1 = provinceRepository.findByProvinceid(1);
@@ -447,7 +479,9 @@ public class AmbulanceTest {
     assertThrows(DataIntegrityViolationException.class, () -> {
     // สร้าง ambulance object ตัวที่ 2
     Ambulance ambulance2 = new Ambulance();
-    java.util.Date date2 = new java.util.Date(2020-01-21);
+    String pattern2 ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat(pattern2);
+        java.util.Date date2 = simpleDateFormat2.parse("2020-01-23");
     AmbulanceBrand brand2 = ambulanceBrandRepository.findByBrandid(1);
     AmbulanceType type2 = ambulanceTypeRepository.findByTypeid(1);
     Province province2 = provinceRepository.findByProvinceid(1);
@@ -468,7 +502,9 @@ public class AmbulanceTest {
     void B5814664_testAmbulanceMustBeUnique() throws ParseException{
     // สร้าง ambulance object
     Ambulance ambulance1 = new Ambulance();
-    java.util.Date date1= new java.util.Date(2020-01-21);
+    String pattern1 ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(pattern1);
+        java.util.Date date1 = simpleDateFormat1.parse("2020-01-23");
     AmbulanceBrand brand1 = ambulanceBrandRepository.findByBrandid(1);
     AmbulanceType type1 = ambulanceTypeRepository.findByTypeid(1);
     Province province1 = provinceRepository.findByProvinceid(1);
@@ -487,7 +523,9 @@ public class AmbulanceTest {
     assertThrows(DataIntegrityViolationException.class, () -> {
     // สร้าง ambulance object ตัวที่ 2
     Ambulance ambulance2 = new Ambulance();
-    java.util.Date date2 = new java.util.Date(2020-01-21);
+    String pattern2 ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat(pattern2);
+        java.util.Date date2 = simpleDateFormat2.parse("2020-01-23");
     AmbulanceBrand brand2 = ambulanceBrandRepository.findByBrandid(1);
     AmbulanceType type2 = ambulanceTypeRepository.findByTypeid(1);
     Province province2 = provinceRepository.findByProvinceid(1);
