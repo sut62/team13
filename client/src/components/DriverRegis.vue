@@ -286,12 +286,14 @@ export default {
         .then(response => {
           console.log(response);
           this.$router.push("/viewdriver");
-          alert('บันทึกข้อมูลสำเร็จ');
+          const options1 = {title: 'Alert', size: 'sm'}
+          this.$dialogs.alert('บันทึกข้อมูลสำเร็จ',options1);
           this.$refs.form.reset();
         })
         .catch(e => {
           console.log(e);
-          alert('บันทึกข้อมูลไม่สำเร็จ');
+          const options2 = {title: 'Alert', size: 'sm'}
+          this.$dialogs.alert('บันทึกข้อมูลไม่สำเร็จ',options2);
         });
       this.submitted = true;
 

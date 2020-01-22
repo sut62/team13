@@ -116,7 +116,7 @@ public class DriverRegisTest {
     }
 
     @Test
-    void B5814664_testDrivernameNotMoreThan20String() {
+    void B5813643_testDrivernameNotMoreThan20String() {
         DriverRegis driverRegis = new DriverRegis();
         driverRegis.setDrivername("BennyBenBenTuckyTucky");
         driverRegis.setIdcard("1349900799556");
