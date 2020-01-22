@@ -13,7 +13,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -33,7 +32,6 @@ public class Ambulance {
   
   @Temporal(TemporalType.DATE)
   @NotNull
-  @FutureOrPresent
   private Date adddate;
 
   @NotNull
