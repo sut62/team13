@@ -28,7 +28,7 @@ public class Ambulance {
   @SequenceGenerator(name = "AMBULANCE_SEQ", sequenceName = "AMBULANCE_SEQ")
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "AMBULANCE_SEQ")
   @Column(name = "ID_AMBULANCE", unique = true, nullable = true)
-  private @NonNull Long ambulanceid; // ไอดีรถ
+  private @NotNull Long ambulanceid; // ไอดีรถ
   
   @Temporal(TemporalType.DATE)
   @NotNull
