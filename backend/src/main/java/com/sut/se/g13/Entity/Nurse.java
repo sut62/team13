@@ -14,6 +14,11 @@ import javax.persistence.GenerationType;
 import java.util.Date;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Data
 @Entity
@@ -25,22 +30,42 @@ public class Nurse {
   @SequenceGenerator(name = "NURSE_SEQ", sequenceName = "NURSE_SEQ")
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "NURSE_SEQ")
   @Column(name = "NURSE_ID", unique = true, nullable = true)
-  private @NonNull Long nurseid; // ไอดีพยาบาล  
-  private @NonNull String nursename; // ชื่อ-นามสกุล
+  private Long nurseid; // ไอดีพยาบาล  
+
+  @Size(min=1, max=30)
+  @NotNull 
+  private String nursename; // ชื่อ-นามสกุล
+
+  @Past
+  //@NotNull  
   @Temporal(TemporalType.DATE)
-  private @NonNull Date birthday; // วันเกิด
-  private @NonNull String address; // ที่อยู่
-  private @NonNull String telephone; // เบอร์โทร
-  private @NonNull String email; // เมล
-  private @NonNull Date nowdate; // เวลาบันทึก
+  private Date birthday; // วันเกิด
+
+  @Size(min=1, max=50)
+  @NotNull 
+  private String address; // ที่อยู่
+
+  @Pattern(regexp = "\\d{10}")
+  @NotNull 
+  @Column(name = "TELEPHONE", unique = true)
+  private String telephone; // เบอร์โทร
+
+  @Email
+  @NotNull 
+  @Column(name = "EMAIL", unique = true)
+  private String email; // เมล
+
+  @Temporal(TemporalType.DATE)
+  //@NotNull
+  private Date nowdate; // เวลาบันทึก
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Gender.class)
   @JoinColumn(name = "GENDER_ID", insertable = true)
   private Gender genderid; // เพศ
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Educational.class)
-    @JoinColumn(name = "EDUCATIONAL_ID", insertable = true)
-    private Educational educationalid; //ระดับการศึกษา
+  @JoinColumn(name = "EDUCATIONAL_ID", insertable = true)
+  private Educational educationalid; //ระดับการศึกษา
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Tier.class)
   @JoinColumn(name = "TIER_ID", insertable = true)
