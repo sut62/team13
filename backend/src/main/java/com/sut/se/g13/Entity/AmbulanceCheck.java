@@ -7,15 +7,22 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.FutureOrPresent;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 import java.util.Date;
 
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+
 
 @Data
 @Entity
@@ -30,32 +37,46 @@ public class AmbulanceCheck  {
   @Column(name = "ID_AMBULANCECHECK", unique = true, nullable = true)
   private @NonNull Long id;
   
+  @NotNull
+  @Size(max = 100)
+  private String note;
+
+  @Temporal(TemporalType.DATE)
+  @NotNull
   @Column(name="CHECK_DATE")
-  private @NonNull Date checkDate;
+  private Date checkDate ;
 
+  @NotNull
   @Column(name="CHECK_BATTERY")
-  private @NonNull Boolean battery;
+  private Boolean battery;
 
+  @NotNull
   @Column(name="CHECK_LIGHT")
-  private @NonNull Boolean light;
+  private  Boolean light;
 
+  @NotNull
   @Column(name="CHECK_WHEEL")
-  private @NonNull Boolean wheel;
+  private  Boolean wheel;
 
+  @NotNull
   @Column(name="CHECK_SUSPENSION")
-  private @NonNull Boolean suspension;
+  private  Boolean suspension;
 
+  @NotNull
   @Column(name="CHECK_BRAKE_FLUID")
-  private @NonNull Boolean brakeFluid;
+  private Boolean brakeFluid;
 
+  @NotNull
   @Column(name="CHECK_ENGINE_OIL")
-  private @NonNull Boolean engineOil;
+  private Boolean engineOil;
 
+  @NotNull
   @Column(name="CHECK_RADIATOR")
-  private @NonNull Boolean radiator;
+  private  Boolean radiator;
 
+  @NotNull
   @Column(name="CHECK_TOOL_SET")
-  private @NonNull Boolean toolSet;
+  private Boolean toolSet;
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Ambulance.class)
   @JoinColumn(name = "ID_AMBULANCE", insertable = true)

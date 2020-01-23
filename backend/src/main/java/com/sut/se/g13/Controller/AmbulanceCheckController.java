@@ -55,7 +55,7 @@ public class AmbulanceCheckController {
         return ambulanceCheckRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @PostMapping("/ambulanceCheck/{id_ambulance}/{id_driverRegis}/{id_mile}/{id_status}/{battery}/{light}/{wheel}/{suspension}/{brakeFluid}/{engineOil}/{radiator}/{toolSet}")
+    @PostMapping("/ambulanceCheck/{id_ambulance}/{id_driverRegis}/{id_mile}/{id_status}/{battery}/{light}/{wheel}/{suspension}/{brakeFluid}/{engineOil}/{radiator}/{toolSet}/{note}")
     public AmbulanceCheck newAmbulanceCheck (AmbulanceCheck  newAmbulanceCheck ,
                                @PathVariable long id_ambulance,
                                @PathVariable long id_status,
@@ -68,14 +68,15 @@ public class AmbulanceCheckController {
                                @PathVariable Boolean brakeFluid,
                                @PathVariable Boolean engineOil,
                                @PathVariable Boolean radiator,
-                               @PathVariable Boolean toolSet
+                               @PathVariable Boolean toolSet,
+                               @PathVariable String note
     ) {
         //AmbulanceCheck newAmbulanceCheck = new AmbulanceCheck();
 
         Ambulance ambulance = ambulanceRepository.findByAmbulanceid(id_ambulance);
-        Status status = statusRepository.findById(id_status);
+        Status status = statusRepository.findByStatusid(id_status);
         DriverRegis driverRegis = driverRegisRepository.findByDriverregisid(id_driverRegis);
-        Mile mile = mileRepository.findById(id_mile);
+        Mile mile = mileRepository.findByMileid(id_mile);
 
         newAmbulanceCheck.setCheckDate(new Date());
         newAmbulanceCheck.setDriverRegis(driverRegis);
@@ -90,6 +91,7 @@ public class AmbulanceCheckController {
         newAmbulanceCheck.setEngineOil(engineOil);
         newAmbulanceCheck.setRadiator(radiator);
         newAmbulanceCheck.setToolSet(toolSet);
+        newAmbulanceCheck.setNote(note);
 
         return ambulanceCheckRepository.save(newAmbulanceCheck);//บันทึก Objcet ชื่อ AmbulanceCheck
 
