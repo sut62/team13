@@ -50,6 +50,7 @@
                                     :rules="[v => !!v || 'Item is required']"
                                     label="-- พนักงานขับรถ --"
                                     required
+                                    v-on:keyup.enter="validate"
                             ></v-select>
                         </v-col>
                     </v-row>
@@ -68,6 +69,7 @@
                                     :rules="[v => !!v || 'Item is required']"
                                     label="-- ไอดีรถพยาบาล --"
                                     required
+                                    v-on:keyup.enter="validate"
                             ></v-select>
                         </v-col>
 
@@ -78,48 +80,71 @@
                                     v-model="ambulanceCheck.mileId"
                                     :items="miles"
                                     item-text="name"
-                                    item-value="id"
+                                    item-value="mileid"
                                     :rules="[v => !!v || 'Item is required']"
                                     label="-- ระยะของรถ --"
                                     required
+                                    v-on:keyup.enter="validate"
                             ></v-select>
                         </v-col>
+                        
                     </v-row>
                 </v-container>
+                <v-row justify="center">
+                <v-col cols="12" sm="8">
+                  <p>Note</p>
+                    <v-text-field
+                      v-model="ambulanceCheck.note"
+                      :rules="[(v) => !!v || 'Item is required']"
+                      label="-- หมายเหตุ (ไม่เกิน100หลัก) --"
+                      counter
+                      required
+                      v-on:keyup.enter="validate"
+                    ></v-text-field>
+                </v-col>
+                </v-row>
                 <v-container>
                     <v-row justify="center">
                         <v-col cols="12" sm="8">
                             <v-checkbox
                                     v-model="ambulanceCheck.battery"
                                     label="เช็คแบตเตอรี่"
+                                    v-on:keyup.enter="validate"
                             ></v-checkbox>
                             <v-checkbox
                                     v-model="ambulanceCheck.light"
                                     label="เช็คล้อและยาง"
+                                    v-on:keyup.enter="validate"
                             ></v-checkbox>
                             <v-checkbox
                                     v-model="ambulanceCheck.wheel"
                                     label="เช็คช่วงล่างและระบบกันสะเทือน"
+                                    v-on:keyup.enter="validate"
                             ></v-checkbox>
                             <v-checkbox
                                     v-model="ambulanceCheck.suspension"
                                     label="เช็คระดับน้ำมันเบรค"
+                                    v-on:keyup.enter="validate"
                             ></v-checkbox>
                             <v-checkbox
                                     v-model="ambulanceCheck.brakeFluid"
                                     label="เช็คระบบไฟส่องสว่าง"
+                                    v-on:keyup.enter="validate"
                             ></v-checkbox>
                             <v-checkbox
                                     v-model="ambulanceCheck.engineOil"
                                     label="เช็คระดับน้ำมันเครื่อง"
+                                    v-on:keyup.enter="validate"
                             ></v-checkbox>
                             <v-checkbox
                                     v-model="ambulanceCheck.radiator"
                                     label="เช็คหม้อน้ำและท่อยาง"
+                                    v-on:keyup.enter="validate"
                             ></v-checkbox>
                             <v-checkbox
                                     v-model="ambulanceCheck.toolSet"
                                     label="เช็คชุดเครื่องมือประจำรถ"
+                                    v-on:keyup.enter="validate"
                             ></v-checkbox>
                         </v-col>
                     </v-row>
@@ -134,10 +159,11 @@
                                     v-model="ambulanceCheck.statusId"
                                     :items="statuses"
                                     item-text="name"
-                                    item-value="id"
+                                    item-value="statusid"
                                     :rules="[v => !!v || 'Item is required']"
                                     label="-- สถานะของรถ --"
                                     required
+                                    v-on:keyup.enter="validate"
                             ></v-select>
                         </v-col>
                     </v-row>
@@ -184,7 +210,8 @@ export default {
         driverRegises : null,
         ambulances : null,
         miles: null,
-        statuses: null
+        statuses: null,
+        note: null
     };
   },
 
@@ -267,22 +294,25 @@ export default {
             "/" +
             this.ambulanceCheck.radiator +
             "/" +
-            this.ambulanceCheck.toolSet ,
+            this.ambulanceCheck.toolSet  +
+            "/" +
+            this.ambulanceCheck.note ,
         this.ambulanceCheck
         )
         .then(response => {
           console.log(response);
           this.$router.push("/viewambulancecheck");
-          alert('บันทึกข้อมูลสำเร็จ');
+          const options1 = {title: 'Alert', size: 'sm'}
+          this.$dialogs.alert('บันทึกข้อมูลสำเร็จ',options1);
           this.$refs.form.reset();
         })
         .catch(e => {
           console.log(e);
-          alert('บันทึกข้อมูลไม่สำเร็จ');
+          const options2 = {title: 'Alert', size: 'sm'}
+          this.$dialogs.alert('บันทึกข้อมูลไม่สำเร็จ',options2);
         });
       this.submitted = true;
 
-          //ถ้ากรอกทั้งหมดถึงจะขึ้นปุ่มให้กด
           if (this.$refs.form.validate()) {
               this.snackbar = true
           }

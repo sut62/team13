@@ -55,6 +55,7 @@
                     { text: "เลขทะเบียนรถ", value: "ambulance.licenseplate"},
                     { text: "จังหวัด", value: "ambulance.provinceid.provincename"},
                     { text: "สภาพรถ", value: "status.name"  },
+                    { text: "สถานที่เช็ค", value: "address"  },
                     { text: "วันที่เช็คสภาพรถ", value: "checkDate"},
                 ],
                 items: []
