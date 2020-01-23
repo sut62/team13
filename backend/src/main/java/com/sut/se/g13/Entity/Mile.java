@@ -26,7 +26,8 @@ public class Mile {
   @SequenceGenerator(name="MILE_SEQ",sequenceName="MILE_SEQ")
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="MILE_SEQ")
   @Column(name = "ID_MILE", unique = true, nullable = true)
-  private @NonNull Long id;
+  private @NonNull Long mileid;
+
   private @NonNull String name;
 
   @OneToMany(fetch = FetchType.EAGER)

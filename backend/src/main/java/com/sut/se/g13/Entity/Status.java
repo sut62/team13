@@ -26,7 +26,7 @@ public class Status {
   @SequenceGenerator(name="STATUS_SEQ",sequenceName="STATUS_SEQ")
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="STATUS_SEQ")
   @Column(name = "ID_STATUS", unique = true, nullable = true)
-  private @NonNull Long id;
+  private @NonNull Long statusid;
   private @NonNull String name;
 
   @OneToMany(fetch = FetchType.EAGER)
