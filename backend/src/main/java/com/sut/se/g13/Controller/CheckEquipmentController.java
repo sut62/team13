@@ -62,7 +62,7 @@ public class CheckEquipmentController {
         //CheckEquipment newCheckEquipment = new CheckEquipment();
 
         Ambulance ambulance = ambulanceRepository.findByAmbulanceid(id_ambulance);
-        Status status = statusRepository.findById(id_status);
+        Status status = statusRepository.findByStatusid(id_status);
         Nurse nurse = nurseRepository.findByNurseid(id_nurse);
 
         newCheckEquipment.setCheckDate(new Date());
