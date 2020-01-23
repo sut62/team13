@@ -58,7 +58,7 @@ public class AmbulanceCheckTest {
         ambulanceCheck.setEngineOil(true);
         ambulanceCheck.setRadiator(true);
         ambulanceCheck.setToolSet(true);
-        ambulanceCheck.setMileid(mile);
+//        ambulanceCheck.setMileid(mile);
 
         ambulanceCheckRepository.saveAndFlush(ambulanceCheck);
 
