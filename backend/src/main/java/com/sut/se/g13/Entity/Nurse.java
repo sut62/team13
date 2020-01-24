@@ -59,18 +59,22 @@ public class Nurse {
   //@NotNull
   private Date nowdate; // เวลาบันทึก
 
+  @NotNull
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Gender.class)
   @JoinColumn(name = "GENDER_ID", insertable = true)
   private Gender genderid; // เพศ
 
+  @NotNull
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Educational.class)
   @JoinColumn(name = "EDUCATIONAL_ID", insertable = true)
   private Educational educationalid; //ระดับการศึกษา
 
+  @NotNull
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Tier.class)
   @JoinColumn(name = "TIER_ID", insertable = true)
   private Tier tierid;  // ขั้นข้าราชการ
 
+  @NotNull
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Province.class)
   @JoinColumn(name = "PROVINCE_ID", insertable = true)
   private Province provinceid; // จังหวัด
