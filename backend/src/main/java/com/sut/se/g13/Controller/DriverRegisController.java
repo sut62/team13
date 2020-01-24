@@ -1,12 +1,15 @@
 package com.sut.se.g13.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 //import org.springframework.http.HttpStatus;
 //import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 //import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
@@ -56,22 +59,17 @@ public class DriverRegisController {
          return driverregis;
      }
 
-    @GetMapping("/educational")
-    public Collection<Educational> educationals() {
-        return educationalRepository.findAll().stream().collect(Collectors.toList());
-    }
-
-
     @GetMapping("/positiondriver")
     public Collection<PositionDriver> positiondrivers() {
         return positiondriverRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @GetMapping("/gender")
-    public Collection<Gender> Genders() {
-        return genderRepository.findAll().stream().collect(Collectors.toList());
-    }
-
+    @DeleteMapping("/driverregis/{id}")
+	public ResponseEntity<String> deleteDriverRegists(@PathVariable("id") long id) {
+		System.out.println("Delete DriverRegis with ID = " + id + "...");
+		driverRegisRepository.deleteById(id);
+		return new ResponseEntity<>("DriverRegis has been deleted!", HttpStatus.OK);
+	}
 
     @PostMapping("/driverRegis/{date}/{drivername}/{idcard}/{address}/{telephone}/{genderid}/{positionid}/{provinceid}/{educationalid}")
     public DriverRegis newDriverRegis(DriverRegis newDriverRegis, 

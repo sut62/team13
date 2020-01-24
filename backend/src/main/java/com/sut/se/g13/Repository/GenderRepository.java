@@ -6,5 +6,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
 public interface GenderRepository extends JpaRepository<Gender, Long> {
-    Gender findByGenderid (Long genderid);
+    Gender findByGenderid (long genderid);
 }

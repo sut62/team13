@@ -7,5 +7,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
 public interface PositionDriverRepository extends JpaRepository<PositionDriver, Long> {
-    PositionDriver findByPositionDriverid (Long positionDriverid);
+    PositionDriver findByPositionDriverid (long positionDriverid);
 }

@@ -7,5 +7,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
 public interface EducationalRepository extends JpaRepository<Educational, Long> {
-    Educational findByEducationalid (Long educationalid);
+    Educational findByEducationalid (long educationalid);
 }

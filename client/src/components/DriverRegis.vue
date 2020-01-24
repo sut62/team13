@@ -61,7 +61,7 @@
                               <v-text-field style= "width:80%"
                                   prepend-icon= "mdi mdi-calendar"
                                   v-model="date"
-                                  label="วัน-เดือน-ปีเกิด"
+                                  label="ปีเกิด-เดือน-วัน"
                                   clearable
                                   readonly
                                   v-on="on"
@@ -81,7 +81,7 @@
                             <v-text-field
                                         v-model="driverRegis.driverCard"
                                         :rules="[(v) => !!v || 'Item is required']"
-                                        label="-- เลขที่บัตรประชาชน --"
+                                        label="-- เลขที่บัตรประชาชน 13 หลัก --"
                                         required
                             ></v-text-field>
                         </v-col>
@@ -109,7 +109,7 @@
                             <v-text-field
                                         v-model="driverRegis.driverAddress"
                                         :rules="[(v) => !!v || 'Item is required']"
-                                        label="-- ที่อยู่ --"
+                                        label="-- ที่อยู่ตามทะเบียนบ้าน --"
                                         required
                             ></v-text-field>
                         
@@ -167,7 +167,7 @@
                                     item-text="positionlevel"
                                     item-value="positionDriverid"
                                     :rules="[v => !!v || 'Item is required']"
-                                    label="-- ตำแหน่งพนักงานขับ --"
+                                    label="-- ตำแหน่งพนักงานคนขับ --"
                                     required
                             ></v-select>
                         </v-col>
