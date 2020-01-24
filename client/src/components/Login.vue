@@ -90,13 +90,15 @@ export default {
             this.$router.push("/welcome");
             http.post("/login/" + this.user);
             // eslint-disable-next-line no-unused-vars
-            const options1 = {title: 'Alert', size: 'sm'}
+            const options1 = { title: "Alert", size: "sm" };
             this.$dialogs.alert("เข้าสู่ระบบสำเร็จ", options1);
-          }
-           else {
+          } else {
             // eslint-disable-next-line no-unused-vars
-            const options2 = {title: 'Alert', size: 'sm'}
-            this.$dialogs.alert("Username หรือ Password อาจจะผิดกรุณาเข้าสู่ระบบใหม่อีกครั้ง", options2);
+            const options2 = { title: "Alert", size: "sm" };
+            this.$dialogs.alert(
+              "Username หรือ Password อาจจะผิดกรุณาเข้าสู่ระบบใหม่อีกครั้ง",
+              options2
+            );
           }
         })
         .catch(e => {
