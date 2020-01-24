@@ -12,6 +12,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Optional;
 import java.util.Set;
 
@@ -40,8 +41,11 @@ public class NurseTest {
     }
 
     @Test
-    void B5802111_testNursewithCorrect() { // เช็ค with correct ทั้งหมดของฟิลด์ที่กรอกข้อมูล
-        final Nurse nurse = new Nurse();
+    void B5802111_testNursewithCorrect() throws ParseException { // เช็ค with correct ทั้งหมดของฟิลด์ที่กรอกข้อมูล
+        Nurse nurse = new Nurse();
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         Gender gender = genderRepository.findByGenderid(1);
         Province province = provinceRepository.findByProvinceid(1);
         Educational educational = educationalRepository.findByEducationalid(1);
@@ -55,9 +59,10 @@ public class NurseTest {
         nurse.setProvinceid(province);
         nurse.setEducationalid(educational);
         nurse.setTierid(tier);
+        nurse.setNowdate(date);
 
         nurseRepository.saveAndFlush(nurse);
-        final Optional<Nurse> check = nurseRepository.findById(nurse.getNurseid());
+        Optional<Nurse> check = nurseRepository.findById(nurse.getNurseid());
         assertEquals("ศราวุฒิ ดวงดี", check.get().getNursename());
         assertEquals("153 ม.7 ต.บ้านหม้อ อ.ศรีเชียงใหม่ 43130", check.get().getAddress());
         assertEquals("0880517942", check.get().getTelephone());
@@ -66,15 +71,20 @@ public class NurseTest {
         assertEquals(province, check.get().getProvinceid());
         assertEquals(educational, check.get().getEducationalid());
         assertEquals(tier, check.get().getTierid());
+        assertEquals(nurse.getNowdate(), check.get().getNowdate());
     }
 
     @Test
-    void B5802111_testNursewithNursenameNotNull(){ // เช็คค่า NotNull ชื่อพยาบาล
-        final Nurse nurse = new Nurse();
+    void B5802111_testNursewithNursenameNotNull() throws ParseException { // เช็คค่า NotNull ชื่อพยาบาล
+        Nurse nurse = new Nurse();
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         Gender gender = genderRepository.findByGenderid(1);
         Province province = provinceRepository.findByProvinceid(1);
         Educational educational = educationalRepository.findByEducationalid(1);
         Tier tier = tierRepository.findByTierid(1);
+
         nurse.setNursename(null);
         nurse.setAddress("153 ม.7 ต.บ้านหม้อ อ.ศรีเชียงใหม่ 43130");
         nurse.setTelephone("0880517942");
@@ -83,21 +93,25 @@ public class NurseTest {
         nurse.setProvinceid(province);
         nurse.setEducationalid(educational);
         nurse.setTierid(tier);
+        nurse.setNowdate(date);
 
         
 
-        final Set<ConstraintViolation<Nurse>> result = validator.validate(nurse);
+        Set<ConstraintViolation<Nurse>> result = validator.validate(nurse);
 
         assertEquals(1, result.size());
 
-        final ConstraintViolation<Nurse> message = result.iterator().next();
+        ConstraintViolation<Nurse> message = result.iterator().next();
         assertEquals("must not be null", message.getMessage());
         assertEquals("nursename", message.getPropertyPath().toString());
     }
 
     @Test
-    void B5802111_testNursewithAddressNotNull(){ // เช็คค่า NotNull ที่อยู่
-        final Nurse nurse = new Nurse();
+    void B5802111_testNursewithAddressNotNull() throws ParseException { // เช็คค่า NotNull ที่อยู่
+        Nurse nurse = new Nurse();
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         Gender gender = genderRepository.findByGenderid(1);
         Province province = provinceRepository.findByProvinceid(1);
         Educational educational = educationalRepository.findByEducationalid(1);
@@ -111,20 +125,24 @@ public class NurseTest {
         nurse.setProvinceid(province);
         nurse.setEducationalid(educational);
         nurse.setTierid(tier);
+        nurse.setNowdate(date);
 
 
-        final Set<ConstraintViolation<Nurse>> result = validator.validate(nurse);
+        Set<ConstraintViolation<Nurse>> result = validator.validate(nurse);
 
         assertEquals(1, result.size());
 
-        final ConstraintViolation<Nurse> message = result.iterator().next();
+        ConstraintViolation<Nurse> message = result.iterator().next();
         assertEquals("must not be null", message.getMessage());
         assertEquals("address", message.getPropertyPath().toString());
     }
 
     @Test
-    void B5802111_testNursewithTelephonNotNull(){ // เช็คค่า NotNull เบอร์โทรศัพท์
-        final Nurse nurse = new Nurse();
+    void B5802111_testNursewithTelephonNotNull() throws ParseException { // เช็คค่า NotNull เบอร์โทรศัพท์
+        Nurse nurse = new Nurse();
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         Gender gender = genderRepository.findByGenderid(1);
         Province province = provinceRepository.findByProvinceid(1);
         Educational educational = educationalRepository.findByEducationalid(1);
@@ -139,19 +157,23 @@ public class NurseTest {
         nurse.setProvinceid(province);
         nurse.setEducationalid(educational);
         nurse.setTierid(tier);
+        nurse.setNowdate(date);
 
-        final Set<ConstraintViolation<Nurse>> result = validator.validate(nurse);
+        Set<ConstraintViolation<Nurse>> result = validator.validate(nurse);
 
         assertEquals(1, result.size());
 
-        final ConstraintViolation<Nurse> message = result.iterator().next();
+        ConstraintViolation<Nurse> message = result.iterator().next();
         assertEquals("must not be null", message.getMessage());
         assertEquals("telephone", message.getPropertyPath().toString());
     }
 
     @Test
-    void B5802111_testNursewithEmailNotNull(){ // เช็คค่า NotNull อีเมล
-        final Nurse nurse = new Nurse();
+    void B5802111_testNursewithEmailNotNull() throws ParseException { // เช็คค่า NotNull อีเมล
+        Nurse nurse = new Nurse();
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         Gender gender = genderRepository.findByGenderid(1);
         Province province = provinceRepository.findByProvinceid(1);
         Educational educational = educationalRepository.findByEducationalid(1);
@@ -165,12 +187,13 @@ public class NurseTest {
         nurse.setProvinceid(province);
         nurse.setEducationalid(educational);
         nurse.setTierid(tier);
+        nurse.setNowdate(date);
 
-        final Set<ConstraintViolation<Nurse>> result = validator.validate(nurse);
+        Set<ConstraintViolation<Nurse>> result = validator.validate(nurse);
 
         assertEquals(1, result.size());
 
-        final ConstraintViolation<Nurse> message = result.iterator().next();
+        ConstraintViolation<Nurse> message = result.iterator().next();
         assertEquals("must not be null", message.getMessage());
         assertEquals("email", message.getPropertyPath().toString());
     }
@@ -178,6 +201,9 @@ public class NurseTest {
     @Test
     void B5802111_testNursewithGenderNotNull() throws ParseException { //ทดสอบห้ามเป็นค่าว่างใน combo box Gender
         Nurse nurse = new Nurse();
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         Province province = provinceRepository.findByProvinceid(1);
         Educational educational = educationalRepository.findByEducationalid(1);
         Tier tier = tierRepository.findByTierid(1);
@@ -190,6 +216,7 @@ public class NurseTest {
         nurse.setProvinceid(province);
         nurse.setEducationalid(educational);
         nurse.setTierid(tier);
+        nurse.setNowdate(date);
 
         Set<ConstraintViolation<Nurse>> result = validator.validate(nurse);
 
@@ -203,6 +230,9 @@ public class NurseTest {
     @Test
     void B5802111_testNursewithProvinceNotNull() throws ParseException { //ทดสอบห้ามเป็นค่าว่างใน combo box Province
         Nurse nurse = new Nurse();
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         Gender gender = genderRepository.findByGenderid(1);
         Educational educational = educationalRepository.findByEducationalid(1);
         Tier tier = tierRepository.findByTierid(1);
@@ -215,6 +245,7 @@ public class NurseTest {
         nurse.setProvinceid(null);
         nurse.setEducationalid(educational);
         nurse.setTierid(tier);
+        nurse.setNowdate(date);
 
         Set<ConstraintViolation<Nurse>> result = validator.validate(nurse);
 
@@ -228,6 +259,9 @@ public class NurseTest {
     @Test
     void B5802111_testNursewithEducationalNotNull() throws ParseException { //ทดสอบห้ามเป็นค่าว่างใน combo box Educational
         Nurse nurse = new Nurse();
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         Gender gender = genderRepository.findByGenderid(1);
         Province province = provinceRepository.findByProvinceid(1);
         Tier tier = tierRepository.findByTierid(1);
@@ -240,6 +274,7 @@ public class NurseTest {
         nurse.setProvinceid(province);
         nurse.setEducationalid(null);
         nurse.setTierid(tier);
+        nurse.setNowdate(date);
 
         Set<ConstraintViolation<Nurse>> result = validator.validate(nurse);
 
@@ -253,6 +288,9 @@ public class NurseTest {
     @Test
     void B5802111_testNursewithTierrNotNull() throws ParseException { //ทดสอบห้ามเป็นค่าว่างใน combo box Tier
         Nurse nurse = new Nurse();
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         Gender gender = genderRepository.findByGenderid(1);
         Province province = provinceRepository.findByProvinceid(1);
         Educational educational = educationalRepository.findByEducationalid(1);
@@ -265,6 +303,7 @@ public class NurseTest {
         nurse.setProvinceid(province);
         nurse.setEducationalid(educational);
         nurse.setTierid(null);
+        nurse.setNowdate(date);
 
         Set<ConstraintViolation<Nurse>> result = validator.validate(nurse);
 
@@ -276,8 +315,11 @@ public class NurseTest {
     }
 
     @Test
-    void B5802111_testNursenameNotMustMoreThen30String() { // เช็ค Nursename ต้องไม่เกิน 30 ตัวอักษร
+    void B5802111_testNursenameNotMustMoreThen30String() throws ParseException { // เช็ค Nursename ต้องไม่เกิน 30 ตัวอักษร
         final Nurse nurse = new Nurse();
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         Gender gender = genderRepository.findByGenderid(1);
         Province province = provinceRepository.findByProvinceid(1);
         Educational educational = educationalRepository.findByEducationalid(1);
@@ -291,6 +333,7 @@ public class NurseTest {
         nurse.setProvinceid(province);
         nurse.setEducationalid(educational);
         nurse.setTierid(tier);
+        nurse.setNowdate(date);
  
         final Set<ConstraintViolation<Nurse>> result = validator.validate(nurse);
         
@@ -304,8 +347,11 @@ public class NurseTest {
     }
 
     @Test
-    void B5802111_testAddressNotMustMoreThen50String() { //เช็ค Address ต้องไม่เกิน 50 ตัวอักษร
+    void B5802111_testAddressNotMustMoreThen50String() throws ParseException { //เช็ค Address ต้องไม่เกิน 50 ตัวอักษร
         final Nurse nurse = new Nurse();
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         Gender gender = genderRepository.findByGenderid(1);
         Province province = provinceRepository.findByProvinceid(1);
         Educational educational = educationalRepository.findByEducationalid(1);
@@ -319,6 +365,7 @@ public class NurseTest {
         nurse.setProvinceid(province);
         nurse.setEducationalid(educational);
         nurse.setTierid(tier);
+        nurse.setNowdate(date);
  
         final Set<ConstraintViolation<Nurse>> result = validator.validate(nurse);
         
@@ -332,8 +379,11 @@ public class NurseTest {
     }
 
     @Test
-    void B5802111_testTelephoneMustNotBe9Digits() { // เช็ค Telephon ต้องเป็น 10 หลักเท่านั้น
+    void B5802111_testTelephoneMustNotBe9Digits() throws ParseException { // เช็ค Telephon ต้องเป็น 10 หลักเท่านั้น
         final Nurse nurse = new Nurse();
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         Gender gender = genderRepository.findByGenderid(1);
         Province province = provinceRepository.findByProvinceid(1);
         Educational educational = educationalRepository.findByEducationalid(1);
@@ -347,6 +397,7 @@ public class NurseTest {
         nurse.setProvinceid(province);
         nurse.setEducationalid(educational);
         nurse.setTierid(tier);
+        nurse.setNowdate(date);
  
         final Set<ConstraintViolation<Nurse>> result = validator.validate(nurse);
 
@@ -360,8 +411,11 @@ public class NurseTest {
     }
 
     @Test
-    void B5802111_testTelephoneMustNotBe11Digits() { // เช็ค Telephon ต้องเป็น 10 หลักเท่านั้น
+    void B5802111_testTelephoneMustNotBe11Digits() throws ParseException { // เช็ค Telephon ต้องเป็น 10 หลักเท่านั้น
         final Nurse nurse = new Nurse();
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         Gender gender = genderRepository.findByGenderid(1);
         Province province = provinceRepository.findByProvinceid(1);
         Educational educational = educationalRepository.findByEducationalid(1);
@@ -375,6 +429,7 @@ public class NurseTest {
         nurse.setProvinceid(province);
         nurse.setEducationalid(educational);
         nurse.setTierid(tier);
+        nurse.setNowdate(date);
  
         final Set<ConstraintViolation<Nurse>> result = validator.validate(nurse);
 
@@ -388,9 +443,12 @@ public class NurseTest {
     }
 
     @Test
-    void B5802111_testTelephoneMustBeUnique() {  // เช็ค Telephon ต้องไม่ซ้ำกัน
+    void B5802111_testTelephoneMustBeUnique() throws ParseException {  // เช็ค Telephon ต้องไม่ซ้ำกัน
         // สร้าง nurse object
         Nurse nurse1 = new Nurse();
+        String pattern1 ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(pattern1);
+        java.util.Date date1 = simpleDateFormat1.parse("2020-01-23");
         Gender gender1 = genderRepository.findByGenderid(1);
         Province province1 = provinceRepository.findByProvinceid(1);
         Educational educational1 = educationalRepository.findByEducationalid(1);
@@ -404,12 +462,16 @@ public class NurseTest {
         nurse1.setProvinceid(province1);
         nurse1.setEducationalid(educational1);
         nurse1.setTierid(tier1);
+        nurse1.setNowdate(date1);
         nurseRepository.saveAndFlush(nurse1);
 
         // คาดหวังว่า DataIntegrityViolationException จะถูก throw
         assertThrows(DataIntegrityViolationException.class, () -> {
             // สร้าง nurse object ตัวที่ 2
             Nurse nurse2 = new Nurse();
+            String pattern2 ="yyyy-MM-dd";
+            SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat(pattern2);
+            java.util.Date date2 = simpleDateFormat2.parse("2020-01-23");
             Gender gender2 = genderRepository.findByGenderid(1);
             Province province2 = provinceRepository.findByProvinceid(1);
             Educational educational2 = educationalRepository.findByEducationalid(1);
@@ -423,14 +485,18 @@ public class NurseTest {
             nurse2.setProvinceid(province2);
             nurse2.setEducationalid(educational2);
             nurse2.setTierid(tier2);
+            nurse2.setNowdate(date2);
             nurseRepository.saveAndFlush(nurse2);
         });
     }
 
     @Test
-    void B5802111_testEmailMustBeUnique() {  // เช็ค Email ต้องไม่ซ้ำกัน
+    void B5802111_testEmailMustBeUnique() throws ParseException {  // เช็ค Email ต้องไม่ซ้ำกัน
         // สร้าง nurse object
         Nurse nurse1 = new Nurse();
+        String pattern1 ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(pattern1);
+        java.util.Date date1 = simpleDateFormat1.parse("2020-01-23");
         Gender gender1 = genderRepository.findByGenderid(1);
         Province province1 = provinceRepository.findByProvinceid(1);
         Educational educational1 = educationalRepository.findByEducationalid(1);
@@ -444,12 +510,16 @@ public class NurseTest {
         nurse1.setProvinceid(province1);
         nurse1.setEducationalid(educational1);
         nurse1.setTierid(tier1);
+        nurse1.setNowdate(date1);
         nurseRepository.saveAndFlush(nurse1);
 
         // คาดหวังว่า DataIntegrityViolationException จะถูก throw
         assertThrows(DataIntegrityViolationException.class, () -> {
             // สร้าง nurse object ตัวที่ 2
             Nurse nurse2 = new Nurse();
+            String pattern2 ="yyyy-MM-dd";
+            SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat(pattern2);
+            java.util.Date date2 = simpleDateFormat2.parse("2020-01-23");
             Gender gender2 = genderRepository.findByGenderid(1);
             Province province2 = provinceRepository.findByProvinceid(1);
             Educational educational2 = educationalRepository.findByEducationalid(1);
@@ -463,6 +533,7 @@ public class NurseTest {
             nurse2.setProvinceid(province2);
             nurse2.setEducationalid(educational2);
             nurse2.setTierid(tier2);
+            nurse2.setNowdate(date2);
             nurseRepository.saveAndFlush(nurse2);
         });
     }
