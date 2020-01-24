@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Ambulance from "../components/Ambulance";
-import ViewAmbulance from "../components/ViewAmbulance";
+import DeleteAmbulance from "../components/DeleteAmbulance";
 import DriverRegis from "../components/DriverRegis";
 import ViewDriver from "../components/ViewDriver";
 import Welcome from "../components/Welcome";
@@ -14,6 +14,7 @@ import ViewCheckEquipment from "../components/ViewCheckEquipment";
 import Nurse from "../components/Nurse";
 import ViewNurse from "../components/ViewNurse";
 import Login from "../components/Login";
+import infoAmbulance from "../components/infoAmbulance";
 Vue.use(Router);
 
 export default new Router({
@@ -21,16 +22,16 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: "/",
+      path: '/',
       component: Login
     },
     {
-      path: "/welcome",
+      path: '/welcome',
       component: Welcome
     },
     {
-      path: "/viewambulance",
-      component: ViewAmbulance
+      path: '/deleteambulance',
+      component: DeleteAmbulance
     },
     {
       path: '/ambulancecheck',
@@ -41,11 +42,11 @@ export default new Router({
       component: ViewAmCheck
     },
     {
-      path: "/ambulance",
+      path: '/ambulance',
       component: Ambulance
     },
     {
-      path: "/driver",
+      path: '/driver',
       component: DriverRegis
     },
     {
@@ -75,6 +76,10 @@ export default new Router({
     {
       path: '/viewnurse',
       component: ViewNurse
+    },
+    {
+      path: '/infoambulance',
+      component: infoAmbulance
     }
   ]
 });

@@ -100,27 +100,62 @@
         <v-tab @click="logout" style="color: black; margin-right:5%">LOG OUT</v-tab>
       </v-row>
     </v-tabs>
-    <v-card style="width:90%; margin:auto; background-color:#FFFFFF">
-      <h1 class="font-weight">SUT AMBULANCE:</h1>
-      <div class="text-center"></div>
-      <iframe
-        style="border: 3px solid #000;"
-        frameborder="0"
-        width="100%;"
-        height="800px"
-        src="http://smc.sut.ac.th"
-      ></iframe>
-    </v-card>
-    <v-container></v-container>
+    <v-container style="height: 200%; margin-right:5%">
+      <v-card style="width:90%; background-color:#FFFFFF">
+        <v-layout text-center wrap>
+          <v-flex mb-4>
+            <br />
+            <h1 class="display-1 font-weight-bold mb-3">Ambulance Information</h1>
+          </v-flex>
+        </v-layout>
+        <v-row justify="center">
+          <v-col cols="12" sm="8">
+            <v-text-field
+              v-model="search"
+              label="ค้นหา"
+              prepend-icon="mdi mdi-file-find"
+              outlined
+              hide-details
+            ></v-text-field>
+          </v-col>
+          <v-col cols="30">
+            <v-data-table
+              :headers="headers"
+              :items="items"
+              :items-per-page="5"
+              class="elevation-1"
+              :search="search"
+            ></v-data-table>
+            <v-col cols="12">
+              <v-btn style="margin-left: 15px;" @click="back">Back</v-btn>
+            </v-col>
+          </v-col>
+        </v-row>
+      </v-card>
+    </v-container>
   </v-app>
 </template>
 
 <script>
+import http from "../http-common";
+
 export default {
-  name: "welcome",
+  name: "viewAmbulance",
   data() {
     return {
-      drawer: false,
+      search: "",
+      headers: [
+        { text: "Ambulance ID", value: "ambulanceid", align: "left" },
+        { text: "Brands", value: "brandid.ambrand" },
+        { text: "Models", value: "ambulancemodel" },
+        { text: "Type", value: "typeid.amtype" },
+        { text: "Identification Number", value: "ambulancenum" },
+        { text: "Engine Number", value: "enginenum" },
+        { text: "License plate", value: "licenseplate" },
+        { text: "Province", value: "provinceid.provincename" }
+      ],
+      items: [],
+      valid: false,
       ambulancepush: [
         { text: "เพิ่มข้อมูล", route: "/ambulance" },
         { text: "ลบข้อมูล", route: "/deleteambulance" },
@@ -149,16 +184,35 @@ export default {
     };
   },
   methods: {
+    /* eslint-disable no-console */
+    getAmbulance() {
+      http
+        .get("/ambulance")
+        .then(response => {
+          this.items = response.data;
+          console.log(this.items);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+    /* eslint-enable no-console */
+    clear() {
+      this.$refs.form.reset();
+    },
     logout() {
       this.$router.push("/");
     },
     pushWelcome() {
       this.$router.push("/welcome");
     },
-    refreshList() {}
+    back() {
+      this.$router.push("/welcome");
+    }
+    /* eslint-disable no-console */
   },
-  mounted() {}
+  mounted() {
+    this.getAmbulance();
+  }
 };
 </script>
-
-
