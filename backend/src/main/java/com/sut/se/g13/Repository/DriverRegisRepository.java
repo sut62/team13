@@ -7,5 +7,9 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
 public interface DriverRegisRepository extends JpaRepository<DriverRegis, Long> {
-    DriverRegis findByDriverregisid (Long driverregisid);
+    DriverRegis findByDriverregisid (long driverregisid);
+
+	
+
+	
 }

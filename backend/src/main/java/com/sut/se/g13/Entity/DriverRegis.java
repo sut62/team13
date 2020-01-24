@@ -38,6 +38,7 @@ public class DriverRegis {
     private String drivername; //ชื่อ-สุกล คนขับ
     
     @NotNull
+    @Column(name = "IDCARD", unique = true)
     @Pattern(regexp = "\\d{13}")
     private  String idcard;     //เลขที่บัตรประชาชน
    
@@ -46,26 +47,31 @@ public class DriverRegis {
     private String address;    //ที่อยู่
     
     @NotNull
+    @Column(name = "TELEPHONE", unique = true)
     @Pattern(regexp="\\d{10}")
     private String telephone;  //หมายเลขโทรศัพท์
 
 
-
+    @NotNull
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Gender.class)
     @JoinColumn(name = "GENDER")
     private Gender genderid; //เพศพนักงานคนขับ
 
+    @NotNull
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = PositionDriver.class)
     @JoinColumn(name = "POSITIONDRIVER")
     private PositionDriver positionid; //ตำแหน่งของพนักงานคนขับ
     
+    @NotNull
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Province.class)
     @JoinColumn(name = "PROVINCE_ID", insertable = true)
     private Province provinceid; //รายชื่อจังหวัด
 
+    @NotNull
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Educational.class)
     @JoinColumn(name = "EDUCATIONAL_ID", insertable = true)
     private Educational educationalid; //ระดับการศึกษา
 
+	
 }
 
