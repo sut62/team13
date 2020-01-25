@@ -153,18 +153,12 @@
               <v-row justify="center">
                 <v-col cols="12" sm="8">
                   <v-checkbox v-model="CheckEquipment.defibrillator" label="เครื่องกระตุ้นหัวใจ"></v-checkbox>
-                  <v-checkbox
-                    v-model="CheckEquipment.sphygmomanometer"
-                    label="เครื่องวัดความดันโลหิต"
-                  ></v-checkbox>
+                  <v-checkbox v-model="CheckEquipment.sphygmomanometer" label="เครื่องวัดความดันโลหิต"></v-checkbox>
                   <v-checkbox v-model="CheckEquipment.respirator" label="เครื่องช่วยหายใจ"></v-checkbox>
                   <v-checkbox v-model="CheckEquipment.oxygenmachine" label="เครื่องออกซิเจน"></v-checkbox>
                   <v-checkbox v-model="CheckEquipment.suction" label="เครื่องดูดเสมหะ"></v-checkbox>
                   <v-checkbox v-model="CheckEquipment.motionDevice" label="อุปกรณ์เคลื่อนที่"></v-checkbox>
-                  <v-checkbox
-                    v-model="CheckEquipment.medicalSprayer"
-                    label="เครื่องพ่นยาทางการแพทย์"
-                  ></v-checkbox>
+                  <v-checkbox v-model="CheckEquipment.medicalSprayer" label="เครื่องพ่นยาทางการแพทย์"></v-checkbox>
                 </v-col>
               </v-row>
             </v-container>
@@ -239,6 +233,7 @@ export default {
       ambulances: null,
       Nurses: null,
       statuses: null,
+      note: null,
       ambulancepush: [
         { text: "เพิ่มข้อมูล", route: "/ambulance" },
         { text: "ลบข้อมูล", route: "/deleteambulance" },
@@ -317,6 +312,8 @@ export default {
             this.CheckEquipment.nurseId +
             "/" +
             this.CheckEquipment.statusId +
+            "/" +
+            this.CheckEquipment.note +
             "/" +
             this.CheckEquipment.defibrillator +
             "/" +
