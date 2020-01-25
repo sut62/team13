@@ -84,6 +84,7 @@ public class CheckEquipment  {
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Status.class)
   @JoinColumn(name = "ID_STATUS", insertable = true)
+  @NotNull
   private Status status;   //สถานะอุปกรณ์
 
 }
