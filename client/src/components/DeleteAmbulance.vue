@@ -101,11 +101,11 @@
       </v-row>
     </v-tabs>
     <v-container style="height: 200%; margin-right:5%">
-      <v-card style="width:90%; margin:auto; background-color:#FFFFFF">
+      <v-card style="width:85%; margin:auto; background-color:#FFFFFF">
         <v-layout text-center wrap>
           <v-flex mb-4>
             <br />
-            <h1 class="display-1 font-weight-bold mb-3">Ambulance Information</h1>
+            <h1 class="display-1 font-weight-bold mb-3">ลบข้อมูลรถพยาบาล</h1>
           </v-flex>
         </v-layout>
 
@@ -113,7 +113,7 @@
           <v-col cols="12" sm="8">
             <v-text-field
               v-model="search"
-              label="ค้นหา"
+              label="Search"
               prepend-icon="mdi mdi-file-find"
               outlined
               hide-details
@@ -135,7 +135,8 @@
 
         <v-form ref="form">
           <v-row justify="center">
-            <h1 class="display-1 font-weight-bold mb-3">Ambulance Delete</h1>
+            <h1 class="display-1 font-weight-bold mb-3">
+              เลือกรถพยาบาลที่คุต้องการลบ</h1>
           </v-row>
           <v-row justify="center">
             <v-col cols="12" sm="4">
@@ -146,12 +147,12 @@
                   item-text="ambulancenum"
                   item-value="ambulanceid"
                   :rules="[v => !!v || 'Item is required']"
-                  label="-- ambulance --"
+                  label="--เลขตัวรถ 17 หลัก(ตามใบคู่มือจดทะเบียน)--"
                   required
                 ></v-select>
               </v-row>
               <p1 v-if="ambulance.ambulanceId != null">
-                ID ที่ต้องการลบ : {{ambulance.ambulanceId}}
+                ที่ต้องการลบคือ {{ambulance.ambulanceId}}
                 กรุณายืนยัน username และ password เพื่อทำการลบ
                 <v-text-field
                   label="Username"
@@ -176,7 +177,7 @@
                 />
 
                 <p2 v-if="employeeCheck != ''">
-                  <v-btn style="margin-left: 15px;" color="red darken-1" @click="deleteAm">Delete</v-btn>
+                  <v-btn style="margin-left: 15px;" color="red darken-1" @click="deleteAm">ลบข้อมูล</v-btn>
                 </p2>
                 <p2 v-else-if="employeeCheck == ''">
                   <v-btn
@@ -204,13 +205,13 @@ export default {
       search: "",
       headers: [
         { text: "Ambulance ID", value: "ambulanceid", align: "left" },
-        { text: "Brands", value: "brandid.ambrand" },
-        { text: "Models", value: "ambulancemodel" },
-        { text: "Type", value: "typeid.amtype" },
-        { text: "Identification Number", value: "ambulancenum" },
-        { text: "Engine Number", value: "enginenum" },
-        { text: "License plate", value: "licenseplate" },
-        { text: "Province", value: "provinceid.provincename" }
+        { text: "ยี่ห้อรถ", value: "brandid.ambrand" },
+        { text: "รุ่นรถ", value: "ambulancemodel" },
+        { text: "ประเภทรถพยาบาล", value: "typeid.amtype" },
+        { text: " เลขตัวรถ 17 หลัก", value: "ambulancenum" },
+        { text: "เลขเครื่องยนตร์ 12 หลัก", value: "enginenum" },
+        { text: "เลขทะเบียนรถ", value: "licenseplate" },
+        { text: "จังหวัด", value: "provinceid.provincename" }
       ],
       items: [],
       ambulance: {
@@ -222,11 +223,6 @@ export default {
       employeeCheck: false,
       valid: false,
       ambulancepush: [
-        { text: "เพิ่มข้อมูล", route: "/ambulance" },
-        { text: "ลบข้อมูล", route: "/deleteambulance" },
-        { text: "ข้อมูล", route: "/infoambulance" }
-      ],
-      ambulances: [
         { text: "เพิ่มข้อมูล", route: "/ambulance" },
         { text: "ลบข้อมูล", route: "/deleteambulance" },
         { text: "ข้อมูล", route: "/infoambulance" }

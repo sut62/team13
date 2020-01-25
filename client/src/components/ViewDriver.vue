@@ -101,7 +101,7 @@
       </v-row>
     </v-tabs>
     <v-container style="height: 200%; margin-right:5%">
-      <v-card style="width:100%; margin:auto; background-color:#FFFFFF">
+      <v-card style="width:90%; margin:auto; background-color:#FFFFFF">
         <v-layout text-center wrap>
           <v-flex mb-4>
             <br />
@@ -110,7 +110,7 @@
         </v-layout>
 
         <v-row justify="center">
-          <v-col cols="12" sm="5">
+          <v-col cols="12" sm="8">
             <v-text-field
               v-model="search"
               label="ค้นหา"
@@ -158,11 +158,6 @@ export default {
       ],
       items: [],
       ambulancepush: [
-        { text: "เพิ่มข้อมูล", route: "/ambulance" },
-        { text: "ลบข้อมูล", route: "/deleteambulance" },
-        { text: "ข้อมูล", route: "/infoambulance" }
-      ],
-      ambulances: [
         { text: "เพิ่มข้อมูล", route: "/ambulance" },
         { text: "ลบข้อมูล", route: "/deleteambulance" },
         { text: "ข้อมูล", route: "/infoambulance" }

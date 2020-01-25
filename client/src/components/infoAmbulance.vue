@@ -101,7 +101,7 @@
       </v-row>
     </v-tabs>
     <v-container style="height: 200%; margin-right:5%">
-      <v-card style="width:90%; background-color:#FFFFFF">
+      <v-card style="width:85%; margin:auto; background-color:#FFFFFF">
         <v-layout text-center wrap>
           <v-flex mb-4>
             <br />
@@ -122,7 +122,7 @@
             <v-data-table
               :headers="headers"
               :items="items"
-              :items-per-page="5"
+              :items-per-page="15"
               class="elevation-1"
               :search="search"
             ></v-data-table>
@@ -146,22 +146,17 @@ export default {
       search: "",
       headers: [
         { text: "Ambulance ID", value: "ambulanceid", align: "left" },
-        { text: "Brands", value: "brandid.ambrand" },
-        { text: "Models", value: "ambulancemodel" },
-        { text: "Type", value: "typeid.amtype" },
-        { text: "Identification Number", value: "ambulancenum" },
-        { text: "Engine Number", value: "enginenum" },
-        { text: "License plate", value: "licenseplate" },
-        { text: "Province", value: "provinceid.provincename" }
+        { text: "ยี่ห้อรถ", value: "brandid.ambrand" },
+        { text: "รุ่นรถ", value: "ambulancemodel" },
+        { text: "ประเภทรถพยาบาล", value: "typeid.amtype" },
+        { text: " เลขตัวรถ 17 หลัก", value: "ambulancenum" },
+        { text: "เลขเครื่องยนตร์ 12 หลัก", value: "enginenum" },
+        { text: "เลขทะเบียนรถ", value: "licenseplate" },
+        { text: "จังหวัด", value: "provinceid.provincename" }
       ],
       items: [],
       valid: false,
       ambulancepush: [
-        { text: "เพิ่มข้อมูล", route: "/ambulance" },
-        { text: "ลบข้อมูล", route: "/deleteambulance" },
-        { text: "ข้อมูล", route: "/infoambulance" }
-      ],
-      ambulances: [
         { text: "เพิ่มข้อมูล", route: "/ambulance" },
         { text: "ลบข้อมูล", route: "/deleteambulance" },
         { text: "ข้อมูล", route: "/infoambulance" }
