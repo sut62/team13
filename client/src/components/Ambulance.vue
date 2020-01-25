@@ -253,29 +253,34 @@ export default {
       provinces: null,
       valid: false,
       ambulancepush: [
-        { text: "เพิ่ม", route: "/ambulance" },
-        { text: "ลบ", route: "/deleteambulance" },
-        { text: "ข้อมูลรถ", route: "/infoambulance" }
+        { text: "เพิ่มข้อมูล", route: "/ambulance" },
+        { text: "ลบข้อมูล", route: "/deleteambulance" },
+        { text: "ข้อมูล", route: "/infoambulance" }
+      ],
+      ambulances: [
+        { text: "เพิ่มข้อมูล", route: "/ambulance" },
+        { text: "ลบข้อมูล", route: "/deleteambulance" },
+        { text: "ข้อมูล", route: "/infoambulance" }
       ],
       nurses: [
-        { text: "เพิ่ม", route: "/nurse" },
-        { text: "ลบ", route: "/viewnurse" }
+        { text: "เพิ่มข้อมูล", route: "/nurse" },
+        { text: "ลบข้อมูล", route: "/viewnurse" }
       ],
       drivers: [
-        { text: "เพิ่ม", route: "/driver" },
-        { text: "ลบ", route: "/viewdriver" }
+        { text: "เพิ่มข้อมูล", route: "/driver" },
+        { text: "ลบข้อมูล", route: "/viewdriver" }
       ],
       emergencies: [
-        { text: "เพิ่ม", route: "/emergency" },
-        { text: "ลบ", route: "/viewemergency" }
+        { text: "เพิ่มข้อมูล", route: "/emergency" },
+        { text: "ลบข้อมูล", route: "/viewemergency" }
       ],
       checks: [
-        { text: "เพิ่ม", route: "/ambulancecheck" },
-        { text: "ลบ", route: "/viewambulancecheck" }
+        { text: "เพิ่มข้อมูล", route: "/ambulancecheck" },
+        { text: "ข้อมูล", route: "/viewambulancecheck" }
       ],
       equipments: [
-        { text: "เพิ่ม", route: "/checkEquipment" },
-        { text: "ลบ", route: "/ViewCheckEquipment" }
+        { text: "เพิ่มข้อมูล", route: "/checkEquipment" },
+        { text: "ข้อมูล", route: "/ViewCheckEquipment" }
       ]
     };
   },

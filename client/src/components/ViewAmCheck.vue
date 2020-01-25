@@ -148,11 +148,16 @@ export default {
         { text: "เลขทะเบียนรถ", value: "ambulance.licenseplate" },
         { text: "จังหวัด", value: "ambulance.provinceid.provincename" },
         { text: "สภาพรถ", value: "status.name" },
-        { text: "สถานที่เช็ค", value: "address" },
+        { text: "หมายเหตุ", value: "note" },
         { text: "วันที่เช็คสภาพรถ", value: "checkDate" }
       ],
       items: [],
       ambulancepush: [
+        { text: "เพิ่มข้อมูล", route: "/ambulance" },
+        { text: "ลบข้อมูล", route: "/deleteambulance" },
+        { text: "ข้อมูล", route: "/infoambulance" }
+      ],
+      ambulances: [
         { text: "เพิ่มข้อมูล", route: "/ambulance" },
         { text: "ลบข้อมูล", route: "/deleteambulance" },
         { text: "ข้อมูล", route: "/infoambulance" }
