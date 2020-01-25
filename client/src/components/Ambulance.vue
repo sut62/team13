@@ -110,7 +110,7 @@
 
             <v-container>
               <div>
-                <p class="font-weight-black display-1">ADD AMBULANCE</p>
+                <p class="font-weight-black display-1">แบบฟอร์มเพิ่มข้อมูลรถพยาบาล</p>
               </div>
             </v-container>
 
@@ -253,11 +253,6 @@ export default {
       provinces: null,
       valid: false,
       ambulancepush: [
-        { text: "เพิ่มข้อมูล", route: "/ambulance" },
-        { text: "ลบข้อมูล", route: "/deleteambulance" },
-        { text: "ข้อมูล", route: "/infoambulance" }
-      ],
-      ambulances: [
         { text: "เพิ่มข้อมูล", route: "/ambulance" },
         { text: "ลบข้อมูล", route: "/deleteambulance" },
         { text: "ข้อมูล", route: "/infoambulance" }
