@@ -60,7 +60,12 @@ public class NurseController {
         return tierRepository.findAll().stream().collect(Collectors.toList());
     }
 
-
+    @DeleteMapping("nurse/{id}")
+    public ResponseEntity<String> deleteNurses(@PathVariable("id") long id) {
+		System.out.println("Delete Nurse with ID = " + id + "...");
+		nurseRepository.deleteById(id);
+        return new ResponseEntity<>("Nurse has been deleted!", HttpStatus.OK);
+    }
 
     @PostMapping("/nurse/{nursename}/{genderid}/{date}/{address}/{provinceid}/{educationalid}/{tierid}/{telephone}/{email}")
     public Nurse newNurse(Nurse newNurse,
