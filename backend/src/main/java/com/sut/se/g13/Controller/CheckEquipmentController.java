@@ -46,11 +46,12 @@ public class CheckEquipmentController {
         return checkEquipmentRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @PostMapping("/checkEquipment/{id_ambulance}/{id_nurse}/{id_status}/{defibrillator}/{sphygmomanometer}/{respirator}/{oxygenmachine}/{suction}/{motionDevice}/{medicalSprayer}")
+    @PostMapping("/checkEquipment/{id_ambulance}/{id_nurse}/{id_status}/{note}/{defibrillator}/{sphygmomanometer}/{respirator}/{oxygenmachine}/{suction}/{motionDevice}/{medicalSprayer}")
     public CheckEquipment newCheckEquipment (CheckEquipment  newCheckEquipment ,
                                @PathVariable long id_ambulance,
                                @PathVariable long id_nurse,
                                @PathVariable long id_status,
+                               @PathVariable String note,
                                @PathVariable Boolean defibrillator,
                                @PathVariable Boolean sphygmomanometer,
                                @PathVariable Boolean respirator,
@@ -69,6 +70,7 @@ public class CheckEquipmentController {
         newCheckEquipment.setAmbulance(ambulance);
         newCheckEquipment.setNurse(nurse);
         newCheckEquipment.setStatus(status);
+        newCheckEquipment.setNote(note);
         newCheckEquipment.setDefibrillator(defibrillator);
         newCheckEquipment.setSphygmomanometer(sphygmomanometer);
         newCheckEquipment.setRespirator(respirator);
