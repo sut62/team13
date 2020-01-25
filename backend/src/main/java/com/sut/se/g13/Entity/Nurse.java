@@ -36,8 +36,6 @@ public class Nurse {
   @NotNull 
   private String nursename; // ชื่อ-นามสกุล
 
-  @Past
-  //@NotNull  
   @Temporal(TemporalType.DATE)
   private Date birthday; // วันเกิด
 
@@ -56,7 +54,7 @@ public class Nurse {
   private String email; // เมล
 
   @Temporal(TemporalType.DATE)
-  //@NotNull
+  @NotNull
   private Date nowdate; // เวลาบันทึก
 
   @NotNull
