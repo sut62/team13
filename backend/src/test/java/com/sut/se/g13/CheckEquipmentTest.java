@@ -349,5 +349,4 @@ public class CheckEquipmentTest {
         assertEquals("size must be between 4 and 50", v.getMessage());
         assertEquals("note", v.getPropertyPath().toString());
      }
-
 }
