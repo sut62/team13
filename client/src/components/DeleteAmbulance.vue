@@ -298,17 +298,9 @@ export default {
           http.delete("/ambulance/" + this.ambulance.ambulanceId);
           // eslint-disable-next-line no-console
           console.log(response);
-          this.$emit("refreshData");
+           this.$router.push("/infoambulance");
           const options1 = { title: "Alert", size: "sm" };
           this.$dialogs.alert("ลบสำเร็จ", options1);
-          this.$refs.form.reset();
-        })
-        .then(response => {
-          // eslint-disable-next-line no-console
-          console.log(response);
-          this.$refs.form.reset();
-          this.$router.push("/infoambulance");
-          location.reload();
         })
         .catch(e => {
           // eslint-disable-next-line no-console
