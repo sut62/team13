@@ -9,7 +9,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.validation.constraints.FutureOrPresent;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -39,58 +38,62 @@ public class AmbulanceCheck  {
   
   @NotNull
   @Size(max = 100)
-  private String note;
+  private String note;  //หมายเหตุ
 
   @Temporal(TemporalType.DATE)
   @NotNull
   @Column(name="CHECK_DATE")
-  private Date checkDate ;
+  private Date checkDate ;  //วันที่เช็คสภาพรถ
 
   @NotNull
   @Column(name="CHECK_BATTERY")
-  private Boolean battery;
+  private Boolean battery; //เช็คแบตเตอรี่
 
   @NotNull
   @Column(name="CHECK_LIGHT")
-  private  Boolean light;
+  private  Boolean light; //เช็คล้อและยาง
 
   @NotNull
   @Column(name="CHECK_WHEEL")
-  private  Boolean wheel;
+  private  Boolean wheel; //เช็คช่วงล่างและระบบกันสะเทือน
 
   @NotNull
   @Column(name="CHECK_SUSPENSION")
-  private  Boolean suspension;
+  private  Boolean suspension;  //เช็คระดับน้ำมันเบรค
 
   @NotNull
   @Column(name="CHECK_BRAKE_FLUID")
-  private Boolean brakeFluid;
+  private Boolean brakeFluid; //เช็คระบบไฟส่องสว่าง
 
   @NotNull
   @Column(name="CHECK_ENGINE_OIL")
-  private Boolean engineOil;
+  private Boolean engineOil;  //เช็คระดับน้ำมันเครื่อง
 
   @NotNull
   @Column(name="CHECK_RADIATOR")
-  private  Boolean radiator;
+  private  Boolean radiator;  //เช็คหม้อน้ำและท่อยาง
 
   @NotNull
   @Column(name="CHECK_TOOL_SET")
-  private Boolean toolSet;
+  private Boolean toolSet;  //เช็คชุดเครื่องมือประจำรถ
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Ambulance.class)
   @JoinColumn(name = "ID_AMBULANCE", insertable = true)
-  private Ambulance ambulance;
+  // @NotNull
+  private Ambulance ambulance;  //ข้อมูลทั้งหมดของรถพยาบาล
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Mile.class)
   @JoinColumn(name = "ID_MILE", insertable = true)
-  private Mile mile;
+  @NotNull
+  private Mile mile;  //ระยะของรถ
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = DriverRegis.class)
   @JoinColumn(name = "ID_DRIVERREGIS", insertable = true)
-  private DriverRegis driverRegis;
+  // @NotNull
+  private DriverRegis driverRegis;  //ข้อมูลทั้งหมดของพนักงานคนขับ
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Status.class)
   @JoinColumn(name = "ID_STATUS", insertable = true)
-  private Status status;
+  @NotNull
+  private Status status;  //สถานะ
 }
