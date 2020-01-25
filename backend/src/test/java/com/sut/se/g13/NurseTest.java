@@ -315,6 +315,33 @@ public class NurseTest {
     }
 
     @Test
+    void B5802111_testNursewithNodDateNotNull() throws ParseException {
+        Nurse nurse = new Nurse();
+        Gender gender = genderRepository.findByGenderid(1);
+        Province province = provinceRepository.findByProvinceid(1);
+        Educational educational = educationalRepository.findByEducationalid(1);
+        Tier tier = tierRepository.findByTierid(1);
+
+        nurse.setNursename("ศราวุฒิ ดวงดี");
+        nurse.setAddress("153 ม.7 ต.บ้านหม้อ อ.ศรีเชียงใหม่ 43130");
+        nurse.setTelephone("0880517942");
+        nurse.setEmail("sarawutduangdee@gmail.com");
+        nurse.setGenderid(gender);
+        nurse.setProvinceid(province);
+        nurse.setEducationalid(educational);
+        nurse.setTierid(tier);
+        nurse.setNowdate(null);
+
+        Set<ConstraintViolation<Nurse>> result = validator.validate(nurse);
+
+        assertEquals(1, result.size());
+
+        ConstraintViolation<Nurse> message = result.iterator().next();
+        assertEquals("must not be null", message.getMessage());
+        assertEquals("nowdate", message.getPropertyPath().toString());
+    }
+
+    @Test
     void B5802111_testNursenameNotMustMoreThen30String() throws ParseException { // เช็ค Nursename ต้องไม่เกิน 30 ตัวอักษร
         final Nurse nurse = new Nurse();
         String pattern ="yyyy-MM-dd";
