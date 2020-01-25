@@ -119,6 +119,8 @@
               hide-details
             ></v-text-field>
           </v-col>
+
+
           <v-col cols="30">
             <v-data-table
               :headers="headers"
@@ -131,6 +133,34 @@
               <v-btn style="margin-left: 15px;" @click="back">Back</v-btn>
             </v-col>
           </v-col>
+
+
+          <v-col cols="3">
+            <v-text-field
+              outlined
+              label="ต้องการลบ Driver Register ID: "
+              prepend-icon="mdi mdi-delete-forever"
+              v-model="driverregis.driverregisId"
+            ></v-text-field>
+            <p v-if="driverregisCheck != ''">
+              ID DriverRegis ที่ต้องการลบ : {{driverregisId}}
+              <v-btn class @click="deleteDriverRegis" color="#D50000" style="color:#FFFFFF">ลบ</v-btn>
+            </p>
+          </v-col>
+
+
+          <v-col cols="2">
+            <div class>
+              <v-btn
+                @click="findDriverRegis"
+                depressed
+                large
+                color="#282FCF"
+                style="color:#FFFFFF;"
+              >ยืนยัน</v-btn>
+            </div>
+          </v-col>
+
         </v-row>
       </v-card>
     </v-container>
@@ -181,7 +211,15 @@ export default {
       equipments: [
         { text: "เพิ่มข้อมูล", route: "/checkEquipment" },
         { text: "ข้อมูล", route: "/ViewCheckEquipment" }
-      ]
+      ],
+
+      driverregis: {
+        driverregisId: null
+      },
+      valid: false,
+      driverregisCheck: false,
+      driverregisId: null
+
     };
   },
   methods: {
@@ -197,6 +235,41 @@ export default {
           console.log(e);
         });
     },
+
+     findDriverRegis() {
+      http
+        .get("/driverregis/" + this.driverregis.driverregisId)
+        .then(response => {
+          console.log(response);
+          if (response.data != null) {
+            this.driverregisId = response.data.driverregisid;
+            this.driverregisCheck = response.status;
+          } else {
+            this.clear();
+          }
+        })
+        .catch(e => {
+          console.log(e);
+        });
+      this.submitted = true;
+    },
+
+    deleteDriverRegis() {
+      http
+        .delete("/driverregis/" + this.driverregis.driverregisId)
+        .then(response => {
+          console.log(response.data);
+          this.$emit("refreshData");
+         const options1 = {title: 'Alert', size: 'sm'}
+          this.$dialogs.alert('ลบข้อมูลพนักงานคนขับสำเร็จ',options1);
+          this.$refs.form.reset();
+          location.reload();
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+
     back() {
       this.$router.push("/driver");
     },
