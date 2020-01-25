@@ -288,14 +288,9 @@ export default {
       statuses: null,
       note: null,
       ambulancepush: [
-        { text: "เพิ่ม", route: "/ambulance" },
-        { text: "ลบ", route: "/deleteambulance" },
-        { text: "ข้อมูลรถ", route: "/infoambulance" }
-      ],
-      ambulances: [
-        { text: "เพิ่ม", route: "/ambulance" },
-        { text: "ลบ", route: "/deleteambulance" },
-        { text: "ข้อมูลรถ", route: "/infoambulance" }
+        { text: "เพิ่มข้อมูล", route: "/ambulance" },
+        { text: "ลบข้อมูล", route: "/deleteambulance" },
+        { text: "ข้อมูล", route: "/infoambulance" }
       ],
       ambulances: [
         { text: "เพิ่มข้อมูล", route: "/ambulance" },

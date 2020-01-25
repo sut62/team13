@@ -226,6 +226,11 @@ export default {
         { text: "ลบข้อมูล", route: "/deleteambulance" },
         { text: "ข้อมูล", route: "/infoambulance" }
       ],
+      ambulances: [
+        { text: "เพิ่มข้อมูล", route: "/ambulance" },
+        { text: "ลบข้อมูล", route: "/deleteambulance" },
+        { text: "ข้อมูล", route: "/infoambulance" }
+      ],
       nurses: [
         { text: "เพิ่มข้อมูล", route: "/nurse" },
         { text: "ลบข้อมูล", route: "/viewnurse" }
