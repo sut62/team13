@@ -187,6 +187,20 @@
               </v-row>
             </v-container>
 
+            <v-container>
+                   <v-row justify="center">
+                     <v-col cols="12" sm="4">
+                        <p>Note</p>
+                            <v-text-field
+                                        v-model="CheckEquipment.note"
+                                        :rules="[(v) => !!v || 'Item is required']"
+                                        label="-- หมายเหตุ --"
+                                        required
+                            ></v-text-field>
+                        </v-col>
+                    </v-row>
+                </v-container>
+
             <v-row justify="center">
               <v-col cols="12">
                 <v-btn :disabled="!valid" color="success" @click="validate">Submit</v-btn>

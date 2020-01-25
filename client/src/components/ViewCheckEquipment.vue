@@ -142,12 +142,13 @@ export default {
     return {
       search: "",
       headers: [
-        { text: "ID ใบเช็ครถ", value: "ambulance.ambulanceid" },
-        { text: "เลขทะเบียนรถ", value: "ambulance.licenseplate" },
-        { text: "สภาพอุปกรณ์", value: "status.name" },
-        { text: "ผู้ตรวจเช็คอุปกรณ์", value: "nurse.nursename" },
-        { text: "วันที่เช็คอุปกรณ์", value: "checkDate" }
-      ],
+                    { text: "ID ใบเช็ค", value: "id"},
+                    { text: "เลขทะเบียนรถ", value: "ambulance.licenseplate"},
+                    { text: "สภาพอุปกรณ์", value: "status.name"  },
+                    { text: "ผู้ตรวจเช็คอุปกรณ์", value: "nurse.nursename"},
+                    { text: "วันที่เช็คอุปกรณ์", value: "checkDate"},
+                    { text: "หมายเหตุ", value: "note"},
+                ],
       items: [],
       ambulancepush: [
         { text: "เพิ่มข้อมูล", route: "/ambulance" },
