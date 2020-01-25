@@ -122,7 +122,9 @@
                     v-model="nurse.nursename"
                     :rules="[(v) => !!v || 'Item is required']"
                     label="-- ชื่อ - นามสกุล --"
+                    counter="30"
                     required
+                    v-on:keyup.enter="saveNurses"
                   ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="4">
@@ -135,6 +137,7 @@
                     :rules="[v => !!v || 'Item is required']"
                     label="-- เพศ --"
                     required
+                    v-on:keyup.enter="saveNurses"
                   ></v-select>
                 </v-col>
               </v-row>
@@ -176,8 +179,10 @@
                   <v-text-field
                     v-model="nurse.address"
                     :rules="[(v) => !!v || 'Item is required']"
-                    label="-- ที่อยู่ --"
+                    label="-- ที่อยู่ตามทะเบียนบ้าน --"
+                    counter="50"
                     required
+                    v-on:keyup.enter="saveNurses"
                   ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="4">
@@ -190,6 +195,7 @@
                     :rules="[v => !!v || 'Item is required']"
                     label="-- จังหวัด --"
                     required
+                    v-on:keyup.enter="saveNurses"
                   ></v-select>
                 </v-col>
               </v-row>
@@ -207,6 +213,7 @@
                     :rules="[v => !!v || 'Item is required']"
                     label="-- วุฒิการศึกษา --"
                     required
+                    v-on:keyup.enter="saveNurses"
                   ></v-select>
                 </v-col>
 
@@ -220,6 +227,7 @@
                     :rules="[v => !!v || 'Item is required']"
                     label="-- ขั้นข้าราชการ --"
                     required
+                    v-on:keyup.enter="saveNurses"
                   ></v-select>
                 </v-col>
               </v-row>
@@ -233,7 +241,9 @@
                     v-model="nurse.telephone"
                     :rules="[(v) => !!v || 'Item is required']"
                     label="-- เบอร์โทรศัพท์ --"
+                    counter="10"
                     required
+                    v-on:keyup.enter="saveNurses"
                   ></v-text-field>
                 </v-col>
 
@@ -242,8 +252,10 @@
                   <v-text-field
                     v-model="nurse.email"
                     :rules="[(v) => !!v || 'Item is required']"
-                    label="-- อีเมล --"
+                    label="-- โปรดระบุที่อยู่อีเมลที่ถูกต้อง --"
+                    counter
                     required
+                    v-on:keyup.enter="saveNurses"
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -289,6 +301,11 @@ export default {
       tiers: null,
       valid: false,
       ambulancepush: [
+        { text: "เพิ่มข้อมูล", route: "/ambulance" },
+        { text: "ลบข้อมูล", route: "/deleteambulance" },
+        { text: "ข้อมูล", route: "/infoambulance" }
+      ],
+      ambulances: [
         { text: "เพิ่มข้อมูล", route: "/ambulance" },
         { text: "ลบข้อมูล", route: "/deleteambulance" },
         { text: "ข้อมูล", route: "/infoambulance" }
@@ -387,12 +404,14 @@ export default {
         .then(response => {
           console.log(response);
           this.$router.push("/viewnurse");
-          alert("บันทึกข้อมูลสำเร็จ");
+          const options1 = { title: "Alert", size: "sm" };
+          this.$dialogs.alert("บันทึกข้อมูลสำเร็จ", options1);
           this.$refs.form.reset();
         })
         .catch(e => {
           console.log(e);
-          alert("บันทึกข้อมูลไม่สำเร็จ");
+          const options2 = { title: "Alert", size: "sm" };
+          this.$dialogs.alert("บันทึกข้อมูลไม่สำเร็จ", options2);
         });
       this.submitted = true;
       if (this.$refs.form.validate()) {

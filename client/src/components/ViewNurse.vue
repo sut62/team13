@@ -101,7 +101,7 @@
       </v-row>
     </v-tabs>
     <v-container style="height: 200%; margin-right:5%">
-      <v-card style="width:90%; margin:auto; background-color:#FFFFFF">
+      <v-card style="width:100%; margin:auto; background-color:#FFFFFF">
         <v-layout text-center wrap>
           <v-flex mb-4>
             <br />
@@ -129,9 +129,69 @@
             ></v-data-table>
             <v-col cols="12">
               <v-btn style="margin-left: 15px;" @click="back">Back</v-btn>
+              
             </v-col>
           </v-col>
         </v-row>
+        <v-form ref="form">
+          <v-row justify="center">
+            <h1 class="display-1 font-weight-bold mb-3">Nurse Delete</h1>
+          </v-row>
+          <v-row justify="center">
+            <v-col cols="12" sm="4">
+              <v-row justify="center">
+                <v-select
+                  v-model="nurse.nurseId"
+                  :items="items"
+                  item-text="nursename"
+                  item-value="nurseid"
+                  :rules="[v => !!v || 'Item is required']"
+                  label="-- nurse --"
+                  required
+                ></v-select>
+              </v-row>
+              <p1 v-if="nurse.nurseId != null">
+                ID ที่ต้องการลบ : {{nurse.nurseId}}
+                กรุณายืนยัน username และ password เพื่อทำการลบ
+                <v-text-field
+                  label="Username"
+                  v-model="user"
+                  :rules="[(v) => !!v || 'This field is required']"
+                  required
+                  counter
+                  clearable
+                  prepend-icon="mdi-account"
+                  v-on:keyup.enter="confirmEmployee"
+                />
+
+                <v-text-field
+                  label="Password"
+                  v-model="pass"
+                  type="password"
+                  prepend-icon="mdi-lock"
+                  required
+                  counter
+                  clearable
+                  v-on:keyup.enter="confirmEmployee"
+                />
+
+                <p2 v-if="employeeCheck != ''">
+                  <p>กรุณากดปุ่มลบเพื่อยื่นยันการลบข้อมูล</p>
+                  <v-btn style="margin-left: 15px;" color="red darken-1" @click="deleteNurse">ลบ</v-btn>
+                  <v-btn style="margin-left: 15px;" color="yellow darken-1" @click="refaresh">Refresh</v-btn>
+                </p2>
+                <p2 v-else-if="employeeCheck == ''">
+                  <v-btn
+                    style="margin-left: 15px;"
+                    color="green darken-1"
+                    @click="confirmEmployee"
+                  >ยืนยัน</v-btn>
+                </p2>
+              </p1>
+            </v-col>
+          </v-row>
+        </v-form>
+
       </v-card>
     </v-container>
   </v-app>
@@ -154,10 +214,24 @@ export default {
         { text: "Educational", value: "educationalid.educationallevel" },
         { text: "Tier", value: "tierid.tiername" },
         { text: "Telephone", value: "telephone" },
-        { text: "E-Mail", value: "email" }
+        { text: "E-Mail", value: "email" },
+        { text: "Save Date", value: "nowdate" }
       ],
       items: [],
+      nurse: {
+        nurseId: null
+      },
+      user: "",
+      pass: "",
+      employee: null,
+      employeeCheck: false,
+      valid: false,
       ambulancepush: [
+        { text: "เพิ่มข้อมูล", route: "/ambulance" },
+        { text: "ลบข้อมูล", route: "/deleteambulance" },
+        { text: "ข้อมูล", route: "/infoambulance" }
+      ],
+      ambulances: [
         { text: "เพิ่มข้อมูล", route: "/ambulance" },
         { text: "ลบข้อมูล", route: "/deleteambulance" },
         { text: "ข้อมูล", route: "/infoambulance" }
@@ -186,7 +260,7 @@ export default {
   },
   methods: {
     /* eslint-disable no-console */
-    getAmbulance() {
+    getNurse() {
       http
         .get("/nurse")
         .then(response => {
@@ -196,6 +270,61 @@ export default {
         .catch(e => {
           console.log(e);
         });
+    },
+    confirmEmployee() {
+      http
+        .get("/check/" + this.user + "/" + this.pass)
+        .then(response => {
+          // eslint-disable-next-line no-console
+          console.log(response);
+          if (response.data[0] != null) {
+            this.employee = response.data.username;
+            this.employeeCheck = response.status;
+          } else {
+            // eslint-disable-next-line no-unused-vars
+            const options2 = { title: "Alert", size: "sm" };
+            this.$dialogs.alert(
+              "Username หรือ Password อาจมีขอผิดพลาดกรุณาลองใหม่อีกครั้ง",options2
+            );
+            this.employeeCheck = false;
+          }
+        })
+        .catch(e => {
+          // eslint-disable-next-line no-console
+          console.log(e);
+        });
+      this.submitted = true;
+    },
+    deleteNurse() {
+      http
+        .post(
+          "/nursedeleted/" + this.user + "/" + this.nurse.nurseId,
+          this.nurse
+        )
+        .then(response => {
+          http.delete("/nurse/" + this.nurse.nurseId);
+          // eslint-disable-next-line no-console
+          console.log(response);
+          this.$router.push("viewnurse");
+          const options1 = { title: "Alert", size: "sm" };
+          this.$dialogs.alert("ลบข้อมูลสำเร็จ", options1);
+          
+        })
+        .catch(e => {
+          // eslint-disable-next-line no-console
+          console.log(e);
+          const options2 = { title: "Alert", size: "sm" };
+          this.$dialogs.alert("ลบข้อมูลไม่สำเร็จ", options2);
+        });
+      this.submitted = true;
+
+      if (this.$refs.form.validate()) {
+        this.snackbar = true;
+      }
+    },
+    refaresh(){
+      this.$router.push("viewnurse");
+      location.reload();
     },
     back() {
       this.$router.push("/nurse");
@@ -209,7 +338,7 @@ export default {
     /* eslint-disable no-console */
   },
   mounted() {
-    this.getAmbulance();
+    this.getNurse();
   }
 };
 </script>
