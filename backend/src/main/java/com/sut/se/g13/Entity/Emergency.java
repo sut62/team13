@@ -21,7 +21,8 @@ public class Emergency {
 
 	@Column(name = "EM_DATE")
 	@Temporal(TemporalType.DATE)
-	private @NonNull Date emDate;
+	@NotNull
+	private Date emDate;
 
 	@Column(name = "EM_PNam")
 	@Size(max = 30)
@@ -33,7 +34,7 @@ public class Emergency {
 	@NotNull
 	private String patientAddress;
 
-	@Column(name = "EM_PTel")
+	@Column(name = "EM_PTel" , unique = true )
 	@Pattern(regexp="\\d{10}")
 	@NotNull
 	private String patientTel;
@@ -45,10 +46,12 @@ public class Emergency {
 
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Symptom.class)
 	@JoinColumn(name = "SYMPTOME_ID", insertable = true)
+	@NotNull
 	private Symptom symptom;
 
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Ambulance.class)
 	@JoinColumn(name = "AMBULANCE_ID", insertable = true)
+	//@NotNull
 	private Ambulance ambulance;
 
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Nurse.class)
@@ -57,6 +60,7 @@ public class Emergency {
 
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = DriverRegis.class)
 	@JoinColumn(name = "DRIVERREGIS_ID", insertable = true)
+	//@NotNull
 	private DriverRegis driverRegis;
 
 }
