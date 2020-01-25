@@ -35,7 +35,13 @@ public class CheckEquipmentTest {
     @Autowired private AmbulanceRepository ambulanceRepository;
     @Autowired private AmbulanceBrandRepository ambulanceBrandRepository;
     @Autowired private AmbulanceTypeRepository ambulanceTypeRepository;
+
     @Autowired private ProvinceRepository provinceRepository;
+
+    @Autowired private NurseRepository nurseRepository;
+    @Autowired private  TierRepository tierRepository;
+    @Autowired private  GenderRepository genderRepository;
+    @Autowired private  EducationalRepository educationalRepository;
 
     @Autowired 
     private NurseRepository nurseRepository;
@@ -54,6 +60,38 @@ public class CheckEquipmentTest {
         // Nurse nurse = nurseRepository.findByNurseid(1);
 
         java.util.Date date = new java.util.Date(2020-01-21);
+        
+//     AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
+//     AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
+
+//     Province province = provinceRepository.findByProvinceid(1);
+
+        // Gender gender = genderRepository.findByGenderid(1);
+        // Educational educational = educationalRepository.findByEducationalid(1);
+        // Tier tier = tierRepository.findByTierid(1);
+
+//     Ambulance ambulance = new Ambulance();
+//     ambulance.setEnginenum("JS150MM03731");
+//     ambulance.setAmbulancemodel("Dmax");
+//     ambulance.setAmbulancenum("ML2S150CMHTP03731");
+//     ambulance.setLicenseplate("1กว 4451");
+//     ambulance.setAdddate(date);
+//     ambulance.setBrandid(brand);
+//     ambulance.setTypeid(type);
+//     ambulance.setProvinceid(province);
+//     ambulanceRepository.save(ambulance);
+//     Ambulance am = ambulanceRepository.findByAmbulanceid(1);
+
+//         nurse.setNursename("ศราวุฒิ ดวงดี");
+//         nurse.setAddress("153 ม.7 ต.บ้านหม้อ อ.ศรีเชียงใหม่ 43130");
+//         nurse.setTelephone("0880517942");
+//         nurse.setEmail("sarawutduangdee@gmail.com");
+//         nurse.setGenderid(gender);
+//         nurse.setProvinceid(province);
+//         nurse.setEducationalid(educational);
+//         nurse.setTierid(tier);
+//         nurse.setNowdate(date);
+
         checkEquipment.setNote("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         checkEquipment.setCheckDate(date);
         checkEquipment.setDefibrillator(true);
