@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -56,12 +59,17 @@ public class EmergencyController {
         return emergency;
     }
 
-
-
     @GetMapping("/symptom")
     public Collection<Symptom> Symptoms() {
         return symptomRepository.findAll().stream().collect(Collectors.toList());
     }
+
+    @DeleteMapping("/emergency/{id}")
+	public ResponseEntity<String> deleteEmergencys(@PathVariable("id") long id) {
+		System.out.println("Delete Emergency with ID = " + id + "...");
+		emergencyRepository.deleteById(id);
+		return new ResponseEntity<>("Emergency has been deleted!", HttpStatus.OK);
+	}
 
     @PostMapping("/emergency/{patientName}/{patientAddress}/{patientTel}/{symptomid}/{note}/{ambulanceid}/{driverregisid}/{nurseid}")
     public Emergency newEmergency(Emergency newEmergency , 

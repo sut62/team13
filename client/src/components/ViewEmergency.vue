@@ -119,6 +119,7 @@
               hide-details
             ></v-text-field>
           </v-col>
+
           <v-col cols="30">
             <v-data-table
               :headers="headers"
@@ -131,6 +132,33 @@
               <v-btn style="margin-left: 15px;" @click="back">Back</v-btn>
             </v-col>
           </v-col>
+      <v-container />
+       <v-col cols="3">
+            <v-text-field
+              outlined
+              label="ต้องการลบ EmergencyID: "
+              prepend-icon="mdi mdi-delete-forever"
+              v-model="emergency.emergencyId"
+            ></v-text-field>
+            <p v-if="emergencyCheck != ''">
+              ID Emergency ที่ต้องการลบ : {{emergencyId}}
+              <v-btn class @click="deleteEmergency" color="#D50000" style="color:#FFFFFF">ลบ</v-btn>
+            </p>
+          </v-col>
+
+
+          <v-col cols="2">
+            <div class>
+              <v-btn
+                @click="findEmergency"
+                depressed
+                large
+                color="#282FCF"
+                style="color:#FFFFFF;"
+              >ยืนยัน</v-btn>
+            </div>
+          </v-col>
+
         </v-row>
       </v-card>
     </v-container>
@@ -181,17 +209,56 @@ export default {
       equipments: [
         { text: "เพิ่มข้อมูล", route: "/checkEquipment" },
         { text: "ข้อมูล", route: "/ViewCheckEquipment" }
-      ]
+      ],
+        emergency: {
+        emergencyId: null
+      },
+      valid: false,
+      emergencyCheck: false,
+      emergencyId: null
+
     };
   },
   methods: {
     /* eslint-disable no-console */
-    getAmbulance() {
+    getEmergency() {
       http
         .get("/emergency")
         .then(response => {
           this.items = response.data;
           console.log(this.items);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+     findEmergency() {
+      http
+        .get("/emergency/" + this.emergency.emergencyId)
+        .then(response => {
+          console.log(response);
+          if (response.data != null) {
+            this.emergencyId = response.data.emergencyid;
+            this.emergencyCheck = response.status;
+          } else {
+            this.clear();
+          }
+        })
+        .catch(e => {
+          console.log(e);
+        });
+      this.submitted = true;
+    },
+    deleteEmergency() {
+      http
+        .delete("/emergency/" + this.emergency.emergencyId)
+        .then(response => {
+          console.log(response.data);
+          this.$emit("refreshData");
+         const options1 = {title: 'Alert', size: 'sm'}
+          this.$dialogs.alert('ลบข้อมูลประวัติฉุกเฉินสำเร็จ',options1);
+          this.$refs.form.reset();
+          location.reload();
         })
         .catch(e => {
           console.log(e);
@@ -209,7 +276,7 @@ export default {
     /* eslint-disable no-console */
   },
   mounted() {
-    this.getAmbulance();
+    this.getEmergency();
   }
 };
 </script>
