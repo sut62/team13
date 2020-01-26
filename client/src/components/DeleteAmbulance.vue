@@ -293,14 +293,18 @@ export default {
         .post(
           "/ambulancedeleted/" + this.user + "/" + this.ambulance.ambulanceId,
           this.ambulance
-        )
+        ),
+        http.delete("/ambulance/" + this.ambulance.ambulanceId)
         .then(response => {
-          http.delete("/ambulance/" + this.ambulance.ambulanceId);
           // eslint-disable-next-line no-console
           console.log(response);
-           this.$router.push("/infoambulance");
           const options1 = { title: "Alert", size: "sm" };
           this.$dialogs.alert("ลบสำเร็จ", options1);
+        })
+        .then(res => {
+          // eslint-disable-next-line no-console
+          console.log(res)
+          this.$router.push("/infoambulance");
         })
         .catch(e => {
           // eslint-disable-next-line no-console
