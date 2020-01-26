@@ -60,6 +60,7 @@ public class AmbulanceController {
         return ambulancetypeRepository.findAll().stream().collect(Collectors.toList());
     }
 
+   
     @DeleteMapping("/ambulance/{id}")
 	public ResponseEntity<String> deleteAmbulances(@PathVariable("id") long id) {
 		System.out.println("Delete Ambulance with ID = " + id + "...");
