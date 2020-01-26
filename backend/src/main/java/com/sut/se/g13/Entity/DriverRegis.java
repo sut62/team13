@@ -65,7 +65,7 @@ public class DriverRegis {
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Province.class)
     @JoinColumn(name = "PROVINCE_ID", insertable = true)
-    private Province provinceid; //รายชื่อจังหวัด 77 จังหวัด
+    private Province provinceid; //รายชื่อจังหวัด
 
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Educational.class)
