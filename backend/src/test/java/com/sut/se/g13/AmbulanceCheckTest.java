@@ -16,7 +16,6 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-//ถ้าจะเช็คทั้งหมด รวมcomboboxที่ดึงเพื่อนมาใช้ด้วย ต้องTestทีละอัน (อย่าลืมเปิด @NotNull ใน Entity)
 @DataJpaTest
 public class AmbulanceCheckTest {
     private Validator validator;
@@ -26,15 +25,8 @@ public class AmbulanceCheckTest {
     @Autowired private StatusRepository statusRepository;
 
     @Autowired private AmbulanceRepository ambulanceRepository;
-    @Autowired private AmbulanceBrandRepository ambulanceBrandRepository;
-    @Autowired private AmbulanceTypeRepository ambulanceTypeRepository;
-
-    @Autowired private ProvinceRepository provinceRepository;
 
     @Autowired private  DriverRegisRepository driverRegisRepository;
-    @Autowired private  EducationalRepository educationalRepository;
-    @Autowired private  GenderRepository genderRepository;
-    @Autowired private  PositionDriverRepository positiondriverRepository;
 
     @BeforeEach
     public void setup() {
@@ -48,41 +40,10 @@ public class AmbulanceCheckTest {
         AmbulanceCheck ambulanceCheck = new AmbulanceCheck();
         Mile mile = mileRepository.findByMileid(1);
         Status status = statusRepository.findByStatusid(1);
+        DriverRegis dr = driverRegisRepository.findByDriverregisid(1);
+        Ambulance am = ambulanceRepository.findByAmbulanceid(1);
 
         java.util.Date date = new java.util.Date(2020-01-21);
-
-    //     AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
-    //     AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
-
-    //     Province province = provinceRepository.findByProvinceid(1);
-
-    //     Gender gender = genderRepository.findByGenderid(1);
-    //     Educational educational = educationalRepository.findByEducationalid(1);
-    //     PositionDriver positiondriver = positiondriverRepository.findByPositionDriverid(1);
-
-    //      Ambulance ambulance = new Ambulance();
-    //     ambulance.setEnginenum("JS150MM03731");
-    //     ambulance.setAmbulancemodel("Dmax");
-    //     ambulance.setAmbulancenum("ML2S150CMHTP03731");
-    //     ambulance.setLicenseplate("1กว 4451");
-    //     ambulance.setAdddate(date);
-    //     ambulance.setBrandid(brand);
-    //     ambulance.setTypeid(type);
-    //     ambulance.setProvinceid(province);
-    //     ambulanceRepository.save(ambulance);
-    //      Ambulance am = ambulanceRepository.findByAmbulanceid(1);
-
-    //      DriverRegis driverRegis = new DriverRegis();
-    //    driverRegis.setDrivername("BennyBenBen");
-    //    driverRegis.setIdcard("1349900799556");
-    //    driverRegis.setTelephone("0927378868");
-    //    driverRegis.setAddress("445 ม.17 ต.แสนสุข อ.วารินชำราบ 34190");
-    //    driverRegis.setGenderid(gender);
-    //    driverRegis.setProvinceid(province);
-    //    driverRegis.setEducationalid(educational);
-    //    driverRegis.setPositionid(positiondriver);
-    //    driverRegisRepository.save(driverRegis);
-    //     DriverRegis dr = driverRegisRepository.findByDriverregisid(1);
 
         ambulanceCheck.setNote("สีของรถพยาบาลมีรอยถลอกด้านข้างทางขวาข้างคนขับ");
         ambulanceCheck.setCheckDate(date);
@@ -96,8 +57,8 @@ public class AmbulanceCheckTest {
         ambulanceCheck.setToolSet(true);
         ambulanceCheck.setMile(mile);
         ambulanceCheck.setStatus(status);
-        // ambulanceCheck.setAmbulance(am);
-        // ambulanceCheck.setDriverRegis(dr);
+         ambulanceCheck.setAmbulance(am);
+         ambulanceCheck.setDriverRegis(dr);
 
         ambulanceCheckRepository.saveAndFlush(ambulanceCheck);
 
@@ -114,8 +75,8 @@ public class AmbulanceCheckTest {
         assertEquals(true, check.get().getToolSet());
         assertEquals(mile, check.get().getMile());
         assertEquals(status, check.get().getStatus());
-        // assertEquals(am, check.get().getAmbulance());
-        // assertEquals(dr, check.get().getDriverRegis());
+         assertEquals(am, check.get().getAmbulance());
+         assertEquals(dr, check.get().getDriverRegis());
     }
 
     @Test
@@ -126,39 +87,8 @@ public class AmbulanceCheckTest {
         Status status = statusRepository.findByStatusid(1);
 
         java.util.Date date = new java.util.Date(2020-01-21);
-
-    //     AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
-    //     AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
-
-    //     Province province = provinceRepository.findByProvinceid(1);
-
-    //     Gender gender = genderRepository.findByGenderid(1);
-    //     Educational educational = educationalRepository.findByEducationalid(1);
-    //     PositionDriver positiondriver = positiondriverRepository.findByPositionDriverid(1);
-
-    //     Ambulance ambulance = new Ambulance();
-    //     ambulance.setEnginenum("JS150MM03731");
-    //     ambulance.setAmbulancemodel("Dmax");
-    //     ambulance.setAmbulancenum("ML2S150CMHTP03731");
-    //     ambulance.setLicenseplate("1กว 4451");
-    //     ambulance.setAdddate(date);
-    //     ambulance.setBrandid(brand);
-    //     ambulance.setTypeid(type);
-    //     ambulance.setProvinceid(province);
-    //     ambulanceRepository.save(ambulance);
-    //     Ambulance am = ambulanceRepository.findByAmbulanceid(1);
-
-    //     DriverRegis driverRegis = new DriverRegis();
-    //    driverRegis.setDrivername("BennyBenBen");
-    //    driverRegis.setIdcard("1349900799556");
-    //    driverRegis.setTelephone("0927378868");
-    //    driverRegis.setAddress("445 ม.17 ต.แสนสุข อ.วารินชำราบ 34190");
-    //    driverRegis.setGenderid(gender);
-    //    driverRegis.setProvinceid(province);
-    //    driverRegis.setEducationalid(educational);
-    //    driverRegis.setPositionid(positiondriver);
-    //    driverRegisRepository.save(driverRegis);
-    //    DriverRegis dr = driverRegisRepository.findByDriverregisid(1);
+        DriverRegis dr = driverRegisRepository.findByDriverregisid(1);
+        Ambulance am = ambulanceRepository.findByAmbulanceid(1);
 
         ambulanceCheck.setNote("สีของรถพยาบาลมีรอยถลอกด้านข้างทางขวาข้างคนขับ");
         ambulanceCheck.setCheckDate(date);
@@ -172,8 +102,8 @@ public class AmbulanceCheckTest {
         ambulanceCheck.setToolSet(true);
         ambulanceCheck.setMile(mile);
         ambulanceCheck.setStatus(status);
-        // ambulanceCheck.setAmbulance(am);
-        // ambulanceCheck.setDriverRegis(dr);
+        ambulanceCheck.setAmbulance(am);
+        ambulanceCheck.setDriverRegis(dr);
         Set<ConstraintViolation<AmbulanceCheck>> result = validator.validate(ambulanceCheck);
 
         assertEquals(1, result.size());
@@ -189,107 +119,10 @@ public class AmbulanceCheckTest {
     AmbulanceCheck ambulanceCheck = new AmbulanceCheck();
     Mile mile = mileRepository.findByMileid(1);
     Status status = statusRepository.findByStatusid(1);
+    DriverRegis dr = driverRegisRepository.findByDriverregisid(1);
+    Ambulance am = ambulanceRepository.findByAmbulanceid(1);
 
     java.util.Date date = new java.util.Date(2020-01-21);
-
-//     AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
-//     AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
-
-//     Province province = provinceRepository.findByProvinceid(1);
-
-//     Gender gender = genderRepository.findByGenderid(1);
-//     Educational educational = educationalRepository.findByEducationalid(1);
-//     PositionDriver positiondriver = positiondriverRepository.findByPositionDriverid(1);
-
-//     Ambulance ambulance = new Ambulance();
-//     ambulance.setEnginenum("JS150MM03731");
-//     ambulance.setAmbulancemodel("Dmax");
-//     ambulance.setAmbulancenum("ML2S150CMHTP03731");
-//     ambulance.setLicenseplate("1กว 4451");
-//     ambulance.setAdddate(date);
-//     ambulance.setBrandid(brand);
-//     ambulance.setTypeid(type);
-//     ambulance.setProvinceid(province);
-//     ambulanceRepository.save(ambulance);
-//     Ambulance am = ambulanceRepository.findByAmbulanceid(1);
-
-//     DriverRegis driverRegis = new DriverRegis();
-//    driverRegis.setDrivername("BennyBenBen");
-//    driverRegis.setIdcard("1349900799556");
-//    driverRegis.setTelephone("0927378868");
-//    driverRegis.setAddress("445 ม.17 ต.แสนสุข อ.วารินชำราบ 34190");
-//    driverRegis.setGenderid(gender);
-//    driverRegis.setProvinceid(province);
-//    driverRegis.setEducationalid(educational);
-//    driverRegis.setPositionid(positiondriver);
-//    driverRegisRepository.save(driverRegis);
-//    DriverRegis dr = driverRegisRepository.findByDriverregisid(1);
-
-    ambulanceCheck.setNote("สีของรถพยาบาลมีรอยถลอกด้านข้างทางขวาข้างคนขับ");
-    ambulanceCheck.setCheckDate(date);
-    ambulanceCheck.setBattery(true);
-    ambulanceCheck.setLight(null);
-    ambulanceCheck.setWheel(true);
-    ambulanceCheck.setSuspension(true);
-    ambulanceCheck.setBrakeFluid(true);
-    ambulanceCheck.setEngineOil(true);
-    ambulanceCheck.setRadiator(true);
-    ambulanceCheck.setToolSet(true);
-    ambulanceCheck.setMile(mile);
-    ambulanceCheck.setStatus(status);
-    // ambulanceCheck.setAmbulance(am);
-    // ambulanceCheck.setDriverRegis(dr);
-
-       Set<ConstraintViolation<AmbulanceCheck>> result = validator.validate(ambulanceCheck);
-
-       assertEquals(1, result.size());
-
-       ConstraintViolation<AmbulanceCheck> message = result.iterator().next();
-       assertEquals("must not be null", message.getMessage());
-       assertEquals("light", message.getPropertyPath().toString());
-   }
-
-   @Test
-   //ป้องกันการใส่ค่า null ของ Wheel
-   void B5809844_testAmbulanceCheckwithWheelNotNull() throws ParseException{
-    AmbulanceCheck ambulanceCheck = new AmbulanceCheck();
-    Mile mile = mileRepository.findByMileid(1);
-    Status status = statusRepository.findByStatusid(1);
-
-    java.util.Date date = new java.util.Date(2020-01-21);
-
-//     AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
-//     AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
-
-//     Province province = provinceRepository.findByProvinceid(1);
-
-//     Gender gender = genderRepository.findByGenderid(1);
-//     Educational educational = educationalRepository.findByEducationalid(1);
-//     PositionDriver positiondriver = positiondriverRepository.findByPositionDriverid(1);
-
-//     Ambulance ambulance = new Ambulance();
-//     ambulance.setEnginenum("JS150MM03731");
-//     ambulance.setAmbulancemodel("Dmax");
-//     ambulance.setAmbulancenum("ML2S150CMHTP03731");
-//     ambulance.setLicenseplate("1กว 4451");
-//     ambulance.setAdddate(date);
-//     ambulance.setBrandid(brand);
-//     ambulance.setTypeid(type);
-//     ambulance.setProvinceid(province);
-//     ambulanceRepository.save(ambulance);
-//     Ambulance am = ambulanceRepository.findByAmbulanceid(1);
-
-//     DriverRegis driverRegis = new DriverRegis();
-//    driverRegis.setDrivername("BennyBenBen");
-//    driverRegis.setIdcard("1349900799556");
-//    driverRegis.setTelephone("0927378868");
-//    driverRegis.setAddress("445 ม.17 ต.แสนสุข อ.วารินชำราบ 34190");
-//    driverRegis.setGenderid(gender);
-//    driverRegis.setProvinceid(province);
-//    driverRegis.setEducationalid(educational);
-//    driverRegis.setPositionid(positiondriver);
-//    driverRegisRepository.save(driverRegis);
-//    DriverRegis dr = driverRegisRepository.findByDriverregisid(1);
 
     ambulanceCheck.setNote("สีของรถพยาบาลมีรอยถลอกด้านข้างทางขวาข้างคนขับ");
     ambulanceCheck.setCheckDate(date);
@@ -303,8 +136,8 @@ public class AmbulanceCheckTest {
     ambulanceCheck.setToolSet(true);
     ambulanceCheck.setMile(mile);
     ambulanceCheck.setStatus(status);
-    // ambulanceCheck.setAmbulance(am);
-    // ambulanceCheck.setDriverRegis(dr);
+    ambulanceCheck.setAmbulance(am);
+    ambulanceCheck.setDriverRegis(dr);
 
        Set<ConstraintViolation<AmbulanceCheck>> result = validator.validate(ambulanceCheck);
 
@@ -321,41 +154,11 @@ public class AmbulanceCheckTest {
     AmbulanceCheck ambulanceCheck = new AmbulanceCheck();
     Mile mile = mileRepository.findByMileid(1);
     Status status = statusRepository.findByStatusid(1);
+    DriverRegis dr = driverRegisRepository.findByDriverregisid(1);
+    Ambulance am = ambulanceRepository.findByAmbulanceid(1);
 
     java.util.Date date = new java.util.Date(2020-01-21);
 
-//     AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
-//     AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
-
-//     Province province = provinceRepository.findByProvinceid(1);
-
-//     Gender gender = genderRepository.findByGenderid(1);
-//     Educational educational = educationalRepository.findByEducationalid(1);
-//     PositionDriver positiondriver = positiondriverRepository.findByPositionDriverid(1);
-
-//     Ambulance ambulance = new Ambulance();
-//     ambulance.setEnginenum("JS150MM03731");
-//     ambulance.setAmbulancemodel("Dmax");
-//     ambulance.setAmbulancenum("ML2S150CMHTP03731");
-//     ambulance.setLicenseplate("1กว 4451");
-//     ambulance.setAdddate(date);
-//     ambulance.setBrandid(brand);
-//     ambulance.setTypeid(type);
-//     ambulance.setProvinceid(province);
-//     ambulanceRepository.save(ambulance);
-//     Ambulance am = ambulanceRepository.findByAmbulanceid(1);
-
-//     DriverRegis driverRegis = new DriverRegis();
-//    driverRegis.setDrivername("BennyBenBen");
-//    driverRegis.setIdcard("1349900799556");
-//    driverRegis.setTelephone("0927378868");
-//    driverRegis.setAddress("445 ม.17 ต.แสนสุข อ.วารินชำราบ 34190");
-//    driverRegis.setGenderid(gender);
-//    driverRegis.setProvinceid(province);
-//    driverRegis.setEducationalid(educational);
-//    driverRegis.setPositionid(positiondriver);
-//    driverRegisRepository.save(driverRegis);
-//    DriverRegis dr = driverRegisRepository.findByDriverregisid(1);
 
     ambulanceCheck.setNote("สีของรถพยาบาลมีรอยถลอกด้านข้างทางขวาข้างคนขับ");
     ambulanceCheck.setCheckDate(date);
@@ -369,8 +172,8 @@ public class AmbulanceCheckTest {
     ambulanceCheck.setToolSet(true);
     ambulanceCheck.setMile(mile);
     ambulanceCheck.setStatus(status);
-    // ambulanceCheck.setAmbulance(am);
-    // ambulanceCheck.setDriverRegis(dr);
+    ambulanceCheck.setAmbulance(am);
+    ambulanceCheck.setDriverRegis(dr);
 
        Set<ConstraintViolation<AmbulanceCheck>> result = validator.validate(ambulanceCheck);
 
@@ -387,107 +190,11 @@ public class AmbulanceCheckTest {
     AmbulanceCheck ambulanceCheck = new AmbulanceCheck();
     Mile mile = mileRepository.findByMileid(1);
     Status status = statusRepository.findByStatusid(1);
+    DriverRegis dr = driverRegisRepository.findByDriverregisid(1);
+    Ambulance am = ambulanceRepository.findByAmbulanceid(1);
 
     java.util.Date date = new java.util.Date(2020-01-21);
 
-//     AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
-//     AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
-
-//     Province province = provinceRepository.findByProvinceid(1);
-
-//     Gender gender = genderRepository.findByGenderid(1);
-//     Educational educational = educationalRepository.findByEducationalid(1);
-//     PositionDriver positiondriver = positiondriverRepository.findByPositionDriverid(1);
-
-//     Ambulance ambulance = new Ambulance();
-//     ambulance.setEnginenum("JS150MM03731");
-//     ambulance.setAmbulancemodel("Dmax");
-//     ambulance.setAmbulancenum("ML2S150CMHTP03731");
-//     ambulance.setLicenseplate("1กว 4451");
-//     ambulance.setAdddate(date);
-//     ambulance.setBrandid(brand);
-//     ambulance.setTypeid(type);
-//     ambulance.setProvinceid(province);
-//     ambulanceRepository.save(ambulance);
-//     Ambulance am = ambulanceRepository.findByAmbulanceid(1);
-
-//     DriverRegis driverRegis = new DriverRegis();
-//    driverRegis.setDrivername("BennyBenBen");
-//    driverRegis.setIdcard("1349900799556");
-//    driverRegis.setTelephone("0927378868");
-//    driverRegis.setAddress("445 ม.17 ต.แสนสุข อ.วารินชำราบ 34190");
-//    driverRegis.setGenderid(gender);
-//    driverRegis.setProvinceid(province);
-//    driverRegis.setEducationalid(educational);
-//    driverRegis.setPositionid(positiondriver);
-//    driverRegisRepository.save(driverRegis);
-//    DriverRegis dr = driverRegisRepository.findByDriverregisid(1);
-
-    ambulanceCheck.setNote("สีของรถพยาบาลมีรอยถลอกด้านข้างทางขวาข้างคนขับ");
-    ambulanceCheck.setCheckDate(date);
-    ambulanceCheck.setBattery(true);
-    ambulanceCheck.setLight(true);
-    ambulanceCheck.setWheel(true);
-    ambulanceCheck.setSuspension(true);
-    ambulanceCheck.setBrakeFluid(null);
-    ambulanceCheck.setEngineOil(true);
-    ambulanceCheck.setRadiator(true);
-    ambulanceCheck.setToolSet(true);
-    ambulanceCheck.setMile(mile);
-    ambulanceCheck.setStatus(status);
-    // ambulanceCheck.setAmbulance(am);
-    // ambulanceCheck.setDriverRegis(dr);
-
-       Set<ConstraintViolation<AmbulanceCheck>> result = validator.validate(ambulanceCheck);
-
-       assertEquals(1, result.size());
-
-       ConstraintViolation<AmbulanceCheck> message = result.iterator().next();
-       assertEquals("must not be null", message.getMessage());
-       assertEquals("brakeFluid", message.getPropertyPath().toString());
-   }
-
-   @Test
-   //ป้องกันการใส่ค่า null ของ EngineOil
-   void B5809844_testAmbulanceCheckwithEngineOilNotNull() throws ParseException{
-    AmbulanceCheck ambulanceCheck = new AmbulanceCheck();
-    Mile mile = mileRepository.findByMileid(1);
-    Status status = statusRepository.findByStatusid(1);
-
-    java.util.Date date = new java.util.Date(2020-01-21);
-
-//     AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
-//     AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
-
-//     Province province = provinceRepository.findByProvinceid(1);
-
-//     Gender gender = genderRepository.findByGenderid(1);
-//     Educational educational = educationalRepository.findByEducationalid(1);
-//     PositionDriver positiondriver = positiondriverRepository.findByPositionDriverid(1);
-
-//     Ambulance ambulance = new Ambulance();
-//     ambulance.setEnginenum("JS150MM03731");
-//     ambulance.setAmbulancemodel("Dmax");
-//     ambulance.setAmbulancenum("ML2S150CMHTP03731");
-//     ambulance.setLicenseplate("1กว 4451");
-//     ambulance.setAdddate(date);
-//     ambulance.setBrandid(brand);
-//     ambulance.setTypeid(type);
-//     ambulance.setProvinceid(province);
-//     ambulanceRepository.save(ambulance);
-//     Ambulance am = ambulanceRepository.findByAmbulanceid(1);
-
-//     DriverRegis driverRegis = new DriverRegis();
-//    driverRegis.setDrivername("BennyBenBen");
-//    driverRegis.setIdcard("1349900799556");
-//    driverRegis.setTelephone("0927378868");
-//    driverRegis.setAddress("445 ม.17 ต.แสนสุข อ.วารินชำราบ 34190");
-//    driverRegis.setGenderid(gender);
-//    driverRegis.setProvinceid(province);
-//    driverRegis.setEducationalid(educational);
-//    driverRegis.setPositionid(positiondriver);
-//    driverRegisRepository.save(driverRegis);
-//    DriverRegis dr = driverRegisRepository.findByDriverregisid(1);
 
     ambulanceCheck.setNote("สีของรถพยาบาลมีรอยถลอกด้านข้างทางขวาข้างคนขับ");
     ambulanceCheck.setCheckDate(date);
@@ -501,8 +208,8 @@ public class AmbulanceCheckTest {
     ambulanceCheck.setToolSet(true);
     ambulanceCheck.setMile(mile);
     ambulanceCheck.setStatus(status);
-    // ambulanceCheck.setAmbulance(am);
-    // ambulanceCheck.setDriverRegis(dr);
+    ambulanceCheck.setAmbulance(am);
+    ambulanceCheck.setDriverRegis(dr);
 
        Set<ConstraintViolation<AmbulanceCheck>> result = validator.validate(ambulanceCheck);
 
@@ -519,41 +226,11 @@ public class AmbulanceCheckTest {
     AmbulanceCheck ambulanceCheck = new AmbulanceCheck();
     Mile mile = mileRepository.findByMileid(1);
     Status status = statusRepository.findByStatusid(1);
+    DriverRegis dr = driverRegisRepository.findByDriverregisid(1);
+    Ambulance am = ambulanceRepository.findByAmbulanceid(1);
 
     java.util.Date date = new java.util.Date(2020-01-21);
 
-//     AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
-//     AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
-
-//     Province province = provinceRepository.findByProvinceid(1);
-
-//     Gender gender = genderRepository.findByGenderid(1);
-//     Educational educational = educationalRepository.findByEducationalid(1);
-//     PositionDriver positiondriver = positiondriverRepository.findByPositionDriverid(1);
-
-//     Ambulance ambulance = new Ambulance();
-//     ambulance.setEnginenum("JS150MM03731");
-//     ambulance.setAmbulancemodel("Dmax");
-//     ambulance.setAmbulancenum("ML2S150CMHTP03731");
-//     ambulance.setLicenseplate("1กว 4451");
-//     ambulance.setAdddate(date);
-//     ambulance.setBrandid(brand);
-//     ambulance.setTypeid(type);
-//     ambulance.setProvinceid(province);
-//     ambulanceRepository.save(ambulance);
-//     Ambulance am = ambulanceRepository.findByAmbulanceid(1);
-
-//     DriverRegis driverRegis = new DriverRegis();
-//    driverRegis.setDrivername("BennyBenBen");
-//    driverRegis.setIdcard("1349900799556");
-//    driverRegis.setTelephone("0927378868");
-//    driverRegis.setAddress("445 ม.17 ต.แสนสุข อ.วารินชำราบ 34190");
-//    driverRegis.setGenderid(gender);
-//    driverRegis.setProvinceid(province);
-//    driverRegis.setEducationalid(educational);
-//    driverRegis.setPositionid(positiondriver);
-//    driverRegisRepository.save(driverRegis);
-//    DriverRegis dr = driverRegisRepository.findByDriverregisid(1);
 
     ambulanceCheck.setNote("สีของรถพยาบาลมีรอยถลอกด้านข้างทางขวาข้างคนขับ");
     ambulanceCheck.setCheckDate(date);
@@ -567,8 +244,8 @@ public class AmbulanceCheckTest {
     ambulanceCheck.setToolSet(true);
     ambulanceCheck.setMile(mile);
     ambulanceCheck.setStatus(status);
-    // ambulanceCheck.setAmbulance(am);
-    // ambulanceCheck.setDriverRegis(dr);
+    ambulanceCheck.setAmbulance(am);
+    ambulanceCheck.setDriverRegis(dr);
 
        Set<ConstraintViolation<AmbulanceCheck>> result = validator.validate(ambulanceCheck);
 
@@ -585,41 +262,10 @@ public class AmbulanceCheckTest {
     AmbulanceCheck ambulanceCheck = new AmbulanceCheck();
     Mile mile = mileRepository.findByMileid(1);
     Status status = statusRepository.findByStatusid(1);
+    DriverRegis dr = driverRegisRepository.findByDriverregisid(1);
+    Ambulance am = ambulanceRepository.findByAmbulanceid(1);
 
     java.util.Date date = new java.util.Date(2020-01-21);
-
-//     AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
-//     AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
-
-//     Province province = provinceRepository.findByProvinceid(1);
-
-//     Gender gender = genderRepository.findByGenderid(1);
-//     Educational educational = educationalRepository.findByEducationalid(1);
-//     PositionDriver positiondriver = positiondriverRepository.findByPositionDriverid(1);
-
-//     Ambulance ambulance = new Ambulance();
-//     ambulance.setEnginenum("JS150MM03731");
-//     ambulance.setAmbulancemodel("Dmax");
-//     ambulance.setAmbulancenum("ML2S150CMHTP03731");
-//     ambulance.setLicenseplate("1กว 4451");
-//     ambulance.setAdddate(date);
-//     ambulance.setBrandid(brand);
-//     ambulance.setTypeid(type);
-//     ambulance.setProvinceid(province);
-//     ambulanceRepository.save(ambulance);
-//     Ambulance am = ambulanceRepository.findByAmbulanceid(1);
-
-//     DriverRegis driverRegis = new DriverRegis();
-//    driverRegis.setDrivername("BennyBenBen");
-//    driverRegis.setIdcard("1349900799556");
-//    driverRegis.setTelephone("0927378868");
-//    driverRegis.setAddress("445 ม.17 ต.แสนสุข อ.วารินชำราบ 34190");
-//    driverRegis.setGenderid(gender);
-//    driverRegis.setProvinceid(province);
-//    driverRegis.setEducationalid(educational);
-//    driverRegis.setPositionid(positiondriver);
-//    driverRegisRepository.save(driverRegis);
-//    DriverRegis dr = driverRegisRepository.findByDriverregisid(1);
 
     ambulanceCheck.setNote("สีของรถพยาบาลมีรอยถลอกด้านข้างทางขวาข้างคนขับ");
     ambulanceCheck.setCheckDate(date);
@@ -633,8 +279,8 @@ public class AmbulanceCheckTest {
     ambulanceCheck.setToolSet(null);
     ambulanceCheck.setMile(mile);
     ambulanceCheck.setStatus(status);
-    // ambulanceCheck.setAmbulance(am);
-    // ambulanceCheck.setDriverRegis(dr);
+    ambulanceCheck.setAmbulance(am);
+    ambulanceCheck.setDriverRegis(dr);
 
        Set<ConstraintViolation<AmbulanceCheck>> result = validator.validate(ambulanceCheck);
 
@@ -647,45 +293,14 @@ public class AmbulanceCheckTest {
 
    @Test
    //ป้องกันการใส่ค่า null ของ Note
-   void B5809844_testAmbulanceCheckwithNoteNotNull() throws ParseException{
+   void B5809844_testAmbulanceCheckwithNoteNotBlank() throws ParseException{
     AmbulanceCheck ambulanceCheck = new AmbulanceCheck();
     Mile mile = mileRepository.findByMileid(1);
     Status status = statusRepository.findByStatusid(1);
+    DriverRegis dr = driverRegisRepository.findByDriverregisid(1);
+    Ambulance am = ambulanceRepository.findByAmbulanceid(1);
 
     java.util.Date date = new java.util.Date(2020-01-21);
-
-//     AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
-//     AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
-
-//     Province province = provinceRepository.findByProvinceid(1);
-
-//     Gender gender = genderRepository.findByGenderid(1);
-//     Educational educational = educationalRepository.findByEducationalid(1);
-//     PositionDriver positiondriver = positiondriverRepository.findByPositionDriverid(1);
-
-//     Ambulance ambulance = new Ambulance();
-//     ambulance.setEnginenum("JS150MM03731");
-//     ambulance.setAmbulancemodel("Dmax");
-//     ambulance.setAmbulancenum("ML2S150CMHTP03731");
-//     ambulance.setLicenseplate("1กว 4451");
-//     ambulance.setAdddate(date);
-//     ambulance.setBrandid(brand);
-//     ambulance.setTypeid(type);
-//     ambulance.setProvinceid(province);
-//     ambulanceRepository.save(ambulance);
-//     Ambulance am = ambulanceRepository.findByAmbulanceid(1);
-
-//     DriverRegis driverRegis = new DriverRegis();
-//    driverRegis.setDrivername("BennyBenBen");
-//    driverRegis.setIdcard("1349900799556");
-//    driverRegis.setTelephone("0927378868");
-//    driverRegis.setAddress("445 ม.17 ต.แสนสุข อ.วารินชำราบ 34190");
-//    driverRegis.setGenderid(gender);
-//    driverRegis.setProvinceid(province);
-//    driverRegis.setEducationalid(educational);
-//    driverRegis.setPositionid(positiondriver);
-//    driverRegisRepository.save(driverRegis);
-//    DriverRegis dr = driverRegisRepository.findByDriverregisid(1);
 
     ambulanceCheck.setNote(null);
     ambulanceCheck.setCheckDate(date);
@@ -699,15 +314,15 @@ public class AmbulanceCheckTest {
     ambulanceCheck.setToolSet(true);
     ambulanceCheck.setMile(mile);
     ambulanceCheck.setStatus(status);
-    // ambulanceCheck.setAmbulance(am);
-    // ambulanceCheck.setDriverRegis(dr);
+    ambulanceCheck.setAmbulance(am);
+    ambulanceCheck.setDriverRegis(dr);
 
        Set<ConstraintViolation<AmbulanceCheck>> result = validator.validate(ambulanceCheck);
 
        assertEquals(1, result.size());
 
        ConstraintViolation<AmbulanceCheck> message = result.iterator().next();
-       assertEquals("must not be null", message.getMessage());
+       assertEquals("must not be blank", message.getMessage());
        assertEquals("note", message.getPropertyPath().toString());
    }
 
@@ -717,41 +332,9 @@ public class AmbulanceCheckTest {
     AmbulanceCheck ambulanceCheck = new AmbulanceCheck();
     Mile mile = mileRepository.findByMileid(1);
     Status status = statusRepository.findByStatusid(1);
+    DriverRegis dr = driverRegisRepository.findByDriverregisid(1);
+    Ambulance am = ambulanceRepository.findByAmbulanceid(1);
 
-    java.util.Date date = new java.util.Date(2020-01-21);
-
-//     AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
-//     AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
-
-//     Province province = provinceRepository.findByProvinceid(1);
-
-//     Gender gender = genderRepository.findByGenderid(1);
-//     Educational educational = educationalRepository.findByEducationalid(1);
-//     PositionDriver positiondriver = positiondriverRepository.findByPositionDriverid(1);
-
-//     Ambulance ambulance = new Ambulance();
-//     ambulance.setEnginenum("JS150MM03731");
-//     ambulance.setAmbulancemodel("Dmax");
-//     ambulance.setAmbulancenum("ML2S150CMHTP03731");
-//     ambulance.setLicenseplate("1กว 4451");
-//     ambulance.setAdddate(date);
-//     ambulance.setBrandid(brand);
-//     ambulance.setTypeid(type);
-//     ambulance.setProvinceid(province);
-//     ambulanceRepository.save(ambulance);
-//     Ambulance am = ambulanceRepository.findByAmbulanceid(1);
-
-//     DriverRegis driverRegis = new DriverRegis();
-//    driverRegis.setDrivername("BennyBenBen");
-//    driverRegis.setIdcard("1349900799556");
-//    driverRegis.setTelephone("0927378868");
-//    driverRegis.setAddress("445 ม.17 ต.แสนสุข อ.วารินชำราบ 34190");
-//    driverRegis.setGenderid(gender);
-//    driverRegis.setProvinceid(province);
-//    driverRegis.setEducationalid(educational);
-//    driverRegis.setPositionid(positiondriver);
-//    driverRegisRepository.save(driverRegis);
-//    DriverRegis dr = driverRegisRepository.findByDriverregisid(1);
 
     ambulanceCheck.setNote("สีของรถพยาบาลมีรอยถลอกด้านข้างทางขวาข้างคนขับ");
     ambulanceCheck.setCheckDate(null);
@@ -765,8 +348,8 @@ public class AmbulanceCheckTest {
     ambulanceCheck.setToolSet(true);
     ambulanceCheck.setMile(mile);
     ambulanceCheck.setStatus(status);
-    // ambulanceCheck.setAmbulance(am);
-    // ambulanceCheck.setDriverRegis(dr);
+    ambulanceCheck.setAmbulance(am);
+    ambulanceCheck.setDriverRegis(dr);
        Set<ConstraintViolation<AmbulanceCheck>> result = validator.validate(ambulanceCheck);
 
        assertEquals(1, result.size());
@@ -781,41 +364,10 @@ public class AmbulanceCheckTest {
    void B5809844_testAmbulanceCheckwithMileNotNull() throws ParseException{
     AmbulanceCheck ambulanceCheck = new AmbulanceCheck();
     Status status = statusRepository.findByStatusid(1);
+    DriverRegis dr = driverRegisRepository.findByDriverregisid(1);
+    Ambulance am = ambulanceRepository.findByAmbulanceid(1);
 
     java.util.Date date = new java.util.Date(2020-01-21);
-
-//     AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
-//     AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
-
-//     Province province = provinceRepository.findByProvinceid(1);
-
-//     Gender gender = genderRepository.findByGenderid(1);
-//     Educational educational = educationalRepository.findByEducationalid(1);
-//     PositionDriver positiondriver = positiondriverRepository.findByPositionDriverid(1);
-
-//     Ambulance ambulance = new Ambulance();
-//     ambulance.setEnginenum("JS150MM03731");
-//     ambulance.setAmbulancemodel("Dmax");
-//     ambulance.setAmbulancenum("ML2S150CMHTP03731");
-//     ambulance.setLicenseplate("1กว 4451");
-//     ambulance.setAdddate(date);
-//     ambulance.setBrandid(brand);
-//     ambulance.setTypeid(type);
-//     ambulance.setProvinceid(province);
-//     ambulanceRepository.save(ambulance);
-//     Ambulance am = ambulanceRepository.findByAmbulanceid(1);
-
-//     DriverRegis driverRegis = new DriverRegis();
-//    driverRegis.setDrivername("BennyBenBen");
-//    driverRegis.setIdcard("1349900799556");
-//    driverRegis.setTelephone("0927378868");
-//    driverRegis.setAddress("445 ม.17 ต.แสนสุข อ.วารินชำราบ 34190");
-//    driverRegis.setGenderid(gender);
-//    driverRegis.setProvinceid(province);
-//    driverRegis.setEducationalid(educational);
-//    driverRegis.setPositionid(positiondriver);
-//    driverRegisRepository.save(driverRegis);
-//    DriverRegis dr = driverRegisRepository.findByDriverregisid(1);
 
     ambulanceCheck.setNote("สีของรถพยาบาลมีรอยถลอกด้านข้างทางขวาข้างคนขับ");
     ambulanceCheck.setCheckDate(date);
@@ -829,8 +381,8 @@ public class AmbulanceCheckTest {
     ambulanceCheck.setToolSet(true);
     ambulanceCheck.setMile(null);
     ambulanceCheck.setStatus(status);
-    // ambulanceCheck.setAmbulance(am);
-    // ambulanceCheck.setDriverRegis(dr);
+    ambulanceCheck.setAmbulance(am);
+    ambulanceCheck.setDriverRegis(dr);
        Set<ConstraintViolation<AmbulanceCheck>> result = validator.validate(ambulanceCheck);
 
        assertEquals(1, result.size());
@@ -845,41 +397,10 @@ public class AmbulanceCheckTest {
    void B5809844_testAmbulanceCheckwithStatusNotNull() throws ParseException{
     AmbulanceCheck ambulanceCheck = new AmbulanceCheck();
     Mile mile = mileRepository.findByMileid(1);
+    DriverRegis dr = driverRegisRepository.findByDriverregisid(1);
+    Ambulance am = ambulanceRepository.findByAmbulanceid(1);
 
     java.util.Date date = new java.util.Date(2020-01-21);
-
-//     AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
-//     AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
-
-//     Province province = provinceRepository.findByProvinceid(1);
-
-//     Gender gender = genderRepository.findByGenderid(1);
-//     Educational educational = educationalRepository.findByEducationalid(1);
-//     PositionDriver positiondriver = positiondriverRepository.findByPositionDriverid(1);
-
-//     Ambulance ambulance = new Ambulance();
-//     ambulance.setEnginenum("JS150MM03731");
-//     ambulance.setAmbulancemodel("Dmax");
-//     ambulance.setAmbulancenum("ML2S150CMHTP03731");
-//     ambulance.setLicenseplate("1กว 4451");
-//     ambulance.setAdddate(date);
-//     ambulance.setBrandid(brand);
-//     ambulance.setTypeid(type);
-//     ambulance.setProvinceid(province);
-//     ambulanceRepository.save(ambulance);
-//     Ambulance am = ambulanceRepository.findByAmbulanceid(1);
-
-//     DriverRegis driverRegis = new DriverRegis();
-//    driverRegis.setDrivername("BennyBenBen");
-//    driverRegis.setIdcard("1349900799556");
-//    driverRegis.setTelephone("0927378868");
-//    driverRegis.setAddress("445 ม.17 ต.แสนสุข อ.วารินชำราบ 34190");
-//    driverRegis.setGenderid(gender);
-//    driverRegis.setProvinceid(province);
-//    driverRegis.setEducationalid(educational);
-//    driverRegis.setPositionid(positiondriver);
-//    driverRegisRepository.save(driverRegis);
-//    DriverRegis dr = driverRegisRepository.findByDriverregisid(1);
 
     ambulanceCheck.setNote("สีของรถพยาบาลมีรอยถลอกด้านข้างทางขวาข้างคนขับ");
     ambulanceCheck.setCheckDate(date);
@@ -893,8 +414,8 @@ public class AmbulanceCheckTest {
     ambulanceCheck.setToolSet(true);
     ambulanceCheck.setMile(mile);
     ambulanceCheck.setStatus(null);
-    // ambulanceCheck.setAmbulance(am);
-    // ambulanceCheck.setDriverRegis(dr);
+    ambulanceCheck.setAmbulance(am);
+    ambulanceCheck.setDriverRegis(dr);
        Set<ConstraintViolation<AmbulanceCheck>> result = validator.validate(ambulanceCheck);
 
        assertEquals(1, result.size());
@@ -904,104 +425,71 @@ public class AmbulanceCheckTest {
        assertEquals("status", message.getPropertyPath().toString());
    }
 
-//    @Test
-//     //ป้องกันการใส่ค่า null ของ Ambulance(combobox ที่ดึงจากเพื่อน)
-//    void B5809844_testAmbulanceCheckwithAmbulanceNotNull() throws ParseException{
-//     AmbulanceCheck ambulanceCheck = new AmbulanceCheck();
-//     Mile mile = mileRepository.findByMileid(1);
-//     Status status = statusRepository.findByStatusid(1);
+   @Test
+    //ป้องกันการใส่ค่า null ของ Ambulance(combobox ที่ดึงจากเพื่อน)
+   void B5809844_testAmbulanceCheckwithAmbulanceNotNull() throws ParseException{
+    AmbulanceCheck ambulanceCheck = new AmbulanceCheck();
+    Mile mile = mileRepository.findByMileid(1);
+    Status status = statusRepository.findByStatusid(1);
+    DriverRegis dr = driverRegisRepository.findByDriverregisid(1);
 
-//     java.util.Date date = new java.util.Date(2020-01-21);
+    java.util.Date date = new java.util.Date(2020-01-21);
 
-//     Province province = provinceRepository.findByProvinceid(1);
+    ambulanceCheck.setNote("สีของรถพยาบาลมีรอยถลอกด้านข้างทางขวาข้างคนขับ");
+    ambulanceCheck.setCheckDate(date);
+    ambulanceCheck.setBattery(true);
+    ambulanceCheck.setLight(true);
+    ambulanceCheck.setWheel(true);
+    ambulanceCheck.setSuspension(true);
+    ambulanceCheck.setBrakeFluid(true);
+    ambulanceCheck.setEngineOil(true);
+    ambulanceCheck.setRadiator(true);
+    ambulanceCheck.setToolSet(true);
+    ambulanceCheck.setMile(mile);
+    ambulanceCheck.setStatus(status);
+    ambulanceCheck.setAmbulance(null);
+    ambulanceCheck.setDriverRegis(dr);
+       Set<ConstraintViolation<AmbulanceCheck>> result = validator.validate(ambulanceCheck);
 
-//     Gender gender = genderRepository.findByGenderid(1);
-//     Educational educational = educationalRepository.findByEducationalid(1);
-//     PositionDriver positiondriver = positiondriverRepository.findByPositionDriverid(1);
+       assertEquals(1, result.size());
 
-//     DriverRegis driverRegis = new DriverRegis();
-//    driverRegis.setDrivername("BennyBenBen");
-//    driverRegis.setIdcard("1349900799556");
-//    driverRegis.setTelephone("0927378868");
-//    driverRegis.setAddress("445 ม.17 ต.แสนสุข อ.วารินชำราบ 34190");
-//    driverRegis.setGenderid(gender);
-//    driverRegis.setProvinceid(province);
-//    driverRegis.setEducationalid(educational);
-//    driverRegis.setPositionid(positiondriver);
-//    driverRegisRepository.save(driverRegis);
-//    DriverRegis dr = driverRegisRepository.findByDriverregisid(1);
+       ConstraintViolation<AmbulanceCheck> message = result.iterator().next();
+       assertEquals("must not be null", message.getMessage());
+       assertEquals("ambulance", message.getPropertyPath().toString());
+   }
 
-//     ambulanceCheck.setNote("สีของรถพยาบาลมีรอยถลอกด้านข้างทางขวาข้างคนขับ");
-//     ambulanceCheck.setCheckDate(date);
-//     ambulanceCheck.setBattery(true);
-//     ambulanceCheck.setLight(true);
-//     ambulanceCheck.setWheel(true);
-//     ambulanceCheck.setSuspension(true);
-//     ambulanceCheck.setBrakeFluid(true);
-//     ambulanceCheck.setEngineOil(true);
-//     ambulanceCheck.setRadiator(true);
-//     ambulanceCheck.setToolSet(true);
-//     ambulanceCheck.setMile(mile);
-//     ambulanceCheck.setStatus(status);
-//     ambulanceCheck.setAmbulance(null);
-//     ambulanceCheck.setDriverRegis(dr);
-//        Set<ConstraintViolation<AmbulanceCheck>> result = validator.validate(ambulanceCheck);
+   @Test
+    //ป้องกันการใส่ค่า null ของ DriverRegis(combobox ที่ดึงจากเพื่อน)
+   void B5809844_testAmbulanceCheckwithDriverRegisNotNull() throws ParseException{
+    AmbulanceCheck ambulanceCheck = new AmbulanceCheck();
+    Mile mile = mileRepository.findByMileid(1);
+    Status status = statusRepository.findByStatusid(1);
+    Ambulance am = ambulanceRepository.findByAmbulanceid(1);
 
-//        assertEquals(1, result.size());
+    java.util.Date date = new java.util.Date(2020-01-21);
 
-//        ConstraintViolation<AmbulanceCheck> message = result.iterator().next();
-//        assertEquals("must not be null", message.getMessage());
-//        assertEquals("ambulance", message.getPropertyPath().toString());
-//    }
+    ambulanceCheck.setNote("สีของรถพยาบาลมีรอยถลอกด้านข้างทางขวาข้างคนขับ");
+    ambulanceCheck.setCheckDate(date);
+    ambulanceCheck.setBattery(true);
+    ambulanceCheck.setLight(true);
+    ambulanceCheck.setWheel(true);
+    ambulanceCheck.setSuspension(true);
+    ambulanceCheck.setBrakeFluid(true);
+    ambulanceCheck.setEngineOil(true);
+    ambulanceCheck.setRadiator(true);
+    ambulanceCheck.setToolSet(true);
+    ambulanceCheck.setMile(mile);
+    ambulanceCheck.setStatus(status);
+    ambulanceCheck.setAmbulance(am);
+    ambulanceCheck.setDriverRegis(null);
+       Set<ConstraintViolation<AmbulanceCheck>> result = validator.validate(ambulanceCheck);
 
-//    @Test
-//     //ป้องกันการใส่ค่า null ของ DriverRegis(combobox ที่ดึงจากเพื่อน)
-//    void B5809844_testAmbulanceCheckwithDriverRegisNotNull() throws ParseException{
-//     AmbulanceCheck ambulanceCheck = new AmbulanceCheck();
-//     Mile mile = mileRepository.findByMileid(1);
-//     Status status = statusRepository.findByStatusid(1);
+       assertEquals(1, result.size());
 
-//     java.util.Date date = new java.util.Date(2020-01-21);
-
-//     AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
-//     AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
-
-//     Province province = provinceRepository.findByProvinceid(1);
-
-//     Ambulance ambulance = new Ambulance();
-//     ambulance.setEnginenum("JS150MM03731");
-//     ambulance.setAmbulancemodel("Dmax");
-//     ambulance.setAmbulancenum("ML2S150CMHTP03731");
-//     ambulance.setLicenseplate("1กว 4451");
-//     ambulance.setAdddate(date);
-//     ambulance.setBrandid(brand);
-//     ambulance.setTypeid(type);
-//     ambulance.setProvinceid(province);
-//     ambulanceRepository.save(ambulance);
-//     Ambulance am = ambulanceRepository.findByAmbulanceid(1);
-
-//     ambulanceCheck.setNote("สีของรถพยาบาลมีรอยถลอกด้านข้างทางขวาข้างคนขับ");
-//     ambulanceCheck.setCheckDate(date);
-//     ambulanceCheck.setBattery(true);
-//     ambulanceCheck.setLight(true);
-//     ambulanceCheck.setWheel(true);
-//     ambulanceCheck.setSuspension(true);
-//     ambulanceCheck.setBrakeFluid(true);
-//     ambulanceCheck.setEngineOil(true);
-//     ambulanceCheck.setRadiator(true);
-//     ambulanceCheck.setToolSet(true);
-//     ambulanceCheck.setMile(mile);
-//     ambulanceCheck.setStatus(status);
-//     ambulanceCheck.setAmbulance(am);
-//     ambulanceCheck.setDriverRegis(null);
-//        Set<ConstraintViolation<AmbulanceCheck>> result = validator.validate(ambulanceCheck);
-
-//        assertEquals(1, result.size());
-
-//        ConstraintViolation<AmbulanceCheck> message = result.iterator().next();
-//        assertEquals("must not be null", message.getMessage());
-//        assertEquals("driverRegis", message.getPropertyPath().toString());
-//    }
+       ConstraintViolation<AmbulanceCheck> message = result.iterator().next();
+       assertEquals("must not be null", message.getMessage());
+       assertEquals("driverRegis", message.getPropertyPath().toString());
+   }
 
    @Test
    //ป้องกันการใส่ข้อมูลยาวเกิน100 ของ Note
@@ -1009,41 +497,11 @@ public class AmbulanceCheckTest {
     AmbulanceCheck ambulanceCheck = new AmbulanceCheck();
     Mile mile = mileRepository.findByMileid(1);
     Status status = statusRepository.findByStatusid(1);
+    DriverRegis dr = driverRegisRepository.findByDriverregisid(1);
+    Ambulance am = ambulanceRepository.findByAmbulanceid(1);
 
     java.util.Date date = new java.util.Date(2020-01-21);
 
-//     AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
-//     AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
-
-//     Province province = provinceRepository.findByProvinceid(1);
-
-//     Gender gender = genderRepository.findByGenderid(1);
-//     Educational educational = educationalRepository.findByEducationalid(1);
-//     PositionDriver positiondriver = positiondriverRepository.findByPositionDriverid(1);
-
-//     Ambulance ambulance = new Ambulance();
-//     ambulance.setEnginenum("JS150MM03731");
-//     ambulance.setAmbulancemodel("Dmax");
-//     ambulance.setAmbulancenum("ML2S150CMHTP03731");
-//     ambulance.setLicenseplate("1กว 4451");
-//     ambulance.setAdddate(date);
-//     ambulance.setBrandid(brand);
-//     ambulance.setTypeid(type);
-//     ambulance.setProvinceid(province);
-//     ambulanceRepository.save(ambulance);
-//     Ambulance am = ambulanceRepository.findByAmbulanceid(1);
-
-//     DriverRegis driverRegis = new DriverRegis();
-//    driverRegis.setDrivername("BennyBenBen");
-//    driverRegis.setIdcard("1349900799556");
-//    driverRegis.setTelephone("0927378868");
-//    driverRegis.setAddress("445 ม.17 ต.แสนสุข อ.วารินชำราบ 34190");
-//    driverRegis.setGenderid(gender);
-//    driverRegis.setProvinceid(province);
-//    driverRegis.setEducationalid(educational);
-//    driverRegis.setPositionid(positiondriver);
-//    driverRegisRepository.save(driverRegis);
-//    DriverRegis dr = driverRegisRepository.findByDriverregisid(1);
 
     ambulanceCheck.setNote("สีของรถพยาบาลมีร่องรอยของการขูดขีดทำให้สีของรถทางด้านขวาข้างคนขับมีร่องรอยของการขูดขีดและศูนย์ของรถพยาบาลไม่ดีทำให้รถขับไม่คงที่");
     ambulanceCheck.setCheckDate(date);
@@ -1057,8 +515,8 @@ public class AmbulanceCheckTest {
     ambulanceCheck.setToolSet(true);
     ambulanceCheck.setMile(mile);
     ambulanceCheck.setStatus(status);
-    // ambulanceCheck.setAmbulance(am);
-    // ambulanceCheck.setDriverRegis(dr);
+    ambulanceCheck.setAmbulance(am);
+    ambulanceCheck.setDriverRegis(dr);
 
        Set<ConstraintViolation<AmbulanceCheck>> result = validator.validate(ambulanceCheck);
 
