@@ -24,7 +24,7 @@ public class SpringBootVueApplication {
 			GenderRepository genderRepository, PositionDriverRepository positiondriverRepository,
 			SymptomRepository symptomRepository, EducationalRepository educationalRepository,
 			AmbulanceTypeRepository ambulanceTypeRepository, EmployeeRepository employeeRepository,
-			TierRepository tierRepository) {
+			TierRepository tierRepository,NurseRepository nurseRepository) {
 		return args -> {
 
 			Stream.of("กรุงเทพมหานคร", "กระบี่", "กาญจนบุรี", "กาฬสินธุ์", "กำแพงเพชร", "ขอนแก่น", "จันทบุรี",
@@ -115,7 +115,52 @@ public class SpringBootVueApplication {
 			infoemp2.setUsername("Bank");
 			infoemp2.setPassword("031239");
 			employeeRepository.save(infoemp2);
+
+			java.util.Date date = new java.util.Date(2020-01-21);
+			AmbulanceBrand brand = ambulanceBrandRepository.findByBrandid(1);
+    		AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
+			Province province = provinceRepository.findByProvinceid(1);
+			Ambulance ambulance = new Ambulance();
+    		ambulance.setEnginenum("JS150MM03731");
+    		ambulance.setAmbulancemodel("Dmax");
+    		ambulance.setAmbulancenum("ML2S150CMHTP03731");
+    		ambulance.setLicenseplate("1กว 4451");
+    		ambulance.setAdddate(date);
+    		ambulance.setBrandid(brand);
+    		ambulance.setTypeid(type);
+    		ambulance.setProvinceid(province);
+    		ambulanceRepository.save(ambulance);
+			
+			Gender gender = genderRepository.findByGenderid(1);
+    		Educational educational = educationalRepository.findByEducationalid(1);
+    		PositionDriver positiondriver = positiondriverRepository.findByPositionDriverid(1);
+
+    		DriverRegis driverRegis = new DriverRegis();
+   			driverRegis.setDrivername("BennyBenBen");
+   			driverRegis.setIdcard("1349900799556");
+   			driverRegis.setTelephone("0927378868");
+   			driverRegis.setAddress("445 ม.17 ต.แสนสุข อ.วารินชำราบ 34190");
+   			driverRegis.setGenderid(gender);
+   			driverRegis.setProvinceid(province);
+			driverRegis.setEducationalid(educational);
+			driverRegis.setEducationalid(educational);
+			driverRegis.setPositionid(positiondriver);
+			driverRegis.setBirthday(date);
+   			driverRegisRepository.save(driverRegis);
+			   
+			Tier tier = tierRepository.findByTierid(1);
+			Nurse nurse = new Nurse();
+        	nurse.setNursename("ศราวุฒิ ดวงดี");
+        	nurse.setAddress("153 ม.7 ต.บ้านหม้อ อ.ศรีเชียงใหม่ 43130");
+        	nurse.setTelephone("0880517942");
+        	nurse.setEmail("sarawutduangdee@gmail.com");
+        	nurse.setGenderid(gender);
+        	nurse.setProvinceid(province);
+        	nurse.setEducationalid(educational);
+        	nurse.setTierid(tier);
+			nurse.setNowdate(date);
+			nurse.setBirthday(date);
+			nurseRepository.save(nurse);
 		};
 	}
-
 }

@@ -7,6 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -36,7 +37,7 @@ public class AmbulanceCheck  {
   @Column(name = "ID_AMBULANCECHECK", unique = true, nullable = true)
   private @NonNull Long id;
   
-  @NotNull
+  @NotBlank
   @Size(max = 100)
   private String note;  //หมายเหตุ
 
@@ -79,7 +80,7 @@ public class AmbulanceCheck  {
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Ambulance.class)
   @JoinColumn(name = "ID_AMBULANCE", insertable = true)
-  // @NotNull
+  @NotNull
   private Ambulance ambulance;  //ข้อมูลทั้งหมดของรถพยาบาล
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Mile.class)
@@ -89,7 +90,7 @@ public class AmbulanceCheck  {
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = DriverRegis.class)
   @JoinColumn(name = "ID_DRIVERREGIS", insertable = true)
-  // @NotNull
+  @NotNull
   private DriverRegis driverRegis;  //ข้อมูลทั้งหมดของพนักงานคนขับ
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Status.class)
