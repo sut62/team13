@@ -121,9 +121,9 @@ public class SpringBootVueApplication {
     		AmbulanceType type = ambulanceTypeRepository.findByTypeid(1);
 			Province province = provinceRepository.findByProvinceid(1);
 			Ambulance ambulance = new Ambulance();
-    		ambulance.setEnginenum("JS150MM03731");
+    		ambulance.setEnginenum("JS150MM07777");
     		ambulance.setAmbulancemodel("Dmax");
-    		ambulance.setAmbulancenum("ML2S150CMHTP03731");
+    		ambulance.setAmbulancenum("ML2S150CMHTP07777");
     		ambulance.setLicenseplate("1กว 4451");
     		ambulance.setAdddate(date);
     		ambulance.setBrandid(brand);
@@ -137,8 +137,8 @@ public class SpringBootVueApplication {
 
     		DriverRegis driverRegis = new DriverRegis();
    			driverRegis.setDrivername("BennyBenBen");
-   			driverRegis.setIdcard("1349900799556");
-   			driverRegis.setTelephone("0927378868");
+   			driverRegis.setIdcard("1309901281917");
+   			driverRegis.setTelephone("0935081634");
    			driverRegis.setAddress("445 ม.17 ต.แสนสุข อ.วารินชำราบ 34190");
    			driverRegis.setGenderid(gender);
    			driverRegis.setProvinceid(province);
@@ -152,8 +152,8 @@ public class SpringBootVueApplication {
 			Nurse nurse = new Nurse();
         	nurse.setNursename("ศราวุฒิ ดวงดี");
         	nurse.setAddress("153 ม.7 ต.บ้านหม้อ อ.ศรีเชียงใหม่ 43130");
-        	nurse.setTelephone("0880517942");
-        	nurse.setEmail("sarawutduangdee@gmail.com");
+        	nurse.setTelephone("0880517900");
+        	nurse.setEmail("sarawutduangdee12@gmail.com");
         	nurse.setGenderid(gender);
         	nurse.setProvinceid(province);
         	nurse.setEducationalid(educational);
