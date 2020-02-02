@@ -141,7 +141,7 @@
           <v-row justify="center">
             <v-col cols="12" sm="4">
               <v-row justify="center">
-                <v-select
+                <v-autocomplete
                   v-model="ambulance.ambulanceId"
                   :items="items"
                   item-text="ambulancenum"
@@ -149,7 +149,7 @@
                   :rules="[v => !!v || 'Item is required']"
                   label="--เลขตัวรถ 17 หลัก(ตามใบคู่มือจดทะเบียน)--"
                   required
-                ></v-select>
+                ></v-autocomplete>
               </v-row>
               <p1 v-if="ambulance.ambulanceId != null">
                 ที่ต้องการลบคือ {{ambulance.ambulanceId}}
