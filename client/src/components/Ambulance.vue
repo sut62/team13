@@ -203,7 +203,7 @@
                 </v-col>
 
                 <v-col cols="12" sm="4">
-                  <v-select
+                  <v-autocomplete
                     v-model="ambulance.provinceId"
                     :items="provinces"
                     item-text="provincename"
@@ -212,7 +212,7 @@
                     label="-- จังหวัด --"
                     required
                     v-on:keyup.enter="saveAmbulances"
-                  ></v-select>
+                  ></v-autocomplete>
                 </v-col>
               </v-row>
             </v-container>
