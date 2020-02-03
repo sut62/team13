@@ -12,6 +12,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Optional;
 import java.util.Set;
 
@@ -45,13 +46,16 @@ public class DriverRegisTest {
     }
 
     @Test
-    void B5813643_testDriverRegiswithCorrect() { // เช็ค with correct ทั้งหมดของฟิลด์ที่กรอกข้อมูล
+    void B5813643_testDriverRegiswithCorrect() throws ParseException { // เช็ค with correct ทั้งหมดของฟิลด์ที่กรอกข้อมูล
         final DriverRegis driverRegis = new DriverRegis();
         Gender gender = genderRepository.findByGenderid(1);
         Province province = provinceRepository.findByProvinceid(1);
         Educational educational = educationalRepository.findByEducationalid(1);
         PositionDriver positiondriver = positiondriverRepository.findByPositionDriverid(1);
      
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         driverRegis.setDrivername("BennyBenBen");
         driverRegis.setIdcard("1349900799556");
         driverRegis.setTelephone("0927378868");
@@ -60,7 +64,7 @@ public class DriverRegisTest {
         driverRegis.setProvinceid(province);
         driverRegis.setEducationalid(educational);
         driverRegis.setPositionid(positiondriver);
-        
+        driverRegis.setBirthday(date);
 
         driverRegisRepository.saveAndFlush(driverRegis);
         final Optional<DriverRegis> check = driverRegisRepository.findById(driverRegis.getDriverregisid());
@@ -72,16 +76,47 @@ public class DriverRegisTest {
         assertEquals(province, check.get().getProvinceid());
         assertEquals(educational, check.get().getEducationalid());
         assertEquals(positiondriver, check.get().getPositionid());
+        assertEquals(driverRegis.getBirthday(), check.get().getBirthday());
 
     }
-
     @Test
-    void B5813643_testDriverRegiswithDrivernameNotNull() { // เช็คค่า NotNull ชื่อคนขับ
+    void B5813643_testDriverRegiswithBirthDayNotNull() throws ParseException { // เช็คค่า NotNull วันเดือนปีเกิด
         final DriverRegis driverRegis = new DriverRegis();
         Gender gender = genderRepository.findByGenderid(1);
         Province province = provinceRepository.findByProvinceid(1);
         Educational educational = educationalRepository.findByEducationalid(1);
         PositionDriver positiondriver = positiondriverRepository.findByPositionDriverid(1);
+
+        driverRegis.setDrivername("BennyBenBen");
+        driverRegis.setIdcard("1349900799556");
+        driverRegis.setTelephone("0927378868");
+        driverRegis.setAddress("445 ม.17 ต.แสนสุข อ.วารินชำราบ 34190");
+        driverRegis.setGenderid(gender);
+        driverRegis.setProvinceid(province);
+        driverRegis.setEducationalid(educational);
+        driverRegis.setPositionid(positiondriver);
+        driverRegis.setBirthday(null);
+
+        final Set<ConstraintViolation<DriverRegis>> result = validator.validate(driverRegis);
+
+        assertEquals(1, result.size());
+
+        final ConstraintViolation<DriverRegis> message = result.iterator().next();
+        assertEquals("must not be null", message.getMessage());
+        assertEquals("birthday", message.getPropertyPath().toString());
+    }
+
+
+    @Test
+    void B5813643_testDriverRegiswithDrivernameNotNull() throws ParseException { // เช็คค่า NotNull ชื่อคนขับ
+        final DriverRegis driverRegis = new DriverRegis();
+        Gender gender = genderRepository.findByGenderid(1);
+        Province province = provinceRepository.findByProvinceid(1);
+        Educational educational = educationalRepository.findByEducationalid(1);
+        PositionDriver positiondriver = positiondriverRepository.findByPositionDriverid(1);
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         
         driverRegis.setDrivername(null);
         driverRegis.setIdcard("1349900799556");
@@ -91,6 +126,7 @@ public class DriverRegisTest {
         driverRegis.setProvinceid(province);
         driverRegis.setEducationalid(educational);
         driverRegis.setPositionid(positiondriver);
+        driverRegis.setBirthday(date);
     
         final Set<ConstraintViolation<DriverRegis>> result = validator.validate(driverRegis);
 
@@ -99,16 +135,22 @@ public class DriverRegisTest {
         final ConstraintViolation<DriverRegis> message = result.iterator().next();
         assertEquals("must not be null", message.getMessage());
         assertEquals("drivername", message.getPropertyPath().toString());
+       
+
     }
 
     @Test
-    void B5813643_testDriverRegiswithIdcardNotNull() { // เช็คค่า NotNull เลขที่บัตรประชาชน
+    void B5813643_testDriverRegiswithIdcardNotNull() throws ParseException { // เช็คค่า NotNull เลขที่บัตรประชาชน
         final DriverRegis driverRegis = new DriverRegis();
         Gender gender = genderRepository.findByGenderid(1);
         Province province = provinceRepository.findByProvinceid(1);
         Educational educational = educationalRepository.findByEducationalid(1);
         PositionDriver positiondriver = positiondriverRepository.findByPositionDriverid(1);
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         
+
         driverRegis.setDrivername("BennyBenBen");
         driverRegis.setIdcard(null);
         driverRegis.setTelephone("0927378868");
@@ -117,6 +159,7 @@ public class DriverRegisTest {
         driverRegis.setProvinceid(province);
         driverRegis.setEducationalid(educational);
         driverRegis.setPositionid(positiondriver);
+        driverRegis.setBirthday(date);
 
         final Set<ConstraintViolation<DriverRegis>> result = validator.validate(driverRegis);
 
@@ -128,12 +171,16 @@ public class DriverRegisTest {
     }
 
     @Test
-    void B5813643_testDriverRegiswithTelephoneNotNull() { // เช็คค่า NotNull เบอร์โทรศัพท์มือถือ
+    void B5813643_testDriverRegiswithTelephoneNotNull() throws ParseException { // เช็คค่า NotNull เบอร์โทรศัพท์มือถือ
         final DriverRegis driverRegis = new DriverRegis();
         Gender gender = genderRepository.findByGenderid(1);
         Province province = provinceRepository.findByProvinceid(1);
         Educational educational = educationalRepository.findByEducationalid(1);
         PositionDriver positiondriver = positiondriverRepository.findByPositionDriverid(1);
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
+        
         
         driverRegis.setDrivername("BennyBenBen");
         driverRegis.setIdcard("1349900799556");
@@ -143,6 +190,8 @@ public class DriverRegisTest {
         driverRegis.setProvinceid(province);
         driverRegis.setEducationalid(educational);
         driverRegis.setPositionid(positiondriver);
+        driverRegis.setBirthday(date);
+
 
 
         final Set<ConstraintViolation<DriverRegis>> result = validator.validate(driverRegis);
@@ -155,12 +204,16 @@ public class DriverRegisTest {
     }
 
     @Test
-    void B5813643_testDriverRegiswithAddressNotNull() { // เช็คค่า NotNull ที่อยู่
+    void B5813643_testDriverRegiswithAddressNotNull() throws ParseException { // เช็คค่า NotNull ที่อยู่
         final DriverRegis driverRegis = new DriverRegis();
         Gender gender = genderRepository.findByGenderid(1);
         Province province = provinceRepository.findByProvinceid(1);
         Educational educational = educationalRepository.findByEducationalid(1);
         PositionDriver positiondriver = positiondriverRepository.findByPositionDriverid(1);
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
+        
         
         driverRegis.setDrivername("BennyBenBen");
         driverRegis.setIdcard("1349900799556");
@@ -170,6 +223,7 @@ public class DriverRegisTest {
         driverRegis.setProvinceid(province);
         driverRegis.setEducationalid(educational);
         driverRegis.setPositionid(positiondriver);
+        driverRegis.setBirthday(date);
 
         final Set<ConstraintViolation<DriverRegis>> result = validator.validate(driverRegis);
 
@@ -181,12 +235,15 @@ public class DriverRegisTest {
     }
 
     @Test
-    void B5813643_testDrivernameNotMoreThan20String() { // เช็คชื่อคนขับ ห้ามมากกว่า 20 อักษร
+    void B5813643_testDrivernameNotMoreThan20String() throws ParseException { // เช็คชื่อคนขับ ห้ามมากกว่า 20 อักษร
         final DriverRegis driverRegis = new DriverRegis();
         Gender gender = genderRepository.findByGenderid(1);
         Province province = provinceRepository.findByProvinceid(1);
         Educational educational = educationalRepository.findByEducationalid(1);
         PositionDriver positiondriver = positiondriverRepository.findByPositionDriverid(1);
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         
         driverRegis.setDrivername("BennyBenBenTuckyTucky");
         driverRegis.setIdcard("1349900799556");
@@ -196,6 +253,7 @@ public class DriverRegisTest {
         driverRegis.setProvinceid(province);
         driverRegis.setEducationalid(educational);
         driverRegis.setPositionid(positiondriver);
+        driverRegis.setBirthday(date);
 
         final Set<ConstraintViolation<DriverRegis>> result = validator.validate(driverRegis);
 
@@ -209,12 +267,15 @@ public class DriverRegisTest {
     }
 
     @Test
-    void B5813643_testIdcardmustbe13String() { // เช็คเลขที่บัตรประชาชน ต้องมี 13 หลักเท่านั้น
+    void B5813643_testIdcardmustbe13String() throws ParseException { // เช็คเลขที่บัตรประชาชน ต้องมี 13 หลักเท่านั้น
         final DriverRegis driverRegis = new DriverRegis();
         Gender gender = genderRepository.findByGenderid(1);
         Province province = provinceRepository.findByProvinceid(1);
         Educational educational = educationalRepository.findByEducationalid(1);
         PositionDriver positiondriver = positiondriverRepository.findByPositionDriverid(1);
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         
         driverRegis.setDrivername("BennyBenBenTuckyTuck");
         driverRegis.setIdcard("13499007995566");
@@ -224,6 +285,7 @@ public class DriverRegisTest {
         driverRegis.setProvinceid(province);
         driverRegis.setEducationalid(educational);
         driverRegis.setPositionid(positiondriver);
+        driverRegis.setBirthday(date);
 
         final Set<ConstraintViolation<DriverRegis>> result = validator.validate(driverRegis);
 
@@ -237,12 +299,15 @@ public class DriverRegisTest {
     }
 
     @Test
-    void B5813643_testTelephonemustbe10String() { // เช็คเบอร์มือถือ ต้องมี 10 หลักเท่านั้น
+    void B5813643_testTelephonemustbe10String() throws ParseException { // เช็คเบอร์มือถือ ต้องมี 10 หลักเท่านั้น
         final DriverRegis driverRegis = new DriverRegis();
         Gender gender = genderRepository.findByGenderid(1);
         Province province = provinceRepository.findByProvinceid(1);
         Educational educational = educationalRepository.findByEducationalid(1);
         PositionDriver positiondriver = positiondriverRepository.findByPositionDriverid(1);
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         
         
         driverRegis.setDrivername("BennyBenBenTuckyTuck");
@@ -253,6 +318,7 @@ public class DriverRegisTest {
         driverRegis.setProvinceid(province);
         driverRegis.setEducationalid(educational);
         driverRegis.setPositionid(positiondriver);
+        driverRegis.setBirthday(date);
 
         final Set<ConstraintViolation<DriverRegis>> result = validator.validate(driverRegis);
 
@@ -266,12 +332,15 @@ public class DriverRegisTest {
     }
 
     @Test
-    void B5813643_testAddressNotMoreThan50String() { // เช็คที่อยู่ มีอักษารได้ไม่เกิน 50 ตัว
+    void B5813643_testAddressNotMoreThan50String() throws ParseException { // เช็คที่อยู่ มีอักษารได้ไม่เกิน 50 ตัว
         final DriverRegis driverRegis = new DriverRegis();
         Gender gender = genderRepository.findByGenderid(1);
         Province province = provinceRepository.findByProvinceid(1);
         Educational educational = educationalRepository.findByEducationalid(1);
         PositionDriver positiondriver = positiondriverRepository.findByPositionDriverid(1);
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         
         driverRegis.setDrivername("BennyBenBenTuckyTuck");
         driverRegis.setIdcard("1349900799556");
@@ -281,6 +350,7 @@ public class DriverRegisTest {
         driverRegis.setProvinceid(province);
         driverRegis.setEducationalid(educational);
         driverRegis.setPositionid(positiondriver);
+        driverRegis.setBirthday(date);
 
         final Set<ConstraintViolation<DriverRegis>> result = validator.validate(driverRegis);
 
@@ -299,6 +369,9 @@ public class DriverRegisTest {
         Province province = provinceRepository.findByProvinceid(1);
         Educational educationallevel = educationalRepository.findByEducationalid(1);
         PositionDriver positionlevel = positiondriverRepository.findByPositionDriverid(1);
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         
         driverRegis.setDrivername("BennyBenBen");
         driverRegis.setIdcard("1349900799556");
@@ -308,6 +381,7 @@ public class DriverRegisTest {
         driverRegis.setProvinceid(province);
         driverRegis.setEducationalid(educationallevel);
         driverRegis.setPositionid(positionlevel);
+        driverRegis.setBirthday(date);
         
 
         Set<ConstraintViolation<DriverRegis>> result = validator.validate(driverRegis);
@@ -325,6 +399,9 @@ public class DriverRegisTest {
         Gender gender = genderRepository.findByGenderid(1);
         Educational educationallevel = educationalRepository.findByEducationalid(1);
         PositionDriver positionlevel = positiondriverRepository.findByPositionDriverid(1);
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         
         driverRegis.setDrivername("BennyBenBen");
         driverRegis.setIdcard("1349900799556");
@@ -334,6 +411,7 @@ public class DriverRegisTest {
         driverRegis.setProvinceid(null);
         driverRegis.setEducationalid(educationallevel);
         driverRegis.setPositionid(positionlevel);
+        driverRegis.setBirthday(date);
         
 
         Set<ConstraintViolation<DriverRegis>> result = validator.validate(driverRegis);
@@ -351,6 +429,9 @@ public class DriverRegisTest {
         Gender gender = genderRepository.findByGenderid(1);
         Province province = provinceRepository.findByProvinceid(1);
         PositionDriver positionlevel = positiondriverRepository.findByPositionDriverid(1);
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         
         driverRegis.setDrivername("BennyBenBen");
         driverRegis.setIdcard("1349900799556");
@@ -360,6 +441,8 @@ public class DriverRegisTest {
         driverRegis.setProvinceid(province);
         driverRegis.setEducationalid(null);
         driverRegis.setPositionid(positionlevel);
+        driverRegis.setBirthday(date);
+        
         
 
         Set<ConstraintViolation<DriverRegis>> result = validator.validate(driverRegis);
@@ -378,6 +461,9 @@ public class DriverRegisTest {
         Gender gender = genderRepository.findByGenderid(1);
         Province province = provinceRepository.findByProvinceid(1);
         Educational educationallevel = educationalRepository.findByEducationalid(1);
+        String pattern ="yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        java.util.Date date = simpleDateFormat.parse("2020-01-23");
         
         driverRegis.setDrivername("BennyBenBen");
         driverRegis.setIdcard("1349900799556");
@@ -387,6 +473,7 @@ public class DriverRegisTest {
         driverRegis.setProvinceid(province);
         driverRegis.setEducationalid(educationallevel);
         driverRegis.setPositionid(null);
+        driverRegis.setBirthday(date);
         
 
         Set<ConstraintViolation<DriverRegis>> result = validator.validate(driverRegis);
@@ -406,6 +493,10 @@ public class DriverRegisTest {
     Province province1 = provinceRepository.findByProvinceid(1);
     Educational educationallevel1 = educationalRepository.findByEducationalid(1);
     PositionDriver positiondriver1 = positiondriverRepository.findByPositionDriverid(1);
+    String pattern ="yyyy-MM-dd";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+    java.util.Date date = simpleDateFormat.parse("2020-01-23");
+    
     driverRegis1.setDrivername("BennyBenBen");
     driverRegis1.setIdcard("1349900799556");
     driverRegis1.setTelephone("0927378868");
@@ -414,7 +505,7 @@ public class DriverRegisTest {
     driverRegis1.setProvinceid(province1);
     driverRegis1.setEducationalid(educationallevel1);
     driverRegis1.setPositionid(positiondriver1);
-
+    driverRegis1.setBirthday(date);
     driverRegisRepository.saveAndFlush(driverRegis1);
 
     // DataIntegrityViolationException จะถูก throw
@@ -426,6 +517,9 @@ public class DriverRegisTest {
     Province province2 = provinceRepository.findByProvinceid(1);
     Educational educationallevel2 = educationalRepository.findByEducationalid(1);
     PositionDriver positiondriver2 = positiondriverRepository.findByPositionDriverid(1);
+    String pattern1 ="yyyy-MM-dd";
+    SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(pattern1);
+    java.util.Date date1 = simpleDateFormat1.parse("2020-01-23");
     
     driverRegis2.setDrivername("BennyBenBen");
     driverRegis2.setIdcard("1349900799556");
@@ -435,7 +529,7 @@ public class DriverRegisTest {
     driverRegis2.setProvinceid(province2);
     driverRegis2.setEducationalid(educationallevel2);
     driverRegis2.setPositionid(positiondriver2);
-
+    driverRegis2.setBirthday(date1);
     driverRegisRepository.saveAndFlush(driverRegis2);
     });
     }
@@ -448,6 +542,11 @@ public class DriverRegisTest {
     Province province1 = provinceRepository.findByProvinceid(1);
     Educational educationallevel1 = educationalRepository.findByEducationalid(1);
     PositionDriver positiondriver1 = positiondriverRepository.findByPositionDriverid(1);
+    String pattern1 ="yyyy-MM-dd";
+    SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(pattern1);
+    java.util.Date date1 = simpleDateFormat1.parse("2020-01-23");
+
+
     driverRegis1.setDrivername("BennyBenBen");
     driverRegis1.setIdcard("1349900799556");
     driverRegis1.setTelephone("0927378868");
@@ -456,6 +555,7 @@ public class DriverRegisTest {
     driverRegis1.setProvinceid(province1);
     driverRegis1.setEducationalid(educationallevel1);
     driverRegis1.setPositionid(positiondriver1);
+    driverRegis1.setBirthday(date1);
 
     driverRegisRepository.saveAndFlush(driverRegis1);
 
@@ -468,6 +568,10 @@ public class DriverRegisTest {
     Province province2 = provinceRepository.findByProvinceid(1);
     Educational educationallevel2 = educationalRepository.findByEducationalid(1);
     PositionDriver positiondriver2 = positiondriverRepository.findByPositionDriverid(1);
+    String pattern2 ="yyyy-MM-dd";
+    SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat(pattern2);
+    java.util.Date date2 = simpleDateFormat2.parse("2020-01-23");
+
     
     driverRegis2.setDrivername("BennyBenBen");
     driverRegis2.setIdcard("1349900799556");
@@ -477,6 +581,7 @@ public class DriverRegisTest {
     driverRegis2.setProvinceid(province2);
     driverRegis2.setEducationalid(educationallevel2);
     driverRegis2.setPositionid(positiondriver2);
+    driverRegis2.setBirthday(date2);
 
     driverRegisRepository.saveAndFlush(driverRegis2);
     });

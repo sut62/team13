@@ -134,31 +134,18 @@
             </v-col>
           </v-col>
 
-
+          <v-container/>
           <v-col cols="3">
-            <v-text-field
-              outlined
-              label="ต้องการลบ Driver Register ID: "
-              prepend-icon="mdi mdi-delete-forever"
-              v-model="driverregis.driverregisId"
-            ></v-text-field>
-            <p v-if="driverregisCheck != ''">
-              ID DriverRegis ที่ต้องการลบ : {{driverregisId}}
+           <v-autocomplete
+                  v-model="driverregis.driverregisId"
+                  :items="items"
+                  item-text="drivername"
+                  item-value="driverregisid"
+                  :rules="[v => !!v || 'Item is required']"
+                  label="--เลือกชื่อพนักงานที่ต้องการลบ--"
+                  required
+                ></v-autocomplete>
               <v-btn class @click="deleteDriverRegis" color="#D50000" style="color:#FFFFFF">ลบ</v-btn>
-            </p>
-          </v-col>
-
-
-          <v-col cols="2">
-            <div class>
-              <v-btn
-                @click="findDriverRegis"
-                depressed
-                large
-                color="#282FCF"
-                style="color:#FFFFFF;"
-              >ยืนยัน</v-btn>
-            </div>
           </v-col>
 
         </v-row>
@@ -260,10 +247,10 @@ export default {
         .then(response => {
           console.log(response.data);
           this.$emit("refreshData");
-         const options1 = {title: 'Alert', size: 'sm'}
+           location.reload();
+           const options1 = {title: 'Alert', size: 'sm'}
           this.$dialogs.alert('ลบข้อมูลพนักงานคนขับสำเร็จ',options1);
-          this.$refs.form.reset();
-          location.reload();
+
         })
         .catch(e => {
           console.log(e);
@@ -283,6 +270,7 @@ export default {
   },
   mounted() {
     this.getDriverRegis();
+    
   }
 };
 </script>
