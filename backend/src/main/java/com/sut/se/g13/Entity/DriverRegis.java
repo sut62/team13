@@ -31,6 +31,7 @@ public class DriverRegis {
     private Long driverregisid;
     
     @Temporal(TemporalType.DATE)
+    
     private Date birthday;     //วันเดือนปีเกิด
     
     @NotNull

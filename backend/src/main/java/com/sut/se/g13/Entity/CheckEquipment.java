@@ -8,6 +8,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.FutureOrPresent;
 
@@ -36,7 +37,7 @@ public class CheckEquipment  {
   @Column(name = "ID_CHECKEQUIPMENT", unique = true, nullable = true)
   private @NonNull Long id;
   
-  @NotNull
+  @NotBlank
   @Size (min=4, max=50)
   private String note;   //หมายเหตุ
 
@@ -76,11 +77,13 @@ public class CheckEquipment  {
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Ambulance.class)
   @JoinColumn(name = "ID_AMBULANCE", insertable = true)
+  @NotNull
   private Ambulance ambulance;   //ไอดีรถพยาบาล
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Nurse.class)
   @JoinColumn(name = "ID_NURSE", insertable = true)
-  private Nurse Nurse;   //พยาบาลผู้เช็ค
+  @NotNull
+  private Nurse nurse;   //พยาบาลผู้เช็ค
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Status.class)
   @JoinColumn(name = "ID_STATUS", insertable = true)

@@ -31,18 +31,11 @@ public class CheckEquipmentTest {
     private CheckEquipmentRepository checkEquipmentRepository;
     @Autowired 
     private StatusRepository statusRepository;
-
-    @Autowired private AmbulanceRepository ambulanceRepository;
-    @Autowired private AmbulanceBrandRepository ambulanceBrandRepository;
-    @Autowired private AmbulanceTypeRepository ambulanceTypeRepository;
-
-    @Autowired private ProvinceRepository provinceRepository;
-
-    @Autowired private NurseRepository nurseRepository;
-    @Autowired private  TierRepository tierRepository;
-    @Autowired private  GenderRepository genderRepository;
-    @Autowired private  EducationalRepository educationalRepository;
-
+    @Autowired 
+    private AmbulanceRepository ambulanceRepository;
+    @Autowired 
+    private NurseRepository nurseRepository;
+    
     @BeforeEach
     public void setup() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
@@ -53,6 +46,8 @@ public class CheckEquipmentTest {
     void B5800841_testCheckEquipmentwithCorrect() throws ParseException {     //เช็คทั้งหมดของฟิวล์
         CheckEquipment checkEquipment= new CheckEquipment();
         Status status = statusRepository.findByStatusid(1);
+        Ambulance ambulance  = ambulanceRepository.findByAmbulanceid(1);
+        Nurse nurse = nurseRepository.findByNurseid(1);
 
         java.util.Date date = new java.util.Date(2020-01-21);
 
@@ -66,6 +61,8 @@ public class CheckEquipmentTest {
         checkEquipment.setMotionDevice(true);
         checkEquipment.setMedicalSprayer(true);
         checkEquipment.setStatus(status);
+        checkEquipment.setAmbulance(ambulance);
+        checkEquipment.setNurse(nurse);
         
         checkEquipmentRepository.saveAndFlush(checkEquipment);
 
@@ -81,12 +78,16 @@ public class CheckEquipmentTest {
         assertEquals(true, check.get().getMotionDevice());
         assertEquals(true, check.get().getMedicalSprayer());
         assertEquals(status, check.get().getStatus());
+        assertEquals(ambulance, check.get().getAmbulance());
+        assertEquals(nurse, check.get().getNurse());
     }
 
     @Test
     void B5800841_testCheckEquipmentwithDefibrillatorNotNull() throws ParseException{
         CheckEquipment checkEquipment= new CheckEquipment();
         Status status = statusRepository.findByStatusid(1);
+        Ambulance ambulance  = ambulanceRepository.findByAmbulanceid(1);
+        Nurse nurse = nurseRepository.findByNurseid(1);
 
         java.util.Date date = new java.util.Date(2020-01-21);
 
@@ -100,6 +101,8 @@ public class CheckEquipmentTest {
         checkEquipment.setMotionDevice(true);
         checkEquipment.setMedicalSprayer(true);
         checkEquipment.setStatus(status);
+        checkEquipment.setAmbulance(ambulance);
+        checkEquipment.setNurse(nurse);
 
         Set<ConstraintViolation<CheckEquipment>> result = validator.validate(checkEquipment);
 
@@ -114,6 +117,8 @@ public class CheckEquipmentTest {
     void B5800841_testCheckEquipmentwithSphygmomanometerNotNull() throws ParseException{
         CheckEquipment checkEquipment= new CheckEquipment();
         Status status = statusRepository.findByStatusid(1);
+        Ambulance ambulance  = ambulanceRepository.findByAmbulanceid(1);
+        Nurse nurse = nurseRepository.findByNurseid(1);
 
         java.util.Date date = new java.util.Date(2020-01-21);
 
@@ -127,6 +132,8 @@ public class CheckEquipmentTest {
         checkEquipment.setMotionDevice(true);
         checkEquipment.setMedicalSprayer(true);
         checkEquipment.setStatus(status);
+        checkEquipment.setAmbulance(ambulance);
+        checkEquipment.setNurse(nurse);
 
         Set<ConstraintViolation<CheckEquipment>> result = validator.validate(checkEquipment);
 
@@ -141,6 +148,8 @@ public class CheckEquipmentTest {
     void B5800841_testCheckEquipmentwithRespiratorNotNull() throws ParseException{
         CheckEquipment checkEquipment= new CheckEquipment();
         Status status = statusRepository.findByStatusid(1);
+        Ambulance ambulance  = ambulanceRepository.findByAmbulanceid(1);
+        Nurse nurse = nurseRepository.findByNurseid(1);
 
         java.util.Date date = new java.util.Date(2020-01-21);
 
@@ -154,6 +163,8 @@ public class CheckEquipmentTest {
         checkEquipment.setMotionDevice(true);
         checkEquipment.setMedicalSprayer(true);
         checkEquipment.setStatus(status);
+        checkEquipment.setAmbulance(ambulance);
+        checkEquipment.setNurse(nurse);
 
         Set<ConstraintViolation<CheckEquipment>> result = validator.validate(checkEquipment);
 
@@ -168,6 +179,8 @@ public class CheckEquipmentTest {
     void B5800841_testCheckEquipmentwithOxygenmachineNotNull() throws ParseException{
         CheckEquipment checkEquipment= new CheckEquipment();
         Status status = statusRepository.findByStatusid(1);
+        Ambulance ambulance  = ambulanceRepository.findByAmbulanceid(1);
+        Nurse nurse = nurseRepository.findByNurseid(1);
 
         java.util.Date date = new java.util.Date(2020-01-21);
 
@@ -181,6 +194,8 @@ public class CheckEquipmentTest {
         checkEquipment.setMotionDevice(true);
         checkEquipment.setMedicalSprayer(true);
         checkEquipment.setStatus(status);
+        checkEquipment.setAmbulance(ambulance);
+        checkEquipment.setNurse(nurse);
 
         Set<ConstraintViolation<CheckEquipment>> result = validator.validate(checkEquipment);
 
@@ -195,6 +210,8 @@ public class CheckEquipmentTest {
     void B5800841_testCheckEquipmentwithSuctionNotNull() throws ParseException{
         CheckEquipment checkEquipment= new CheckEquipment();
         Status status = statusRepository.findByStatusid(1);
+        Ambulance ambulance  = ambulanceRepository.findByAmbulanceid(1);
+        Nurse nurse = nurseRepository.findByNurseid(1);
 
         java.util.Date date = new java.util.Date(2020-01-21);
 
@@ -208,6 +225,8 @@ public class CheckEquipmentTest {
         checkEquipment.setMotionDevice(true);
         checkEquipment.setMedicalSprayer(true);
         checkEquipment.setStatus(status);
+        checkEquipment.setAmbulance(ambulance);
+        checkEquipment.setNurse(nurse);
 
         Set<ConstraintViolation<CheckEquipment>> result = validator.validate(checkEquipment);
 
@@ -222,6 +241,8 @@ public class CheckEquipmentTest {
     void B5800841_testCheckEquipmentwithMotionDeviceNotNull() throws ParseException{
         CheckEquipment checkEquipment= new CheckEquipment();
         Status status = statusRepository.findByStatusid(1);
+        Ambulance ambulance  = ambulanceRepository.findByAmbulanceid(1);
+        Nurse nurse = nurseRepository.findByNurseid(1);
 
         java.util.Date date = new java.util.Date(2020-01-21);
 
@@ -235,6 +256,8 @@ public class CheckEquipmentTest {
         checkEquipment.setMotionDevice(null);
         checkEquipment.setMedicalSprayer(true);
         checkEquipment.setStatus(status);
+        checkEquipment.setAmbulance(ambulance);
+        checkEquipment.setNurse(nurse);
 
         Set<ConstraintViolation<CheckEquipment>> result = validator.validate(checkEquipment);
 
@@ -249,6 +272,8 @@ public class CheckEquipmentTest {
     void B5800841_testCheckEquipmentwithMedicalSprayerNotNull() throws ParseException{
         CheckEquipment checkEquipment= new CheckEquipment();
         Status status = statusRepository.findByStatusid(1);
+        Ambulance ambulance  = ambulanceRepository.findByAmbulanceid(1);
+        Nurse nurse = nurseRepository.findByNurseid(1);
 
         java.util.Date date = new java.util.Date(2020-01-21);
 
@@ -262,6 +287,8 @@ public class CheckEquipmentTest {
         checkEquipment.setMotionDevice(true);
         checkEquipment.setMedicalSprayer(null);
         checkEquipment.setStatus(status);
+        checkEquipment.setAmbulance(ambulance);
+        checkEquipment.setNurse(nurse);
 
         Set<ConstraintViolation<CheckEquipment>> result = validator.validate(checkEquipment);
 
@@ -276,6 +303,8 @@ public class CheckEquipmentTest {
     void B5800841_testCheckEquipmentwithNoteNotNull() throws ParseException{
         CheckEquipment checkEquipment= new CheckEquipment();
         Status status = statusRepository.findByStatusid(1);
+        Ambulance ambulance  = ambulanceRepository.findByAmbulanceid(1);
+        Nurse nurse = nurseRepository.findByNurseid(1);
 
         java.util.Date date = new java.util.Date(2020-01-21);
 
@@ -289,13 +318,15 @@ public class CheckEquipmentTest {
         checkEquipment.setMotionDevice(true);
         checkEquipment.setMedicalSprayer(true);
         checkEquipment.setStatus(status);
+        checkEquipment.setAmbulance(ambulance);
+        checkEquipment.setNurse(nurse);
 
         Set<ConstraintViolation<CheckEquipment>> result = validator.validate(checkEquipment);
 
         assertEquals(1, result.size());
 
         ConstraintViolation<CheckEquipment> message = result.iterator().next();
-        assertEquals("must not be null", message.getMessage());
+        assertEquals("must not be blank", message.getMessage());
         assertEquals("note", message.getPropertyPath().toString());
     }
 
@@ -303,6 +334,8 @@ public class CheckEquipmentTest {
     void B5800841_testCheckEquipmentwithCheckDateNotNull() throws ParseException{
         CheckEquipment checkEquipment= new CheckEquipment();
         Status status = statusRepository.findByStatusid(1);
+        Ambulance ambulance  = ambulanceRepository.findByAmbulanceid(1);;
+        Nurse nurse = nurseRepository.findByNurseid(1);
 
         java.util.Date date = new java.util.Date(2020-01-21);
 
@@ -316,6 +349,8 @@ public class CheckEquipmentTest {
         checkEquipment.setMotionDevice(true);
         checkEquipment.setMedicalSprayer(true);
         checkEquipment.setStatus(status);
+        checkEquipment.setAmbulance(ambulance);
+        checkEquipment.setNurse(nurse);
 
         Set<ConstraintViolation<CheckEquipment>> result = validator.validate(checkEquipment);
 
@@ -329,6 +364,8 @@ public class CheckEquipmentTest {
     void B5800841_testCheckEquipmentwithStatusNotNull() throws ParseException{
         CheckEquipment checkEquipment= new CheckEquipment();
         Status status = statusRepository.findByStatusid(1);
+        Ambulance ambulance  = ambulanceRepository.findByAmbulanceid(1);
+        Nurse nurse = nurseRepository.findByNurseid(1);
 
         java.util.Date date = new java.util.Date(2020-01-21);
 
@@ -342,6 +379,8 @@ public class CheckEquipmentTest {
         checkEquipment.setMotionDevice(true);
         checkEquipment.setMedicalSprayer(true);
         checkEquipment.setStatus(null);
+        checkEquipment.setAmbulance(ambulance);
+        checkEquipment.setNurse(nurse);
 
         Set<ConstraintViolation<CheckEquipment>> result = validator.validate(checkEquipment);
 
@@ -351,11 +390,73 @@ public class CheckEquipmentTest {
         assertEquals("must not be null", message.getMessage());
         assertEquals("status", message.getPropertyPath().toString());
     }
+    @Test
+    void B5800841_testCheckEquipmentwithAmbulanceNotNull() throws ParseException{
+        CheckEquipment checkEquipment= new CheckEquipment();
+        Status status = statusRepository.findByStatusid(1);
+        Ambulance ambulance  = ambulanceRepository.findByAmbulanceid(1);
+        Nurse nurse = nurseRepository.findByNurseid(1);
+
+        java.util.Date date = new java.util.Date(2020-01-21);
+
+        checkEquipment.setNote("aaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        checkEquipment.setCheckDate(date);
+        checkEquipment.setDefibrillator(true);
+        checkEquipment.setSphygmomanometer(true);
+        checkEquipment.setRespirator(true);
+        checkEquipment.setOxygenmachine(true);
+        checkEquipment.setSuction(true);
+        checkEquipment.setMotionDevice(true);
+        checkEquipment.setMedicalSprayer(true);
+        checkEquipment.setStatus(status);
+        checkEquipment.setAmbulance(null);
+        checkEquipment.setNurse(nurse);
+
+        Set<ConstraintViolation<CheckEquipment>> result = validator.validate(checkEquipment);
+
+        assertEquals(1, result.size());
+
+        ConstraintViolation<CheckEquipment> message = result.iterator().next();
+        assertEquals("must not be null", message.getMessage());
+        assertEquals("ambulance", message.getPropertyPath().toString());
+    }
+    @Test
+    void B5800841_testCheckEquipmentwithNurseNotNull() throws ParseException{
+        CheckEquipment checkEquipment= new CheckEquipment();
+        Status status = statusRepository.findByStatusid(1);
+        Ambulance ambulance  = ambulanceRepository.findByAmbulanceid(1);
+        Nurse nurse = nurseRepository.findByNurseid(1);
+
+        java.util.Date date = new java.util.Date(2020-01-21);
+
+        checkEquipment.setNote("aaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        checkEquipment.setCheckDate(date);
+        checkEquipment.setDefibrillator(true);
+        checkEquipment.setSphygmomanometer(true);
+        checkEquipment.setRespirator(true);
+        checkEquipment.setOxygenmachine(true);
+        checkEquipment.setSuction(true);
+        checkEquipment.setMotionDevice(true);
+        checkEquipment.setMedicalSprayer(true);
+        checkEquipment.setStatus(status);
+        checkEquipment.setAmbulance(ambulance);
+        checkEquipment.setNurse(null);
+
+        Set<ConstraintViolation<CheckEquipment>> result = validator.validate(checkEquipment);
+
+        assertEquals(1, result.size());
+
+        ConstraintViolation<CheckEquipment> message = result.iterator().next();
+        assertEquals("must not be null", message.getMessage());
+        assertEquals("nurse", message.getPropertyPath().toString());
+    }
 
     @Test
     void B5800841_testNoteMustMoreThan50String(){
         CheckEquipment checkEquipment= new CheckEquipment();
         Status status = statusRepository.findByStatusid(1);
+        Ambulance ambulance  = ambulanceRepository.findByAmbulanceid(1);
+        Nurse nurse = nurseRepository.findByNurseid(1);
 
         java.util.Date date = new java.util.Date(2020-01-21);
 
@@ -369,6 +470,8 @@ public class CheckEquipmentTest {
         checkEquipment.setMotionDevice(true);
         checkEquipment.setMedicalSprayer(true);
         checkEquipment.setStatus(status);
+        checkEquipment.setAmbulance(ambulance);
+        checkEquipment.setNurse(nurse);
 
         Set<ConstraintViolation<CheckEquipment>> result = validator.validate(checkEquipment);
 
@@ -385,6 +488,8 @@ public class CheckEquipmentTest {
     void B5800841_testNoteMustLessThan4String()throws ParseException{
         CheckEquipment checkEquipment= new CheckEquipment();
         Status status = statusRepository.findByStatusid(1);
+        Ambulance ambulance  = ambulanceRepository.findByAmbulanceid(1);
+        Nurse nurse = nurseRepository.findByNurseid(1);
 
         java.util.Date date = new java.util.Date(2020-01-21);
 
@@ -398,6 +503,8 @@ public class CheckEquipmentTest {
         checkEquipment.setMotionDevice(true);
         checkEquipment.setMedicalSprayer(true);
         checkEquipment.setStatus(status);
+        checkEquipment.setAmbulance(ambulance);
+        checkEquipment.setNurse(nurse);
 
         Set<ConstraintViolation<CheckEquipment>> result = validator.validate(checkEquipment);
 
