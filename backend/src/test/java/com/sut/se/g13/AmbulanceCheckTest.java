@@ -383,7 +383,7 @@ public class AmbulanceCheckTest {
     ambulanceCheck.setStatus(status);
     ambulanceCheck.setAmbulance(am);
     ambulanceCheck.setDriverRegis(dr);
-       Set<ConstraintViolation<AmbulanceCheck>> result = validator.validate(ambulanceCheck);
+    Set<ConstraintViolation<AmbulanceCheck>> result = validator.validate(ambulanceCheck);
 
        assertEquals(1, result.size());
 
