@@ -207,7 +207,7 @@
               <v-row justify="center">
                 <v-col cols="12" sm="4">
                   <p>Provinces</p>
-                  <v-select
+                  <v-autocomplete
                     v-model="driverRegis.provinceId"
                     :items="provinces"
                     item-text="provincename"
@@ -215,7 +215,7 @@
                     :rules="[v => !!v || 'Item is required']"
                     label="-- จังหวัด --"
                     required
-                  ></v-select>
+                  ></v-autocomplete>
                 </v-col>
 
                 <v-col cols="12" sm="4">

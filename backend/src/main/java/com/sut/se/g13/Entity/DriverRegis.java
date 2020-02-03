@@ -29,9 +29,9 @@ public class DriverRegis {
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator="DriverRegis_seq")
     @Column(name = "DRIVERREGIS_ID", unique = true, nullable = true)
     private Long driverregisid;
-    
+
+    @NotNull
     @Temporal(TemporalType.DATE)
-    
     private Date birthday;     //วันเดือนปีเกิด
     
     @NotNull
