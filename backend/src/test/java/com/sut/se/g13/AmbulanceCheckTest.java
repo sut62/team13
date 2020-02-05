@@ -57,8 +57,8 @@ public class AmbulanceCheckTest {
         ambulanceCheck.setToolSet(true);
         ambulanceCheck.setMile(mile);
         ambulanceCheck.setStatus(status);
-         ambulanceCheck.setAmbulance(am);
-         ambulanceCheck.setDriverRegis(dr);
+        ambulanceCheck.setAmbulance(am);
+        ambulanceCheck.setDriverRegis(dr);
 
         ambulanceCheckRepository.saveAndFlush(ambulanceCheck);
 
@@ -75,8 +75,8 @@ public class AmbulanceCheckTest {
         assertEquals(true, check.get().getToolSet());
         assertEquals(mile, check.get().getMile());
         assertEquals(status, check.get().getStatus());
-         assertEquals(am, check.get().getAmbulance());
-         assertEquals(dr, check.get().getDriverRegis());
+        assertEquals(am, check.get().getAmbulance());
+        assertEquals(dr, check.get().getDriverRegis());
     }
 
     @Test
@@ -292,7 +292,7 @@ public class AmbulanceCheckTest {
    }
 
    @Test
-   //ป้องกันการใส่ค่า null ของ Note
+   //ป้องกันการใส่ค่า null หรือค่า String ว่างๆ ของ Note
    void B5809844_testAmbulanceCheckwithNoteNotBlank() throws ParseException{
     AmbulanceCheck ambulanceCheck = new AmbulanceCheck();
     Mile mile = mileRepository.findByMileid(1);
@@ -383,7 +383,7 @@ public class AmbulanceCheckTest {
     ambulanceCheck.setStatus(status);
     ambulanceCheck.setAmbulance(am);
     ambulanceCheck.setDriverRegis(dr);
-    Set<ConstraintViolation<AmbulanceCheck>> result = validator.validate(ambulanceCheck);
+       Set<ConstraintViolation<AmbulanceCheck>> result = validator.validate(ambulanceCheck);
 
        assertEquals(1, result.size());
 
@@ -526,6 +526,44 @@ public class AmbulanceCheckTest {
        // error message ตรงชนิด และถูก field
        ConstraintViolation<AmbulanceCheck> v = result.iterator().next();
        assertEquals("size must be between 0 and 100", v.getMessage());
+       assertEquals("note", v.getPropertyPath().toString());
+   }
+
+   @Test
+   //ป้องกันการใส่ข้อมูลภาษาอังกฤษ ของ Note
+   void B5809844_testNoteMustEnglish() throws ParseException{
+    AmbulanceCheck ambulanceCheck = new AmbulanceCheck();
+    Mile mile = mileRepository.findByMileid(1);
+    Status status = statusRepository.findByStatusid(1);
+    DriverRegis dr = driverRegisRepository.findByDriverregisid(1);
+    Ambulance am = ambulanceRepository.findByAmbulanceid(1);
+
+    java.util.Date date = new java.util.Date(2020-01-21);
+
+
+    ambulanceCheck.setNote("Car is broken.");
+    ambulanceCheck.setCheckDate(date);
+    ambulanceCheck.setBattery(true);
+    ambulanceCheck.setLight(true);
+    ambulanceCheck.setWheel(true);
+    ambulanceCheck.setSuspension(true);
+    ambulanceCheck.setBrakeFluid(true);
+    ambulanceCheck.setEngineOil(true);
+    ambulanceCheck.setRadiator(true);
+    ambulanceCheck.setToolSet(true);
+    ambulanceCheck.setMile(mile);
+    ambulanceCheck.setStatus(status);
+    ambulanceCheck.setAmbulance(am);
+    ambulanceCheck.setDriverRegis(dr);
+
+       Set<ConstraintViolation<AmbulanceCheck>> result = validator.validate(ambulanceCheck);
+
+       // result ต้องมี error 1 ค่าเท่านั้น
+       assertEquals(1, result.size());
+
+       // error message ตรงชนิด และถูก field
+       ConstraintViolation<AmbulanceCheck> v = result.iterator().next();
+       assertEquals("must match \"[ก-๙]*\"", v.getMessage());
        assertEquals("note", v.getPropertyPath().toString());
    }
 }
