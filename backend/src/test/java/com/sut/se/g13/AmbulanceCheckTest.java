@@ -113,9 +113,42 @@ public class AmbulanceCheckTest {
         assertEquals("battery", message.getPropertyPath().toString());
     }
 
+    @Test
+    //ป้องกันการใส่ค่า null ของ Light
+    void B5809844_testAmbulanceCheckwithLightNotNull() throws ParseException{
+        AmbulanceCheck ambulanceCheck = new AmbulanceCheck();
+        Mile mile = mileRepository.findByMileid(1);
+        Status status = statusRepository.findByStatusid(1);
+
+        java.util.Date date = new java.util.Date(2020-01-21);
+        DriverRegis dr = driverRegisRepository.findByDriverregisid(1);
+        Ambulance am = ambulanceRepository.findByAmbulanceid(1);
+
+        ambulanceCheck.setNote("สีของรถพยาบาลมีรอยถลอกด้านข้างทางขวาข้างคนขับ");
+        ambulanceCheck.setCheckDate(date);
+        ambulanceCheck.setBattery(true);
+        ambulanceCheck.setLight(null);
+        ambulanceCheck.setWheel(true);
+        ambulanceCheck.setSuspension(true);
+        ambulanceCheck.setBrakeFluid(true);
+        ambulanceCheck.setEngineOil(true);
+        ambulanceCheck.setRadiator(true);
+        ambulanceCheck.setToolSet(true);
+        ambulanceCheck.setMile(mile);
+        ambulanceCheck.setStatus(status);
+        ambulanceCheck.setAmbulance(am);
+        ambulanceCheck.setDriverRegis(dr);
+        Set<ConstraintViolation<AmbulanceCheck>> result = validator.validate(ambulanceCheck);
+
+        assertEquals(1, result.size());
+
+        ConstraintViolation<AmbulanceCheck> message = result.iterator().next();
+        assertEquals("must not be null", message.getMessage());
+        assertEquals("light", message.getPropertyPath().toString());
+    }
    @Test
-   //ป้องกันการใส่ค่า null ของ Light
-   void B5809844_testAmbulanceCheckwithLightNotNull() throws ParseException{
+   //ป้องกันการใส่ค่า null ของ Wheel
+   void B5809844_testAmbulanceCheckwithWheelNotNull() throws ParseException{
     AmbulanceCheck ambulanceCheck = new AmbulanceCheck();
     Mile mile = mileRepository.findByMileid(1);
     Status status = statusRepository.findByStatusid(1);
@@ -187,6 +220,41 @@ public class AmbulanceCheckTest {
    @Test
    //ป้องกันการใส่ค่า null ของ BrakeFluid
    void B5809844_testAmbulanceCheckwithBrakeFluidNotNull() throws ParseException{
+    AmbulanceCheck ambulanceCheck = new AmbulanceCheck();
+    Mile mile = mileRepository.findByMileid(1);
+    Status status = statusRepository.findByStatusid(1);
+    DriverRegis dr = driverRegisRepository.findByDriverregisid(1);
+    Ambulance am = ambulanceRepository.findByAmbulanceid(1);
+
+    java.util.Date date = new java.util.Date(2020-01-21);
+
+
+    ambulanceCheck.setNote("สีของรถพยาบาลมีรอยถลอกด้านข้างทางขวาข้างคนขับ");
+    ambulanceCheck.setCheckDate(date);
+    ambulanceCheck.setBattery(true);
+    ambulanceCheck.setLight(true);
+    ambulanceCheck.setWheel(true);
+    ambulanceCheck.setSuspension(true);
+    ambulanceCheck.setBrakeFluid(null);
+    ambulanceCheck.setEngineOil(true);
+    ambulanceCheck.setRadiator(true);
+    ambulanceCheck.setToolSet(true);
+    ambulanceCheck.setMile(mile);
+    ambulanceCheck.setStatus(status);
+    ambulanceCheck.setAmbulance(am);
+    ambulanceCheck.setDriverRegis(dr);
+
+       Set<ConstraintViolation<AmbulanceCheck>> result = validator.validate(ambulanceCheck);
+
+       assertEquals(1, result.size());
+
+       ConstraintViolation<AmbulanceCheck> message = result.iterator().next();
+       assertEquals("must not be null", message.getMessage());
+       assertEquals("brakeFluid", message.getPropertyPath().toString());
+   }
+   @Test
+   //ป้องกันการใส่ค่า null ของ EngineOil
+   void B5809844_testAmbulanceCheckwithEngineOilNotNull() throws ParseException{
     AmbulanceCheck ambulanceCheck = new AmbulanceCheck();
     Mile mile = mileRepository.findByMileid(1);
     Status status = statusRepository.findByStatusid(1);
