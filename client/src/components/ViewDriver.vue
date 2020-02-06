@@ -247,14 +247,18 @@ export default {
         .then(response => {
           console.log(response.data);
           this.$emit("refreshData");
-           location.reload();
-           const options1 = {title: 'Alert', size: 'sm'}
-          this.$dialogs.alert('ลบข้อมูลพนักงานคนขับสำเร็จ',options1);
+          const options1 = {title: 'Alert', size: 'sm'}
+          this.$dialogs.alert('ลบข้อมูลพนักงานคนขับสำเร็จ!',options1);
+          this.getDriverRegis();
 
         })
         .catch(e => {
           console.log(e);
+          const options2 = {title: 'Alert', size: 'sm'}
+          this.$dialogs.alert('ลบข้อมูลพนักงานคนขับไม่สำเร็จ!',options2);
+
         });
+          this.submitted = true;
     },
 
     back() {
