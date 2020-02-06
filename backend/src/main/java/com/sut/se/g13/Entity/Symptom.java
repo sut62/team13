@@ -2,9 +2,6 @@ package com.sut.se.g13.Entity;
 
 import lombok.*;
 import javax.persistence.*;
-import java.util.*;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @Data
 @Entity
