@@ -37,7 +37,7 @@ public class Nurse {
   private String nursename; // ชื่อ-นามสกุล
 
   @Temporal(TemporalType.DATE)
-  
+  @NotNull
   private Date birthday; // วันเกิด
 
   @Size(min=1, max=50)
