@@ -122,6 +122,7 @@
                     v-model="emergency.emergencyPatientName"
                     :rules="[(v) => !!v || 'Item is required']"
                     label="-- ชื่อผู้ป่วย --"
+                    counter="30"
                     required
                   ></v-text-field>
                 </v-col>
@@ -145,6 +146,7 @@
                     v-model="emergency.emergencyPatientAddress"
                     :rules="[(v) => !!v || 'Item is required']"
                     label="-- ที่อยู่/ตำแหน่งผู้ป่วย --"
+                    counter="70"
                     required
                   ></v-text-field>
                 </v-col>
@@ -171,6 +173,7 @@
                     v-model="emergency.emergencyNote"
                     :rules="[(v) => !!v || 'Item is required']"
                     label="-- อาการอย่างอื่นๆโปรดระบุ (ถ้าไม่มีกรอก - ) -- "
+                    counter="30"
                     required
                   ></v-text-field>
                 </v-col>
