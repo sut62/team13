@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.dao.DataIntegrityViolationException;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -16,11 +16,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
-import java.time.LocalDateTime;
-import java.text.SimpleDateFormat;
+
 
 
 @DataJpaTest
@@ -337,7 +333,7 @@ public class CheckEquipmentTest {
         Ambulance ambulance  = ambulanceRepository.findByAmbulanceid(1);;
         Nurse nurse = nurseRepository.findByNurseid(1);
 
-        java.util.Date date = new java.util.Date(2020-01-21);
+        
 
         checkEquipment.setNote("aaaaaaaaaaaaaaaaaaaaaaaaaaa");
         checkEquipment.setCheckDate(null);
@@ -363,7 +359,7 @@ public class CheckEquipmentTest {
     @Test
     void B5800841_testCheckEquipmentwithStatusNotNull() throws ParseException{
         CheckEquipment checkEquipment= new CheckEquipment();
-        Status status = statusRepository.findByStatusid(1);
+        
         Ambulance ambulance  = ambulanceRepository.findByAmbulanceid(1);
         Nurse nurse = nurseRepository.findByNurseid(1);
 
@@ -394,7 +390,7 @@ public class CheckEquipmentTest {
     void B5800841_testCheckEquipmentwithAmbulanceNotNull() throws ParseException{
         CheckEquipment checkEquipment= new CheckEquipment();
         Status status = statusRepository.findByStatusid(1);
-        Ambulance ambulance  = ambulanceRepository.findByAmbulanceid(1);
+        
         Nurse nurse = nurseRepository.findByNurseid(1);
 
         java.util.Date date = new java.util.Date(2020-01-21);
@@ -425,7 +421,7 @@ public class CheckEquipmentTest {
         CheckEquipment checkEquipment= new CheckEquipment();
         Status status = statusRepository.findByStatusid(1);
         Ambulance ambulance  = ambulanceRepository.findByAmbulanceid(1);
-        Nurse nurse = nurseRepository.findByNurseid(1);
+
 
         java.util.Date date = new java.util.Date(2020-01-21);
 
