@@ -15,9 +15,5 @@ public class Symptom {
     @Column(name = "SYMPTOME_ID", unique = true, nullable = true)
     private @NonNull Long symptomid;
     private @NonNull String type;
-    
-   /* @OneToMany(fetch = FetchType.EAGER)
-    private Collection<Emergency> Emergency;*/
-    
 
 }
