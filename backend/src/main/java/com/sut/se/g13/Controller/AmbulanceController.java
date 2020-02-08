@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
-import java.util.Optional;
 import com.sut.se.g13.Entity.*;
 import com.sut.se.g13.Repository.*;
 import java.text.ParseException;
@@ -42,12 +41,6 @@ public class AmbulanceController {
     @GetMapping("/ambulance")
     public Collection<Ambulance> Ambulances() {
         return ambulanceRepository.findAll().stream().collect(Collectors.toList());
-    }
-
-    @GetMapping("/ambulance/{id}")
-    public Optional<Ambulance> Ambulances(@PathVariable Long id) {
-        Optional<Ambulance> ambulance = ambulanceRepository.findById(id);
-        return ambulance;
     }
 
     @GetMapping("/ambulancebrand")

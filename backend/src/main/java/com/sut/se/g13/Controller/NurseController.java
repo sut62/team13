@@ -14,7 +14,6 @@ import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.stream.Collectors;
-import java.util.Optional;
 import com.sut.se.g13.Entity.*;
 import com.sut.se.g13.Repository.*;
 import java.text.ParseException;
@@ -48,11 +47,6 @@ public class NurseController {
     @GetMapping("/nurse")
     public Collection<Nurse> Nurses() {
         return nurseRepository.findAll().stream().collect(Collectors.toList());
-    }
-    @GetMapping("/nurse/{id}")
-    public Optional<Nurse> Nurses(@PathVariable Long id) {
-        Optional<Nurse> nurse = nurseRepository.findById(id);
-        return nurse;
     }
 
     @GetMapping("/tier")

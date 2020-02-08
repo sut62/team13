@@ -16,7 +16,6 @@ import org.springframework.http.ResponseEntity;
 import java.util.Collection;
 import java.util.Date;
 
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.sut.se.g13.Entity.*;
@@ -50,11 +49,6 @@ public class EmergencyController {
         return emergencyRepository.findAll().stream().collect(Collectors.toList());
     }
     
-    @GetMapping("/emergency/{id}")
-    public Optional<Emergency> Emergencys(@PathVariable Long id) {
-        Optional<Emergency> emergency = emergencyRepository.findById(id);
-        return emergency;
-    }
 
     @GetMapping("/symptom")
     public Collection<Symptom> Symptoms() {

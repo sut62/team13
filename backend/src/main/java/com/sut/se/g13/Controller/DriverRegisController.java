@@ -17,7 +17,6 @@ import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.stream.Collectors;
-import java.util.Optional;
 import com.sut.se.g13.Entity.*;
 import com.sut.se.g13.Repository.*;
 import java.text.ParseException;
@@ -53,11 +52,6 @@ public class DriverRegisController {
         return driverRegisRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @GetMapping("/driverregis/{id}")
-     public Optional<DriverRegis> DriverRegists(@PathVariable Long id) {
-         Optional<DriverRegis> driverregis = driverRegisRepository.findById(id);
-         return driverregis;
-     }
 
     @GetMapping("/positiondriver")
     public Collection<PositionDriver> positiondrivers() {
